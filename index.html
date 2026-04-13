@@ -4,205 +4,141 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Laporan Harian Kasir</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size:15px;
   line-height:1.5;
-  background:#f8f9fa;
+  background:#0f1117;
+  color:#e2e8f0;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
-.wrap {
-  max-width:420px;
-  margin:auto;
-  padding:1rem 1rem 4rem;
-}
+.wrap { max-width:440px; margin:auto; padding:1rem 1rem 5rem; }
 
 .page-title {
-  font-size:32px;
-  font-weight:700;
-  text-align:center;
-  margin:20px 0 30px;
-  color:#1f2937;
+  font-family: 'DM Serif Display', serif;
+  font-size:28px; font-weight:400;
+  text-align:center; margin:24px 0 28px;
+  color:#f8fafc; letter-spacing:-0.5px;
 }
+.page-title span { color:#c9a84c; }
 
 .sec {
-  border-radius:16px;
-  padding:1.25rem;
-  margin-bottom:1rem;
-  border:2px solid;
-  background:#fff;
+  border-radius:16px; padding:1.25rem;
+  margin-bottom:12px; background:#1a1d27;
+  border:1px solid #2a2d3e;
 }
 .sec-head {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:14px;
-  padding-bottom:12px;
-  border-bottom:2px solid;
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:16px; padding-bottom:14px;
+  border-bottom:1px solid #2a2d3e;
 }
-.sec-icon {
-  width:30px;
-  height:30px;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-}
+.sec-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
 .sec-icon svg { width:16px; height:16px; }
+.sec-title { font-weight:700; font-size:14px; color:#f1f5f9; letter-spacing:0.3px; }
 
-.sec-info { background:#E6F1FB; border-color:#378ADD; }
-.sec-jual { background:#EAF3DE; border-color:#639922; }
-.sec-keluar { background:#FAEEDA; border-color:#BA7517; }
-.sec-summary { background:#EEEDFE; border-color:#7F77DD; }
-.sec-ekstra { background:#F1EFE8; border-color:#888780; }
-
-.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.field { margin-bottom:12px; }
-label {
-  font-size:11px;
-  font-weight:600;
-  color:#666;
-  display:block;
-  margin-bottom:5px;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.field { margin-bottom:10px; }
+label { font-size:10px; font-weight:700; color:#64748b; display:block; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.8px; }
 input, select, textarea {
-  width:100%;
-  padding:14px;
-  border:2.5px solid #94a3b8;
-  border-radius:12px;
-  font-size:15px;
+  width:100%; padding:12px 14px; background:#0f1117;
+  border:1px solid #2a2d3e; border-radius:10px;
+  font-size:14px; font-family:'Plus Jakarta Sans',sans-serif;
+  color:#e2e8f0; transition:border-color 0.2s;
 }
+input:focus, select:focus, textarea:focus { outline:none; border-color:#c9a84c; }
+select option { background:#1a1d27; }
 textarea { resize:vertical; min-height:80px; }
+input[readonly] { color:#c9a84c; cursor:default; }
 
-.metric-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  margin-bottom:16px;
-}
-.metric {
-  text-align:center;
-  background:rgba(255,255,255,0.7);
-  padding:10px 8px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-}
-.metric-num {
-  font-size:18px;
-  font-weight:700;
-}
-.metric-lbl {
-  font-size:11px;
-  color:#666;
-  margin-top:4px;
-}
+.metric-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px; }
+.metric { text-align:center; background:#0f1117; padding:12px 8px; border-radius:10px; border:1px solid #2a2d3e; }
+.metric-num { font-size:14px; font-weight:700; }
+.metric-lbl { font-size:10px; color:#64748b; margin-top:4px; text-transform:uppercase; letter-spacing:0.5px; }
 
+.peng-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid #1e2130; color:#94a3b8; }
+
+.sum-row { display:flex; justify-content:space-between; padding:8px 0; font-size:14px; }
+.sum-total { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:linear-gradient(135deg,#c9a84c15,#c9a84c08); border:1px solid #c9a84c40; border-radius:12px; margin-top:12px; }
+
+.btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:1.5rem; }
+.abtn { padding:16px 12px; border-radius:14px; min-height:56px; font-size:14px; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; transition:all 0.2s; letter-spacing:0.3px; }
+.abtn:active { transform:scale(0.97); }
+.abtn-print { background:linear-gradient(135deg,#c9a84c,#a8892e); color:#0f1117; box-shadow:0 8px 20px #c9a84c30; }
+.abtn-reset { background:#1a1d27; color:#94a3b8; border:1px solid #2a2d3e; }
+
+/* ===== NOTA PREMIUM ===== */
 #nota-capture {
-  display:none;
-  width:380px;
-  margin:20px auto;
-  background:#fff;
-  border:3px solid #333;
-  border-radius:12px;
-  overflow:hidden;
-  font-family: system-ui, sans-serif;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display:none; width:480px;
+  background:#0d0f18;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  position:fixed; left:-9999px; top:0;
 }
+.nc-outer { background:#0d0f18; position:relative; overflow:hidden; }
+.nc-bg-c1 { position:absolute; width:320px; height:320px; background:radial-gradient(circle,#c9a84c14 0%,transparent 70%); top:-100px; right:-100px; border-radius:50%; pointer-events:none; }
+.nc-bg-c2 { position:absolute; width:220px; height:220px; background:radial-gradient(circle,#3b5bf612 0%,transparent 70%); bottom:80px; left:-60px; border-radius:50%; pointer-events:none; }
 
-.nota-header {
-  background:#1f2937;
-  color:white;
-  text-align:center;
-  padding:18px 15px;
-}
-.nota-header h1 {
-  font-size:20px;
-  margin-bottom:8px;
-}
-.nota-header p {
-  margin:4px 0;
-  font-size:14px;
-}
+.nc-header { padding:36px 36px 26px; position:relative; }
+.nc-logo-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.nc-logo-icon { width:44px; height:44px; background:linear-gradient(135deg,#c9a84c,#a8892e); border-radius:12px; display:flex; align-items:center; justify-content:center; }
+.nc-logo-icon svg { width:22px; height:22px; }
+.nc-logo-text { font-size:11px; color:#475569; font-weight:700; text-transform:uppercase; letter-spacing:2px; }
+.nc-cafe-name { font-family:'DM Serif Display',serif; font-size:32px; color:#f8fafc; line-height:1.1; letter-spacing:-0.5px; }
+.nc-meta-row { display:flex; gap:24px; margin-top:16px; }
+.nc-meta-item { display:flex; flex-direction:column; gap:3px; }
+.nc-meta-lbl { font-size:9px; color:#334155; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; }
+.nc-meta-val { font-size:13px; color:#94a3b8; font-weight:600; }
 
-.nota-section, .nota-divider {
-  padding:15px 18px;
-}
-.nota-row {
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-  font-size:15px;
-}
-.nota-label { color:#374151; }
-.bold { font-weight:700; color:#111827; }
+.nc-gold-line { height:1px; background:linear-gradient(90deg,transparent,#c9a84c80,#e8c96e,#c9a84c80,transparent); margin:0 36px; }
 
-.nota-divider {
-  border-top:2px dashed #6b7280;
-  border-bottom:2px dashed #6b7280;
-  margin:10px 0;
-}
+.nc-body { padding:28px 36px; }
+.nc-section-title { font-size:9px; color:#c9a84c; text-transform:uppercase; letter-spacing:2.5px; font-weight:700; margin-bottom:14px; }
 
-.nota-catatan {
-  padding:15px 18px;
-  background:#f9fafb;
-  font-size:14px;
-  line-height:1.4;
-  color:#374151;
-}
+.nc-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:22px; }
+.nc-card { background:#141620; border:1px solid #1e2235; border-radius:12px; padding:14px 10px; text-align:center; }
+.nc-card-val { font-size:14px; font-weight:800; margin-bottom:5px; }
+.nc-card-lbl { font-size:9px; color:#334155; text-transform:uppercase; letter-spacing:1px; }
 
-.btn-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:2rem;
-}
-.abtn {
-  padding:16px 12px;
-  border-radius:14px;
-  min-height:58px;
-  font-size:15px;
-  font-weight:600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: all 0.2s;
-}
-.abtn:active { transform: scale(0.96); }
-.abtn-print { background: #4a7c2a; color: white; }
-.abtn-reset { background: #6b7280; color: white; }
-.abtn-icon {
-  width:32px;
-  height:32px;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: rgba(255,255,255,0.25);
-}
-.abtn-icon svg { width:18px; height:18px; }
+.nc-detail-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #141620; }
+.nc-detail-label { font-size:13px; color:#475569; }
+.nc-detail-val { font-size:13px; color:#cbd5e1; font-weight:600; }
+
+.nc-peng-section { background:#141620; border:1px solid #1e2235; border-radius:12px; padding:16px; margin:20px 0; }
+.nc-peng-row { display:flex; justify-content:space-between; padding:7px 0; font-size:12px; border-bottom:1px solid #1a1d2a; color:#475569; }
+.nc-peng-row:last-of-type { border-bottom:none; }
+.nc-peng-name { color:#64748b; }
+
+.nc-summary { background:#141620; border:1px solid #2a2d3e; border-radius:16px; padding:20px; margin-top:20px; position:relative; overflow:hidden; }
+.nc-summary::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#c9a84c,#e8c96e,#c9a84c); }
+.nc-sum-row { display:flex; justify-content:space-between; padding:8px 0; font-size:13px; border-bottom:1px solid #1a1d2a; }
+.nc-sum-row:last-child { border-bottom:none; }
+.nc-sum-lbl { color:#475569; }
+.nc-sum-val { color:#94a3b8; font-weight:600; }
+
+.nc-laba { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:linear-gradient(135deg,#c9a84c18,#c9a84c06); border:1px solid #c9a84c45; border-radius:14px; margin-top:16px; }
+.nc-laba-lbl { font-size:11px; color:#c9a84c80; text-transform:uppercase; letter-spacing:2px; font-weight:700; }
+.nc-laba-val { font-size:26px; font-weight:800; color:#c9a84c; letter-spacing:-1px; }
+
+.nc-catatan { margin-top:20px; padding:16px 18px; background:#141620; border-left:3px solid #c9a84c50; border-radius:0 10px 10px 0; }
+.nc-catatan-lbl { font-size:9px; color:#c9a84c60; text-transform:uppercase; letter-spacing:1.5px; font-weight:700; margin-bottom:6px; }
+.nc-catatan-val { font-size:12px; color:#475569; line-height:1.7; }
+
+.nc-footer { padding:18px 36px 28px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #141620; margin-top:10px; }
+.nc-footer-ts { font-size:10px; color:#1e2235; }
+.nc-footer-badge { font-size:9px; color:#1e2235; text-transform:uppercase; letter-spacing:1.5px; border:1px solid #1a1d2a; padding:4px 12px; border-radius:20px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="page-head">
-    <p class="page-title">Laporan Harian Kasir</p>
-  </div>
+  <p class="page-title">Laporan <span>Kasir</span></p>
 
-  <!-- Info Dasar -->
-  <div class="sec sec-info">
-    <div class="sec-head" style="border-color:#378ADD;">
-      <div class="sec-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <span style="font-weight:700;">Info Dasar</span>
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#c9a84c20;"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span class="sec-title">Info Dasar</span>
     </div>
     <div class="grid2">
       <div class="field"><label>Nama Cafe</label><input id="namaCafe" value="Cafe Ndeso" autocomplete="off"></div>
@@ -210,147 +146,171 @@ textarea { resize:vertical; min-height:80px; }
     </div>
     <div class="grid2">
       <div class="field"><label>Hari</label><select id="hari">
-        <option>Minggu</option>
-        <option selected>Senin</option>
-        <option>Selasa</option>
-        <option>Rabu</option>
-        <option>Kamis</option>
-        <option>Jumat</option>
-        <option>Sabtu</option>
+        <option>Minggu</option><option selected>Senin</option><option>Selasa</option>
+        <option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option>
       </select></div>
       <div class="field"><label>Kasir</label><input id="kasir" value="Leli" autocomplete="off"></div>
     </div>
   </div>
 
-  <!-- Penjualan -->
-  <div class="sec sec-jual">
-    <div class="sec-head" style="border-color:#639922;">
-      <div class="sec-icon" style="background:#639922;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-      <span style="font-weight:700;">Penjualan</span>
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#22c55e20;"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <span class="sec-title">Penjualan</span>
     </div>
     <div class="metric-grid">
-      <div class="metric"><div class="metric-num" id="mTunai" style="color:#3B6D11">0</div><div class="metric-lbl">Tunai</div></div>
-      <div class="metric"><div class="metric-num" id="mQris" style="color:#185FA5">0</div><div class="metric-lbl">QRIS</div></div>
-      <div class="metric"><div class="metric-num" id="mTrx" style="color:#534AB7">0</div><div class="metric-lbl">Trx</div></div>
+      <div class="metric"><div class="metric-num" id="mTunai" style="color:#22c55e">Rp 0</div><div class="metric-lbl">Tunai</div></div>
+      <div class="metric"><div class="metric-num" id="mQris" style="color:#3b82f6">Rp 0</div><div class="metric-lbl">QRIS</div></div>
+      <div class="metric"><div class="metric-num" id="mTrx" style="color:#a78bfa">0</div><div class="metric-lbl">Trx</div></div>
     </div>
     <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
     <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
     <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
   </div>
 
-  <!-- Pengeluaran -->
-  <div class="sec sec-keluar">
-    <div class="sec-head" style="border-color:#BA7517;">
-      <div class="sec-icon" style="background:#BA7517;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-      <span style="font-weight:700;">Pengeluaran</span>
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#f9731620;"><svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <span class="sec-title">Pengeluaran</span>
     </div>
-    <p style="font-size:12px;color:#633806;margin-bottom:8px;">Format: <code>nama pengeluaran = jumlah</code></p>
-    <textarea id="pengeluaranText" rows="6" autocomplete="off"></textarea>
-    <div class="prev-box" style="margin-top:12px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;">
-      <div style="font-size:13px;color:#666;margin-bottom:6px;">Rincian Pengeluaran</div>
-      <div id="listPeng"><em style="color:#666">Belum ada data</em></div>
-    </div>
-  </div>
-
-  <!-- Ringkasan -->
-  <div class="sec sec-summary">
-    <div class="sec-head" style="border-color:#7F77DD;">
-      <div class="sec-icon" style="background:#7F77DD;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <span style="font-weight:700;">Ringkasan</span>
-    </div>
-    <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="totalPenj" class="bold">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="totalPeng" class="bold" style="color:#854F0B">Rp 0</span></div>
-    <div class="nota-row" style="margin-top:12px;border-top:2px solid #7F77DD;padding-top:12px;">
-      <span class="nota-label">Laba Bersih</span><span id="laba" class="bold" style="font-size:19px;color:#166534;">Rp 0</span>
+    <p style="font-size:12px;color:#475569;margin-bottom:8px;">Format: <code style="color:#c9a84c;background:#c9a84c15;padding:2px 6px;border-radius:4px;">nama = jumlah</code></p>
+    <textarea id="pengeluaranText" rows="5" autocomplete="off"></textarea>
+    <div style="margin-top:12px;background:#0f1117;border:1px solid #1e2235;border-radius:10px;padding:12px;">
+      <div style="font-size:10px;color:#334155;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;">Rincian</div>
+      <div id="listPeng"><em style="color:#334155;font-size:13px;">Belum ada data</em></div>
     </div>
   </div>
 
-  <!-- Info Tambahan -->
-  <div class="sec sec-ekstra">
-    <div class="sec-head" style="border-color:#888780;">
-      <div class="sec-icon" style="background:#888780;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <span style="font-weight:700;">Info Tambahan</span>
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#a78bfa20;"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <span class="sec-title">Ringkasan</span>
+    </div>
+    <div class="sum-row"><span style="color:#64748b;">Total Penjualan</span><span id="totalPenj" style="font-weight:700;color:#f1f5f9;">Rp 0</span></div>
+    <div class="sum-row"><span style="color:#64748b;">Total Pengeluaran</span><span id="totalPeng" style="font-weight:700;color:#f97316;">Rp 0</span></div>
+    <div class="sum-total">
+      <span style="font-size:12px;color:#c9a84c;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;">Laba Bersih</span>
+      <span id="laba" style="font-size:22px;font-weight:800;color:#c9a84c;">Rp 0</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#64748b20;"><svg viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <span class="sec-title">Info Tambahan</span>
     </div>
     <div class="grid2">
       <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-      <div class="field"><label>Saldo Kas Akhir</label><input id="saldoAkhir" readonly class="bold" style="background:#f3f4f6;"></div>
+      <div class="field"><label>Saldo Kas Akhir</label><input id="saldoAkhir" readonly></div>
     </div>
-    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" autocomplete="off"></textarea></div>
+    <div class="field"><label>Catatan</label><textarea id="catatan" rows="3" autocomplete="off"></textarea></div>
   </div>
 
-  <!-- Tombol -->
   <div class="btn-grid">
     <button class="abtn abtn-print" onclick="simpanJPG()">
-      <div class="abtn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 6 2 18 2 18 9"></polyline>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-          <rect x="6" y="14" width="12" height="8"></rect>
-        </svg>
-      </div>
-      <span>Simpan sebagai JPG</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Simpan JPG
     </button>
     <button class="abtn abtn-reset" onclick="resetForm()">
-      <div class="abtn-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"></polyline>
-          <path d="M3.51 15a9 9 0 1 0 .49-4.95"></path>
-        </svg>
-      </div>
-      <span>Reset Form</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+      Reset Form
     </button>
   </div>
 </div>
 
-<!-- Nota untuk di-capture -->
+<!-- NOTA PREMIUM CAPTURE -->
 <div id="nota-capture">
-  <div class="nota-header">
-    <h1>LAPORAN KEUANGAN HARIAN</h1>
-    <p id="p-namaCafe">Cafe Ndeso</p>
-    <p id="p-tgl">Tanggal: -</p>
-    <p id="p-kasir">Kasir: -</p>
-  </div>
+  <div class="nc-outer">
+    <div class="nc-bg-c1"></div>
+    <div class="nc-bg-c2"></div>
 
-  <div class="nota-section">
-    <div class="nota-row"><span class="nota-label">Tunai</span><span id="p-tunai">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">QRIS / Transfer</span><span id="p-qris">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">Jumlah Transaksi</span><span id="p-trx">0 trx</span></div>
-  </div>
+    <div class="nc-header">
+      <div class="nc-logo-row">
+        <div class="nc-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0d0f18" stroke-width="2.5" stroke-linecap="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+        </div>
+        <span class="nc-logo-text">Laporan Keuangan Harian</span>
+      </div>
+      <div class="nc-cafe-name" id="p-namaCafe">Cafe Ndeso</div>
+      <div class="nc-meta-row">
+        <div class="nc-meta-item"><span class="nc-meta-lbl">Tanggal</span><span class="nc-meta-val" id="p-tgl">—</span></div>
+        <div class="nc-meta-item"><span class="nc-meta-lbl">Hari</span><span class="nc-meta-val" id="p-hari">—</span></div>
+        <div class="nc-meta-item"><span class="nc-meta-lbl">Kasir</span><span class="nc-meta-val" id="p-kasir">—</span></div>
+      </div>
+    </div>
 
-  <div class="nota-divider">
-    <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="p-totalJual" class="bold">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="p-totalKeluar" class="bold" style="color:#854F0B;">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">Laba Bersih</span><span id="p-laba" class="bold" style="color:#166534;"></span></div>
-    <div class="nota-row"><span class="nota-label">Saldo Kas Akhir</span><span id="p-saldoAkhir" class="bold">Rp 0</span></div>
-  </div>
+    <div class="nc-gold-line"></div>
 
-  <div class="nota-catatan">
-    <strong>Catatan:</strong><br>
-    <span id="p-catatan">Tidak ada catatan</span>
+    <div class="nc-body">
+      <div class="nc-section-title">Penjualan</div>
+      <div class="nc-cards">
+        <div class="nc-card"><div class="nc-card-val" id="p-tunai" style="color:#22c55e;">Rp 0</div><div class="nc-card-lbl">Tunai</div></div>
+        <div class="nc-card"><div class="nc-card-val" id="p-qris" style="color:#3b82f6;">Rp 0</div><div class="nc-card-lbl">QRIS</div></div>
+        <div class="nc-card"><div class="nc-card-val" id="p-trx" style="color:#a78bfa;">0</div><div class="nc-card-lbl">Transaksi</div></div>
+      </div>
+      <div class="nc-detail-row">
+        <span class="nc-detail-label">Total Penjualan</span>
+        <span class="nc-detail-val" id="p-totalJual">Rp 0</span>
+      </div>
+
+      <div style="margin-top:22px;">
+        <div class="nc-section-title">Pengeluaran</div>
+        <div class="nc-peng-section">
+          <div id="p-listPeng"><span style="color:#334155;font-size:12px;">Tidak ada pengeluaran</span></div>
+          <div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:8px;border-top:1px solid #1e2235;">
+            <span style="font-size:11px;color:#334155;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Total Pengeluaran</span>
+            <span style="font-size:13px;color:#f97316;font-weight:700;" id="p-totalKeluar">Rp 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nc-summary">
+        <div class="nc-section-title" style="margin-bottom:12px;">Ringkasan</div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Penjualan</span><span class="nc-sum-val" id="p-sum-jual">Rp 0</span></div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Pengeluaran</span><span class="nc-sum-val" style="color:#f97316;" id="p-sum-keluar">Rp 0</span></div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kemarin</span><span class="nc-sum-val" id="p-saldoKemarin">Rp 0</span></div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kas Akhir</span><span class="nc-sum-val" id="p-saldoAkhir">Rp 0</span></div>
+      </div>
+
+      <div class="nc-laba">
+        <span class="nc-laba-lbl">Laba Bersih</span>
+        <span class="nc-laba-val" id="p-laba">Rp 0</span>
+      </div>
+
+      <div class="nc-catatan">
+        <div class="nc-catatan-lbl">Catatan</div>
+        <div class="nc-catatan-val" id="p-catatan">—</div>
+      </div>
+    </div>
+
+    <div class="nc-footer">
+      <span class="nc-footer-ts" id="p-generated">—</span>
+      <span class="nc-footer-badge">Laporan Harian Kasir</span>
+    </div>
   </div>
 </div>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+const fmt = function(n) { return 'Rp\u00a0' + Math.round(n).toLocaleString('id-ID'); };
 
 function parsePeng() {
   const lines = document.getElementById('pengeluaranText').value.trim().split('\n');
-  let total = 0;
-  let html = '';
+  let total = 0, hForm = '', hNota = '';
   lines.forEach(function(l) {
-    if (l.includes('=')) {
-      const parts = l.split('=');
-      const nama = parts[0].trim();
-      const val = parts[1].trim();
-      const jml = parseFloat(val.replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
-      if (jml > 0) {
-        total += jml;
-        html += '<div class="nota-row"><span>' + nama + '</span><span>' + fmt(jml) + '</span></div>';
-      }
+    if (!l.includes('=')) return;
+    const parts = l.split('=');
+    const nama = parts[0].trim();
+    const val = (parts[1] || '').trim();
+    const jml = parseFloat(val.replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
+    if (jml > 0) {
+      total += jml;
+      hForm += '<div class="peng-row"><span>' + nama + '</span><span style="color:#f97316;">' + fmt(jml) + '</span></div>';
+      hNota += '<div class="nc-peng-row"><span class="nc-peng-name">' + nama + '</span><span>' + fmt(jml) + '</span></div>';
     }
   });
-  document.getElementById('listPeng').innerHTML = html || '<em style="color:#666">Belum ada pengeluaran</em>';
+  document.getElementById('listPeng').innerHTML = hForm || '<em style="color:#334155;font-size:13px;">Belum ada pengeluaran</em>';
+  document.getElementById('p-listPeng').innerHTML = hNota || '<span style="color:#334155;font-size:12px;">Tidak ada pengeluaran</span>';
   return total;
 }
 
@@ -361,8 +321,7 @@ function upd() {
   const totalP = tunai + qris;
   const totalK = parsePeng();
   const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + tunai; // Hanya tunai yang masuk kas fisik
-
+  const saldoAkhir = saldoK + tunai;
   document.getElementById('mTunai').textContent = fmt(tunai);
   document.getElementById('mQris').textContent = fmt(qris);
   document.getElementById('mTrx').textContent = trx;
@@ -373,68 +332,64 @@ function upd() {
 }
 
 document.getElementById('pengeluaranText').addEventListener('input', upd);
-
-// Set tanggal hari ini
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-
-// Contoh data pengeluaran
 document.getElementById('pengeluaranText').value = 'tape = 200000';
-
-window.addEventListener('load', function() {
-  upd();
-});
+window.addEventListener('load', function(){ upd(); });
 
 async function simpanJPG() {
-  document.getElementById('p-namaCafe').innerText = document.getElementById('namaCafe').value || 'Cafe Ndeso';
-  document.getElementById('p-tgl').innerText = 'Tanggal: ' + (document.getElementById('tanggal').value || '-');
-  document.getElementById('p-kasir').innerText = 'Kasir: ' + (document.getElementById('kasir').value || '-');
-
   const tunai = parseFloat(document.getElementById('tunai').value) || 0;
   const qris = parseFloat(document.getElementById('qris').value) || 0;
   const totalP = tunai + qris;
   const totalK = parsePeng();
-  const saldoAkhir = (parseFloat(document.getElementById('saldoKemarin').value) || 0) + tunai;
+  const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
+  const saldoAkhir = saldoK + tunai;
+  const now = new Date();
 
+  document.getElementById('p-namaCafe').innerText = document.getElementById('namaCafe').value || 'Cafe Ndeso';
+  document.getElementById('p-tgl').innerText = document.getElementById('tanggal').value || '—';
+  document.getElementById('p-hari').innerText = document.getElementById('hari').value || '—';
+  document.getElementById('p-kasir').innerText = document.getElementById('kasir').value || '—';
   document.getElementById('p-tunai').innerText = fmt(tunai);
   document.getElementById('p-qris').innerText = fmt(qris);
-  document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value) || 0) + ' trx';
+  document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value)||0) + ' trx';
   document.getElementById('p-totalJual').innerText = fmt(totalP);
   document.getElementById('p-totalKeluar').innerText = fmt(totalK);
-  document.getElementById('p-laba').innerText = fmt(totalP - totalK);
+  document.getElementById('p-sum-jual').innerText = fmt(totalP);
+  document.getElementById('p-sum-keluar').innerText = fmt(totalK);
+  document.getElementById('p-saldoKemarin').innerText = fmt(saldoK);
   document.getElementById('p-saldoAkhir').innerText = fmt(saldoAkhir);
-
-  const catatanText = document.getElementById('catatan').value.trim();
-  document.getElementById('p-catatan').innerText = catatanText || 'Tidak ada catatan hari ini.';
+  document.getElementById('p-laba').innerText = fmt(totalP - totalK);
+  document.getElementById('p-catatan').innerText = document.getElementById('catatan').value.trim() || 'Tidak ada catatan hari ini.';
+  document.getElementById('p-generated').innerText = 'Dicetak: ' + now.toLocaleString('id-ID');
 
   const nota = document.getElementById('nota-capture');
   nota.style.display = 'block';
+  nota.style.position = 'fixed';
+  nota.style.left = '-9999px';
+  nota.style.top = '0';
+
+  await new Promise(function(r){ setTimeout(r, 400); });
 
   try {
     const canvas = await html2canvas(nota, {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: '#ffffff',
-      logging: false
+      scale: 2.5, useCORS: true, allowTaint: true,
+      backgroundColor: '#0d0f18', logging: false,
+      width: 480, windowWidth: 480
     });
-
     const link = document.createElement('a');
-    const tgl = document.getElementById('tanggal').value.replace(/-/g, '') || 'tanggal';
-    link.download = 'Laporan_Keuangan_' + tgl + '.jpg';
-    link.href = canvas.toDataURL('image/jpeg', 0.92);
+    const tgl = document.getElementById('tanggal').value.replace(/-/g,'') || 'tanggal';
+    link.download = 'Laporan_' + tgl + '.jpg';
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
     link.click();
-  } catch (err) {
-    alert('Gagal menyimpan JPG: ' + err.message);
-    console.error(err);
+  } catch(err) {
+    alert('Gagal menyimpan: ' + err.message);
   } finally {
     nota.style.display = 'none';
   }
 }
 
 function resetForm() {
-  if (confirm('Reset semua data ke awal?')) {
-    location.reload();
-  }
+  if (confirm('Reset semua data?')) { location.reload(); }
 }
 </script>
 </body>
