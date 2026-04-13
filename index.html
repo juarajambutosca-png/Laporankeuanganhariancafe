@@ -232,7 +232,7 @@ textarea { resize:vertical; min-height:80px; }
         <option>Jumat</option>
         <option>Sabtu</option>
       </select></div>
-      <div class="field"><label>Kasir</label><input id="kasir" value="Falina" autocomplete="off"></div>
+      <div class="field"><label>Kasir</label><input id="kasir" value="Leli" autocomplete="off"></div>
     </div>
   </div>
 
@@ -247,9 +247,9 @@ textarea { resize:vertical; min-height:80px; }
       <div class="metric"><div class="metric-num" id="mQris" style="color:#185FA5"></div><div class="metric-lbl">QRIS</div></div>
       <div class="metric"><div class="metric-num" id="mTrx" style="color:#534AB7">0</div><div class="metric-lbl">Trx</div></div>
     </div>
-    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value="1250000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value="850000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value="68" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
   </div>
 
   <!-- Pengeluaran -->
@@ -286,10 +286,10 @@ textarea { resize:vertical; min-height:80px; }
       <span class="sec-title" style="font-weight:700;">Info Tambahan</span>
     </div>
     <div class="grid2">
-      <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" value="500000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+      <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
       <div class="field"><label>Saldo Kas Akhir</label><input id="saldoAkhir" readonly class="bold" style="background:#f3f4f6;"></div>
     </div>
-    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" autocomplete="off">Sore ramai, stok susu tinggal sedikit, ada 2 komplain rasa terlalu manis.</textarea></div>
+    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" autocomplete="off"> </textarea></div>
   </div>
 
   <!-- Tombol -->
@@ -320,7 +320,7 @@ textarea { resize:vertical; min-height:80px; }
 <div id="nota-capture">
   <div class="nota-header">
     <h1>LAPORAN KEUANGAN HARIAN</h1>
-    <p id="p-namaCafe">Cafe Ndeso</p>
+    <p id="p-namaCafe">Lumbong Coffee</p>
     <p id="p-tgl">Tanggal: -</p>
     <p id="p-kasir">Kasir: -</p>
   </div>
@@ -390,7 +390,7 @@ document.getElementById('pengeluaranText').addEventListener('input', upd);
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
 
 // Contoh data pengeluaran
-document.getElementById('pengeluaranText').value = `tape = 200000\nsealer = 21000\ntimun = 4000\ngarpu cemilan = 25000\nvast depan = 603000\nsari roti = 15000\njeruk buah = 35000\njamur enoki = 18000\nladaku = 6000\nekonomi = 4000\ngas = 56000`;
+document.getElementById('pengeluaranText').value = `tape = 200000';
 
 window.addEventListener('load', () => {
   upd();
