@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Laporan Harian Kasir</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+  font-size:15px; 
+  line-height:1.5;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.wrap { 
+  max-width:420px; 
+  margin:auto; 
+  padding:1rem 1rem 3rem; 
+}
+
+input, select, textarea, .abtn { font-size: 16px; }
+
+.page-head { padding:0.75rem 0 1.25rem; }
+.page-title { font-size:19px; font-weight:600; }
+.page-sub { font-size:13px; color:#666; margin-top:4px; }
+
+.sec { border-radius:16px; padding:1.25rem; margin-bottom:1rem; border:2px solid; }
+.sec-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:12px; border-bottom:2px solid; }
+.sec-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.sec-icon svg { width:16px; height:16px; }
+
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.field { margin-bottom:12px; }
+label { font-size:11px; font-weight:600; color:#666; display:block; margin-bottom:5px; text-transform:uppercase; }
+
+input, select, textarea {
+  width:100%; padding:14px; border:2.5px solid #94a3b8; border-radius:12px;
+}
+
+.metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
+.metric { padding:12px 8px; border-radius:12px; text-align:center; }
+
+#pengeluaranText { font-family: monospace; font-size:15px; height:140px; resize:none; }
+
+.prev-box { margin-top:10px; padding:12px; border-radius:12px; max-height:200px; overflow-y:auto; }
+
+.btn-grid { 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:12px; 
+  margin-top:1.8rem; 
+}
+
+.abtn { 
+  padding:13px 12px; 
+  border-radius:14px; 
+  min-height:50px; 
+  font-size:14.5px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.abtn-icon { width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.abtn-icon svg { width:15px; height:15px; }
+.abtn-main { font-size:14.5px; font-weight:600; }
+.abtn-sub { font-size:10.5px; opacity:0.75; }
+
+/* Warna Section */
+.sec-info    { background:#E6F1FB; border-color:#378ADD; }
+.sec-jual    { background:#EAF3DE; border-color:#639922; }
+.sec-keluar  { background:#FAEEDA; border-color:#BA7517; }
+.sec-summary { background:#EEEDFE; border-color:#7F77DD; }
+.sec-ekstra  { background:#F1EFE8; border-color:#888780; }
+
+/* === NOTA JPG - VERSI BARU (Lebih Rapi) === */
+#nota-capture {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 380px;
+  background: #ffffff;
+  padding: 25px 22px;
+  color: #000;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.nota-header { 
+  text-align:center; 
+  border-bottom:3px solid #000; 
+  padding-bottom:15px; 
+  margin-bottom:18px; 
+}
+.nota-header h1 { 
+  font-size:19px; 
+  font-weight:700; 
+  margin-bottom:6px; 
+}
+.nota-header p { 
+  margin:3px 0; 
+  font-size:14.5px; 
+}
+
+.nota-section { margin:16px 0; }
+.nota-row { 
+  display:flex; 
+  justify-content:space-between; 
+  margin:8px 0; 
+  font-size:15px; 
+}
+.nota-label { font-weight:500; }
+
+.nota-divider { 
+  border-top:2px solid #000; 
+  margin:18px 0 12px; 
+  padding-top:12px; 
+}
+
+.nota-catatan {
+  margin-top:20px;
+  padding-top:12px;
+  border-top:1px dashed #666;
+  font-size:14px;
+  line-height:1.4;
+  color:#333;
+}
+
+.bold { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="page-head">
+    <p class="page-title">Laporan Harian Kasir</p>
+    <p class="page-sub">Angka terhitung otomatis</p>
+  </div>
+
+  <!-- Info Dasar -->
+  <div class="sec sec-info">
+    <div class="sec-head">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span class="sec-title">Info dasar</span>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Nama cafe</label><input id="namaCafe" value="Cafe Ndeso" autocomplete="off"></div>
+      <div class="field"><label>Tanggal</label><input type="date" id="tanggal"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Hari</label><select id="hari"><option>Minggu</option><option selected>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select></div>
+      <div class="field"><label>Kasir</label><input id="kasir" value="Falina" autocomplete="off"></div>
+    </div>
+  </div>
+
+  <!-- Penjualan -->
+  <div class="sec sec-jual">
+    <div class="sec-head">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <span class="sec-title">Penjualan</span>
+    </div>
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-num" id="mTunai" style="color:#3B6D11">Rp 0</div><div class="metric-lbl">Tunai</div></div>
+      <div class="metric"><div class="metric-num" id="mQris" style="color:#185FA5">Rp 0</div><div class="metric-lbl">QRIS</div></div>
+      <div class="metric"><div class="metric-num" id="mTrx" style="color:#534AB7">0</div><div class="metric-lbl">Trx</div></div>
+    </div>
+    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value="1250000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value="850000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>Jumlah transaksi</label><input type="number" id="transaksi" value="68" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+  </div>
+
+  <!-- Pengeluaran -->
+  <div class="sec sec-keluar">
+    <div class="sec-head">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <span class="sec-title">Pengeluaran</span>
+    </div>
+    <p style="font-size:12px;color:#633806;margin-bottom:8px;">Format: <code>nama = jumlah</code></p>
+    <textarea id="pengeluaranText" autocomplete="off"></textarea>
+    <div class="prev-box">
+      <div class="prev-lbl">Rincian Pengeluaran</div>
+      <div id="listPeng"><em style="color:#666">Belum ada data</em></div>
+    </div>
+  </div>
+
+  <!-- Ringkasan -->
+  <div class="sec sec-summary">
+    <div class="sec-head">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <span class="sec-title">Ringkasan</span>
+    </div>
+    <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="totalPenj" class="bold">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="totalPeng" class="bold" style="color:#854F0B">Rp 0</span></div>
+    <div class="nota-row" style="margin-top:10px;border-top:2px solid #7F77DD;padding-top:10px;">
+      <span class="nota-label">Laba Bersih</span><span id="laba" class="bold" style="font-size:18px">Rp 0</span>
+    </div>
+  </div>
+
+  <!-- Info Tambahan -->
+  <div class="sec sec-ekstra">
+    <div class="sec-head">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <span class="sec-title">Info tambahan</span>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Saldo kemarin (Rp)</label><input type="number" id="saldoKemarin" value="500000" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+      <div class="field"><label>Saldo kas akhir</label><input id="saldoAkhir" readonly class="bold"></div>
+    </div>
+    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" style="resize:none;" autocomplete="off">Sore ramai, stok susu tinggal sedikit, ada 2 komplain rasa terlalu manis.</textarea></div>
+  </div>
+
+  <div class="btn-grid">
+    <button class="abtn abtn-print" onclick="simpanJPG()">
+      <div class="abtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+      <div class="abtn-txt"><span class="abtn-main">Simpan JPG</span><span class="abtn-sub">Nota Ringkas</span></div>
+    </button>
+
+    <button class="abtn abtn-reset" onclick="resetForm()">
+      <div class="abtn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg></div>
+      <div class="abtn-txt"><span class="abtn-main">Reset</span><span class="abtn-sub">Bersihkan form</span></div>
+    </button>
+  </div>
+</div>
+
+<!-- === NOTA JPG (DENGAN CATATAN & JUDUL BARU) === -->
+<div id="nota-capture">
+  <div class="nota-header">
+    <h1>Laporan Keuangan Harian</h1>
+    <p id="p-namaCafe">Cafe Ndeso</p>
+    <p id="p-tgl">Tanggal: -</p>
+    <p id="p-kasir">Kasir: -</p>
+  </div>
+
+  <div class="nota-section">
+    <div class="nota-row"><span class="nota-label">Tunai</span><span id="p-tunai">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">QRIS / Transfer</span><span id="p-qris">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">Jumlah Transaksi</span><span id="p-trx">0</span></div>
+  </div>
+
+  <div class="nota-divider">
+    <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="p-totalJual" class="bold">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="p-totalKeluar" class="bold">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">Laba Bersih</span><span id="p-laba" class="bold">Rp 0</span></div>
+    <div class="nota-row"><span class="nota-label">Saldo Kas Akhir</span><span id="p-saldoAkhir" class="bold">Rp 0</span></div>
+  </div>
+
+  <!-- Catatan -->
+  <div class="nota-catatan">
+    <strong>Catatan:</strong><br>
+    <span id="p-catatan">Tidak ada catatan</span>
+  </div>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+
+document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
+document.getElementById('pengeluaranText').value = `tape = 200000\nsealer = 21000\ntimun = 4000\ngarpu cemilan = 25000\nvast depan = 603000\nsari roti = 15000\njeruk buah = 35000\njamur enoki = 18000\nladaku = 6000\nekonomi = 4000\ngas = 56000`;
+
+function parsePeng(){
+  const lines = document.getElementById('pengeluaranText').value.trim().split('\n');
+  let total = 0, html = '';
+  lines.forEach(l => {
+    if(l.includes('=')){
+      const [n, v] = l.split('=').map(s => s.trim());
+      const jml = parseFloat(v.replace(/[^0-9]/g,'')) || 0;
+      if(jml > 0){
+        total += jml;
+        html += `<div class="nota-row"><span>${n}</span><span>${fmt(jml)}</span></div>`;
+      }
+    }
+  });
+  document.getElementById('listPeng').innerHTML = html || '<em style="color:#666">Belum ada pengeluaran</em>';
+  return total;
+}
+
+function upd(){
+  const tunai = parseFloat(document.getElementById('tunai').value) || 0;
+  const qris = parseFloat(document.getElementById('qris').value) || 0;
+  const trx = parseInt(document.getElementById('transaksi').value) || 0;
+  const totalP = tunai + qris;
+  const totalK = parsePeng();
+  const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
+  const saldoAkhir = saldoK + tunai;
+
+  document.getElementById('mTunai').textContent = fmt(tunai);
+  document.getElementById('mQris').textContent = fmt(qris);
+  document.getElementById('mTrx').textContent = trx;
+  document.getElementById('totalPenj').textContent = fmt(totalP);
+  document.getElementById('totalPeng').textContent = fmt(totalK);
+  document.getElementById('laba').textContent = fmt(totalP - totalK);
+  document.getElementById('saldoAkhir').value = fmt(saldoAkhir);
+}
+
+document.getElementById('pengeluaranText').addEventListener('input', upd);
+upd();
+
+async function simpanJPG() {
+  const tunai = parseFloat(document.getElementById('tunai').value) || 0;
+  const qris = parseFloat(document.getElementById('qris').value) || 0;
+  const trx = parseInt(document.getElementById('transaksi').value) || 0;
+  const totalP = tunai + qris;
+  const totalK = parsePeng();
+  const saldoAkhir = (parseFloat(document.getElementById('saldoKemarin').value) || 0) + tunai;
+
+  // Isi data ke nota
+  document.getElementById('p-namaCafe').innerText = document.getElementById('namaCafe').value || 'Cafe Ndeso';
+  document.getElementById('p-tgl').innerText = "Tanggal: " + (document.getElementById('tanggal').value || '-');
+  document.getElementById('p-kasir').innerText = "Kasir: " + (document.getElementById('kasir').value || '-');
+
+  document.getElementById('p-tunai').innerText = fmt(tunai);
+  document.getElementById('p-qris').innerText = fmt(qris);
+  document.getElementById('p-trx').innerText = trx;
+
+  document.getElementById('p-totalJual').innerText = fmt(totalP);
+  document.getElementById('p-totalKeluar').innerText = fmt(totalK);
+  document.getElementById('p-laba').innerText = fmt(totalP - totalK);
+  document.getElementById('p-saldoAkhir').innerText = fmt(saldoAkhir);
+
+  // Tambah Catatan
+  const catatanText = document.getElementById('catatan').value.trim();
+  document.getElementById('p-catatan').innerText = catatanText || "Tidak ada catatan hari ini.";
+
+  const nota = document.getElementById('nota-capture');
+
+  try {
+    const canvas = await html2canvas(nota, { 
+      scale: 3, 
+      backgroundColor: '#ffffff', 
+      logging: false 
+    });
+
+    const link = document.createElement('a');
+    const tgl = document.getElementById('tanggal').value || 'tanggal';
+    link.download = `Laporan_Keuangan_${tgl}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.93);
+    link.click();
+  } catch (err) {
+    alert('Gagal menyimpan nota: ' + err.message);
+  }
+}
+
+function resetForm(){
+  if(confirm('Reset semua data?')) location.reload();
+}
+</script>
+</body>
+</html>
