@@ -20,7 +20,6 @@ body {
   padding:1rem 1rem 4rem;
 }
 
-/* Header */
 .page-title {
   font-size:32px;
   font-weight:700;
@@ -29,7 +28,6 @@ body {
   color:#1f2937;
 }
 
-/* Section Umum */
 .sec {
   border-radius:16px;
   padding:1.25rem;
@@ -82,7 +80,6 @@ input, select, textarea {
 }
 textarea { resize:vertical; min-height:80px; }
 
-/* Metric Penjualan */
 .metric-grid {
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
@@ -106,9 +103,8 @@ textarea { resize:vertical; min-height:80px; }
   margin-top:4px;
 }
 
-/* Nota Capture (ini yang paling penting diperbaiki) */
 #nota-capture {
-  display:none; /* disembunyikan di tampilan normal */
+  display:none;
   width:380px;
   margin:20px auto;
   background:#fff;
@@ -160,7 +156,6 @@ textarea { resize:vertical; min-height:80px; }
   color:#374151;
 }
 
-/* Tombol */
 .btn-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -178,19 +173,13 @@ textarea { resize:vertical; min-height:80px; }
   justify-content: center;
   gap: 10px;
   border: none;
+  cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: all 0.2s;
 }
 .abtn:active { transform: scale(0.96); }
-
-.abtn-print {
-  background: #4a7c2a;
-  color: white;
-}
-.abtn-reset {
-  background: #6b7280;
-  color: white;
-}
+.abtn-print { background: #4a7c2a; color: white; }
+.abtn-reset { background: #6b7280; color: white; }
 .abtn-icon {
   width:32px;
   height:32px;
@@ -200,10 +189,7 @@ textarea { resize:vertical; min-height:80px; }
   justify-content:center;
   background: rgba(255,255,255,0.25);
 }
-.abtn-icon svg {
-  width:18px;
-  height:18px;
-}
+.abtn-icon svg { width:18px; height:18px; }
 </style>
 </head>
 <body>
@@ -214,9 +200,9 @@ textarea { resize:vertical; min-height:80px; }
 
   <!-- Info Dasar -->
   <div class="sec sec-info">
-    <div class="sec-head">
+    <div class="sec-head" style="border-color:#378ADD;">
       <div class="sec-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <span class="sec-title" style="font-weight:700;">Info Dasar</span>
+      <span style="font-weight:700;">Info Dasar</span>
     </div>
     <div class="grid2">
       <div class="field"><label>Nama Cafe</label><input id="namaCafe" value="Cafe Ndeso" autocomplete="off"></div>
@@ -238,25 +224,25 @@ textarea { resize:vertical; min-height:80px; }
 
   <!-- Penjualan -->
   <div class="sec sec-jual">
-    <div class="sec-head">
+    <div class="sec-head" style="border-color:#639922;">
       <div class="sec-icon" style="background:#639922;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-      <span class="sec-title" style="font-weight:700;">Penjualan</span>
+      <span style="font-weight:700;">Penjualan</span>
     </div>
     <div class="metric-grid">
-      <div class="metric"><div class="metric-num" id="mTunai" style="color:#3B6D11"> 0</div><div class="metric-lbl">Tunai</div></div>
-      <div class="metric"><div class="metric-num" id="mQris" style="color:#185FA5"></div><div class="metric-lbl">QRIS</div></div>
+      <div class="metric"><div class="metric-num" id="mTunai" style="color:#3B6D11">0</div><div class="metric-lbl">Tunai</div></div>
+      <div class="metric"><div class="metric-num" id="mQris" style="color:#185FA5">0</div><div class="metric-lbl">QRIS</div></div>
       <div class="metric"><div class="metric-num" id="mTrx" style="color:#534AB7">0</div><div class="metric-lbl">Trx</div></div>
     </div>
-    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+    <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
   </div>
 
   <!-- Pengeluaran -->
   <div class="sec sec-keluar">
-    <div class="sec-head">
+    <div class="sec-head" style="border-color:#BA7517;">
       <div class="sec-icon" style="background:#BA7517;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-      <span class="sec-title" style="font-weight:700;">Pengeluaran</span>
+      <span style="font-weight:700;">Pengeluaran</span>
     </div>
     <p style="font-size:12px;color:#633806;margin-bottom:8px;">Format: <code>nama pengeluaran = jumlah</code></p>
     <textarea id="pengeluaranText" rows="6" autocomplete="off"></textarea>
@@ -268,9 +254,9 @@ textarea { resize:vertical; min-height:80px; }
 
   <!-- Ringkasan -->
   <div class="sec sec-summary">
-    <div class="sec-head">
+    <div class="sec-head" style="border-color:#7F77DD;">
       <div class="sec-icon" style="background:#7F77DD;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <span class="sec-title" style="font-weight:700;">Ringkasan</span>
+      <span style="font-weight:700;">Ringkasan</span>
     </div>
     <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="totalPenj" class="bold">Rp 0</span></div>
     <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="totalPeng" class="bold" style="color:#854F0B">Rp 0</span></div>
@@ -281,15 +267,15 @@ textarea { resize:vertical; min-height:80px; }
 
   <!-- Info Tambahan -->
   <div class="sec sec-ekstra">
-    <div class="sec-head">
+    <div class="sec-head" style="border-color:#888780;">
       <div class="sec-icon" style="background:#888780;"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <span class="sec-title" style="font-weight:700;">Info Tambahan</span>
+      <span style="font-weight:700;">Info Tambahan</span>
     </div>
     <div class="grid2">
-      <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" value=" " inputmode="numeric" oninput="upd()" autocomplete="off"></div>
+      <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
       <div class="field"><label>Saldo Kas Akhir</label><input id="saldoAkhir" readonly class="bold" style="background:#f3f4f6;"></div>
     </div>
-    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" autocomplete="off"> </textarea></div>
+    <div class="field"><label>Catatan</label><textarea id="catatan" rows="4" autocomplete="off"></textarea></div>
   </div>
 
   <!-- Tombol -->
@@ -320,7 +306,7 @@ textarea { resize:vertical; min-height:80px; }
 <div id="nota-capture">
   <div class="nota-header">
     <h1>LAPORAN KEUANGAN HARIAN</h1>
-    <p id="p-namaCafe">Lumbong Coffee</p>
+    <p id="p-namaCafe">Cafe Ndeso</p>
     <p id="p-tgl">Tanggal: -</p>
     <p id="p-kasir">Kasir: -</p>
   </div>
@@ -333,7 +319,7 @@ textarea { resize:vertical; min-height:80px; }
 
   <div class="nota-divider">
     <div class="nota-row"><span class="nota-label">Total Penjualan</span><span id="p-totalJual" class="bold">Rp 0</span></div>
-    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="p-totalKeluar" class= 0</span></div>
+    <div class="nota-row"><span class="nota-label">Total Pengeluaran</span><span id="p-totalKeluar" class="bold" style="color:#854F0B;">Rp 0</span></div>
     <div class="nota-row"><span class="nota-label">Laba Bersih</span><span id="p-laba" class="bold" style="color:#166534;"></span></div>
     <div class="nota-row"><span class="nota-label">Saldo Kas Akhir</span><span id="p-saldoAkhir" class="bold">Rp 0</span></div>
   </div>
@@ -346,19 +332,21 @@ textarea { resize:vertical; min-height:80px; }
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-const fmt = n => ' ' + Math.round(n).toLocaleString('id-ID');
+const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
 
 function parsePeng() {
   const lines = document.getElementById('pengeluaranText').value.trim().split('\n');
   let total = 0;
   let html = '';
-  lines.forEach(l => {
+  lines.forEach(function(l) {
     if (l.includes('=')) {
-      const [nama, val] = l.split('=').map(s => s.trim());
+      const parts = l.split('=');
+      const nama = parts[0].trim();
+      const val = parts[1].trim();
       const jml = parseFloat(val.replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
       if (jml > 0) {
         total += jml;
-        html += `<div class="nota-row"><span>${nama}</span><span>${fmt(jml)}</span></div>`;
+        html += '<div class="nota-row"><span>' + nama + '</span><span>' + fmt(jml) + '</span></div>';
       }
     }
   });
@@ -373,7 +361,7 @@ function upd() {
   const totalP = tunai + qris;
   const totalK = parsePeng();
   const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + totalP;   // Perbaikan: seharusnya total penjualan (tunai + qris)
+  const saldoAkhir = saldoK + tunai; // Hanya tunai yang masuk kas fisik
 
   document.getElementById('mTunai').textContent = fmt(tunai);
   document.getElementById('mQris').textContent = fmt(qris);
@@ -390,37 +378,36 @@ document.getElementById('pengeluaranText').addEventListener('input', upd);
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
 
 // Contoh data pengeluaran
-document.getElementById('pengeluaranText').value = `tape = 200000';
+document.getElementById('pengeluaranText').value = 'tape = 200000';
 
-window.addEventListener('load', () => {
+window.addEventListener('load', function() {
   upd();
 });
 
 async function simpanJPG() {
-  // Isi data ke nota capture
   document.getElementById('p-namaCafe').innerText = document.getElementById('namaCafe').value || 'Cafe Ndeso';
-  document.getElementById('p-tgl').innerText = "Tanggal: " + (document.getElementById('tanggal').value || '-');
-  document.getElementById('p-kasir').innerText = "Kasir: " + (document.getElementById('kasir').value || '-');
+  document.getElementById('p-tgl').innerText = 'Tanggal: ' + (document.getElementById('tanggal').value || '-');
+  document.getElementById('p-kasir').innerText = 'Kasir: ' + (document.getElementById('kasir').value || '-');
 
   const tunai = parseFloat(document.getElementById('tunai').value) || 0;
   const qris = parseFloat(document.getElementById('qris').value) || 0;
   const totalP = tunai + qris;
   const totalK = parsePeng();
-  const saldoAkhir = (parseFloat(document.getElementById('saldoKemarin').value) || 0) + totalP;
+  const saldoAkhir = (parseFloat(document.getElementById('saldoKemarin').value) || 0) + tunai;
 
   document.getElementById('p-tunai').innerText = fmt(tunai);
   document.getElementById('p-qris').innerText = fmt(qris);
-  document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value) || 0) + " trx";
+  document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value) || 0) + ' trx';
   document.getElementById('p-totalJual').innerText = fmt(totalP);
   document.getElementById('p-totalKeluar').innerText = fmt(totalK);
   document.getElementById('p-laba').innerText = fmt(totalP - totalK);
   document.getElementById('p-saldoAkhir').innerText = fmt(saldoAkhir);
 
   const catatanText = document.getElementById('catatan').value.trim();
-  document.getElementById('p-catatan').innerText = catatanText || "Tidak ada catatan hari ini.";
+  document.getElementById('p-catatan').innerText = catatanText || 'Tidak ada catatan hari ini.';
 
   const nota = document.getElementById('nota-capture');
-  nota.style.display = 'block';   // Tampilkan dulu sebelum capture
+  nota.style.display = 'block';
 
   try {
     const canvas = await html2canvas(nota, {
@@ -433,7 +420,7 @@ async function simpanJPG() {
 
     const link = document.createElement('a');
     const tgl = document.getElementById('tanggal').value.replace(/-/g, '') || 'tanggal';
-    link.download = `Laporan_Keuangan_${tgl}.jpg`;
+    link.download = 'Laporan_Keuangan_' + tgl + '.jpg';
     link.href = canvas.toDataURL('image/jpeg', 0.92);
     link.click();
   } catch (err) {
