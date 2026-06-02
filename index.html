@@ -11,192 +11,222 @@ body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size:15px;
   line-height:1.5;
-  background:#0f1117;
-  color:#e2e8f0;
+  background:#f1f5f9;
+  color:#0f172a;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .wrap { max-width:440px; margin:auto; padding:1rem 1rem 5rem; }
 
-.page-title {
-  font-family: 'DM Serif Display', serif;
-  font-size:28px; font-weight:400;
-  text-align:center; margin:24px 0 28px;
-  color:#f8fafc; letter-spacing:-0.5px;
+/* HEADER HIJAU MUDA */
+.header-bar {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  padding: 18px 20px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  border: 1px solid #86efac;
 }
-.page-title span { color:#c9a84c; }
+.header-bar .title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #166534;
+  letter-spacing: -0.3px;
+}
+.header-bar .subtitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #15803d;
+  margin-top: 4px;
+}
 
 .sec {
   border-radius:16px; padding:1.25rem;
-  margin-bottom:12px; background:#1a1d27;
-  border:1px solid #2a2d3e;
+  margin-bottom:12px; background:#ffffff;
+  border:1px solid #e2e8f0;
+  border-left: 5px solid #22c55e;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
 }
 .sec-head {
   display:flex; align-items:center; gap:10px;
   margin-bottom:16px; padding-bottom:14px;
-  border-bottom:1px solid #2a2d3e;
+  border-bottom:1px solid #e2e8f0;
 }
 .sec-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
 .sec-icon svg { width:16px; height:16px; }
-.sec-title { font-weight:700; font-size:14px; color:#f1f5f9; letter-spacing:0.3px; }
+.sec-title { font-weight:700; font-size:14px; color:#1e293b; letter-spacing:0.3px; }
 
 .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .field { margin-bottom:10px; }
 label { font-size:10px; font-weight:700; color:#64748b; display:block; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.8px; }
 input, select, textarea {
-  width:100%; padding:12px 14px; background:#0f1117;
-  border:1px solid #2a2d3e; border-radius:10px;
+  width:100%; padding:12px 14px; background:#ffffff;
+  border:1px solid #cbd5e1; border-radius:10px;
   font-size:14px; font-family:'Plus Jakarta Sans',sans-serif;
-  color:#e2e8f0; transition:border-color 0.2s;
+  color:#0f172a; transition:border-color 0.2s, box-shadow 0.2s;
 }
-input:focus, select:focus, textarea:focus { outline:none; border-color:#c9a84c; }
-select option { background:#1a1d27; }
+input:focus, select:focus, textarea:focus { outline:none; border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.1); }
+select option { background:#ffffff; }
 textarea { resize:vertical; min-height:80px; }
-input[readonly] { color:#c9a84c; cursor:default; }
+input[readonly] { color:#c9a84c; cursor:default; background:#fefce8; border-color:#fde047; }
 
 .metric-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px; }
-.metric { text-align:center; background:#0f1117; padding:12px 8px; border-radius:10px; border:1px solid #2a2d3e; }
+.metric { text-align:center; background:#f8fafc; padding:12px 8px; border-radius:10px; border:1px solid #e2e8f0; }
 .metric-num { font-size:14px; font-weight:700; }
 .metric-lbl { font-size:10px; color:#64748b; margin-top:4px; text-transform:uppercase; letter-spacing:0.5px; }
 
-.peng-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid #1e2130; color:#94a3b8; }
+.peng-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid #f1f5f9; color:#475569; }
 
 .sum-row { display:flex; justify-content:space-between; padding:8px 0; font-size:14px; }
-.sum-total { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:linear-gradient(135deg,#c9a84c15,#c9a84c08); border:1px solid #c9a84c40; border-radius:12px; margin-top:12px; }
+.sum-total { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:linear-gradient(135deg,#fefce8,#fef9c3); border:1px solid #fde047; border-radius:12px; margin-top:12px; }
 
 .btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:1.5rem; }
 .abtn { padding:16px 12px; border-radius:14px; min-height:56px; font-size:14px; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; transition:all 0.2s; letter-spacing:0.3px; }
 .abtn:active { transform:scale(0.97); }
-.abtn-print { background:linear-gradient(135deg,#c9a84c,#a8892e); color:#0f1117; box-shadow:0 8px 20px #c9a84c30; }
-.abtn-reset { background:#1a1d27; color:#94a3b8; border:1px solid #2a2d3e; }
+.abtn-print { background:linear-gradient(135deg,#c9a84c,#a8892e); color:#0f1117; box-shadow:0 8px 20px rgba(201,168,76,0.3); }
+.abtn-reset { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
 
-/* ===== NOTA PREMIUM ===== */
-#nota-capture {
-  display:none; width:480px;
-  background:#0d0f18;
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  position:fixed; left:-9999px; top:0;
-}
-.nc-outer { background:#0d0f18; position:relative; overflow:hidden; }
-.nc-bg-c1 { position:absolute; width:320px; height:320px; background:radial-gradient(circle,#c9a84c14 0%,transparent 70%); top:-100px; right:-100px; border-radius:50%; pointer-events:none; }
-.nc-bg-c2 { position:absolute; width:220px; height:220px; background:radial-gradient(circle,#3b5bf612 0%,transparent 70%); bottom:80px; left:-60px; border-radius:50%; pointer-events:none; }
-
-.nc-header { padding:36px 36px 26px; position:relative; }
+/* NOTA */
+#nota-capture { display:none; width:480px; background:#ffffff; font-family:'Plus Jakarta Sans',system-ui,sans-serif; position:fixed; left:-9999px; top:0; box-shadow: 0 10px 30px rgba(15,23,42,0.1); }
+.nc-outer { background:#ffffff; position:relative; overflow:hidden; border:1px solid #e2e8f0; border-radius:4px; }
+.nc-bg-c1 { position:absolute; width:320px; height:320px; background:radial-gradient(circle,#fefce820 0%,transparent 70%); top:-100px; right:-100px; border-radius:50%; pointer-events:none; }
+.nc-bg-c2 { position:absolute; width:220px; height:220px; background:radial-gradient(circle,#fef9c320 0%,transparent 70%); bottom:80px; left:-60px; border-radius:50%; pointer-events:none; }
+.nc-header { padding:36px 36px 26px; position:relative; background:#ffffff; }
 .nc-logo-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
 .nc-logo-icon { width:44px; height:44px; background:linear-gradient(135deg,#c9a84c,#a8892e); border-radius:12px; display:flex; align-items:center; justify-content:center; }
 .nc-logo-icon svg { width:22px; height:22px; }
 .nc-logo-text { font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:2px; }
-.nc-cafe-name { font-family:'DM Serif Display',serif; font-size:32px; color:#f8fafc; line-height:1.1; letter-spacing:-0.5px; }
+.nc-cafe-name { font-family:'DM Serif Display',serif; font-size:32px; color:#0f172a; line-height:1.1; letter-spacing:-0.5px; }
 .nc-meta-row { display:flex; gap:24px; margin-top:16px; }
 .nc-meta-item { display:flex; flex-direction:column; gap:3px; }
 .nc-meta-lbl { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; }
-.nc-meta-val { font-size:15px; color:#cbd5e1; font-weight:600; }
-
+.nc-meta-val { font-size:15px; color:#334155; font-weight:600; }
 .nc-gold-line { height:1px; background:linear-gradient(90deg,transparent,#c9a84c80,#e8c96e,#c9a84c80,transparent); margin:0 36px; }
-
-.nc-body { padding:28px 36px; }
-.nc-section-title { font-size:11px; color:#e8c96e; text-transform:uppercase; letter-spacing:2.5px; font-weight:700; margin-bottom:14px; }
-
+.nc-body { padding:28px 36px; background:#ffffff; }
+.nc-section-title { font-size:11px; color:#c9a84c; text-transform:uppercase; letter-spacing:2.5px; font-weight:700; margin-bottom:14px; }
 .nc-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:22px; }
-.nc-card { background:#141620; border:1px solid #2a2d3e; border-radius:12px; padding:16px 10px; text-align:center; }
+.nc-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px 10px; text-align:center; }
 .nc-card-val { font-size:16px; font-weight:800; margin-bottom:6px; }
 .nc-card-lbl { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px; }
-
-.nc-detail-row { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid #1e2235; }
-.nc-detail-label { font-size:14px; color:#94a3b8; }
-.nc-detail-val { font-size:15px; color:#f1f5f9; font-weight:700; }
-
-.nc-peng-section { background:#141620; border:1px solid #2a2d3e; border-radius:12px; padding:16px; margin:20px 0; }
-.nc-peng-row { display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid #1e2235; color:#94a3b8; }
+.nc-detail-row { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid #f1f5f9; }
+.nc-detail-label { font-size:14px; color:#475569; }
+.nc-detail-val { font-size:15px; color:#0f172a; font-weight:700; }
+.nc-peng-section { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:20px 0; }
+.nc-peng-row { display:flex; justify-content:space-between; padding:8px 0; font-size:14px; border-bottom:1px solid #e2e8f0; color:#475569; }
 .nc-peng-row:last-of-type { border-bottom:none; }
-.nc-peng-name { color:#cbd5e1; }
-
-.nc-summary { background:#141620; border:1px solid #2a2d3e; border-radius:16px; padding:20px; margin-top:20px; position:relative; overflow:hidden; }
+.nc-peng-name { color:#1e293b; font-weight:500; }
+.nc-summary { background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; padding:20px; margin-top:20px; position:relative; overflow:hidden; }
 .nc-summary::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#c9a84c,#e8c96e,#c9a84c); }
-.nc-sum-row { display:flex; justify-content:space-between; padding:9px 0; font-size:14px; border-bottom:1px solid #1e2235; }
+.nc-sum-row { display:flex; justify-content:space-between; padding:9px 0; font-size:14px; border-bottom:1px solid #f1f5f9; }
 .nc-sum-row:last-child { border-bottom:none; }
-.nc-sum-lbl { color:#94a3b8; }
-.nc-sum-val { color:#e2e8f0; font-weight:700; }
-
-.nc-laba { display:flex; justify-content:space-between; align-items:center; padding:20px 22px; background:linear-gradient(135deg,#c9a84c22,#c9a84c08); border:1px solid #c9a84c60; border-radius:14px; margin-top:16px; }
-.nc-laba-lbl { font-size:12px; color:#c9a84c; text-transform:uppercase; letter-spacing:2px; font-weight:700; }
-.nc-laba-val { font-size:30px; font-weight:800; color:#e8c96e; letter-spacing:-1px; }
-
-.nc-catatan { margin-top:20px; padding:16px 18px; background:#141620; border-left:3px solid #c9a84c; border-radius:0 10px 10px 0; }
-.nc-catatan-lbl { font-size:11px; color:#c9a84c; text-transform:uppercase; letter-spacing:1.5px; font-weight:700; margin-bottom:8px; }
-.nc-catatan-val { font-size:14px; color:#94a3b8; line-height:1.7; }
-
-.nc-footer { padding:18px 36px 28px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #1e2235; margin-top:10px; }
-.nc-footer-ts { font-size:11px; color:#475569; }
-.nc-footer-badge { font-size:10px; color:#475569; text-transform:uppercase; letter-spacing:1.5px; border:1px solid #2a2d3e; padding:5px 12px; border-radius:20px; }
+.nc-sum-lbl { color:#475569; }
+.nc-sum-val { color:#0f172a; font-weight:700; }
+.nc-laba { display:flex; justify-content:space-between; align-items:center; padding:20px 22px; background:linear-gradient(135deg,#fefce8,#fef9c3); border:1px solid #fde047; border-radius:14px; margin-top:16px; }
+.nc-laba-lbl { font-size:12px; color:#a16207; text-transform:uppercase; letter-spacing:2px; font-weight:700; }
+.nc-laba-val { font-size:30px; font-weight:800; color:#854d0e; letter-spacing:-1px; }
+.nc-catatan { margin-top:20px; padding:16px 18px; background:#fefce8; border-left:3px solid #c9a84c; border-radius:0 10px 10px 0; }
+.nc-catatan-lbl { font-size:11px; color:#854d0e; text-transform:uppercase; letter-spacing:1.5px; font-weight:700; margin-bottom:8px; }
+.nc-catatan-val { font-size:14px; color:#475569; line-height:1.7; }
+.nc-footer { padding:18px 36px 28px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e2e8f0; margin-top:10px; background:#ffffff; }
+.nc-footer-ts { font-size:11px; color:#64748b; }
+.nc-footer-badge { font-size:10px; color:#64748b; text-transform:uppercase; letter-spacing:1.5px; border:1px solid #e2e8f0; padding:5px 12px; border-radius:20px; background:#f8fafc; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="page-title">Laporan Keuangan Harian </p>
 
-  <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:#c9a84c20;"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <span class="sec-title">Lumbong Coffee</span>
-    </div>
-    <div class="grid2">
-      <div class="field"><label>Nama Cafe</label><input id="namaCafe" value="Cafe Ndeso" autocomplete="off"></div>
-      <div class="field"><label>Tanggal</label><input type="date" id="tanggal"></div>
-    </div>
-    <div class="grid2">
-      <div class="field"><label>Hari</label><select id="hari">
-        <option>Minggu</option><option selected>Senin</option><option>Selasa</option>
-        <option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option>
-      </select></div>
-      <div class="field"><label>Kasir</label><input id="kasir" value="Leli" autocomplete="off"></div>
-    </div>
+  <!-- HEADER HIJAU MUDA -->
+  <div class="header-bar">
+    <div class="title">Laporan Keuangan Harian</div>
+    <div class="subtitle">Lumbong Coffee</div>
   </div>
 
   <div class="sec">
     <div class="sec-head">
-      <div class="sec-icon" style="background:#22c55e20;"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="sec-icon" style="background:#fefce8;"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span class="sec-title">Informasi</span>
+    </div>
+    
+    <div class="grid2">
+      <div class="field"><label>Tanggal</label><input type="date" id="tanggal"></div>
+      <div class="field"><label>Kasir</label><input id="kasir" value="Leli" autocomplete="off"></div>
+    </div>
+  </div>
+
+  <!-- PENJUALAN -->
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:#dcfce7;"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
       <span class="sec-title">Penjualan</span>
     </div>
     <div class="metric-grid">
-      <div class="metric"><div class="metric-num" id="mTunai" style="color:#22c55e">Rp 0</div><div class="metric-lbl">Tunai</div></div>
-      <div class="metric"><div class="metric-num" id="mQris" style="color:#3b82f6">Rp 0</div><div class="metric-lbl">QRIS</div></div>
-      <div class="metric"><div class="metric-num" id="mTrx" style="color:#a78bfa">0</div><div class="metric-lbl">Trx</div></div>
+      <div class="metric"><div class="metric-num" id="mTunai" style="color:#16a34a">Rp 0</div><div class="metric-lbl">Tunai</div></div>
+      <div class="metric"><div class="metric-num" id="mQris" style="color:#2563eb">Rp 0</div><div class="metric-lbl">QRIS</div></div>
+      <div class="metric"><div class="metric-num" id="mTrx" style="color:#7c3aed">0</div><div class="metric-lbl">Trx</div></div>
     </div>
     <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
     <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
     <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" value="" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
   </div>
 
+  <!-- PENGELUARAN + HUTANG -->
   <div class="sec">
     <div class="sec-head">
-      <div class="sec-icon" style="background:#f9731620;"><svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-      <span class="sec-title">Pengeluaran</span>
+      <div class="sec-icon" style="background:#ffedd5;"><svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <span class="sec-title">Pengeluaran & Hutang</span>
     </div>
-    <p style="font-size:12px;color:#475569;margin-bottom:8px;">Format: <code style="color:#c9a84c;background:#c9a84c15;padding:2px 6px;border-radius:4px;">nama = jumlah</code></p>
-    <textarea id="pengeluaranText" rows="5" autocomplete="off"></textarea>
-    <div style="margin-top:12px;background:#0f1117;border:1px solid #1e2235;border-radius:10px;padding:12px;">
-      <div style="font-size:10px;color:#334155;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;">Rincian</div>
-      <div id="listPeng"><em style="color:#334155;font-size:13px;">Belum ada data</em></div>
+    <p style="font-size:12px;color:#64748b;margin-bottom:8px;">Format: <code style="color:#c9a84c;background:#fefce8;padding:2px 6px;border-radius:4px;">nama = jumlah</code></p>
+    <textarea id="pengeluaranText" rows="4" autocomplete="off"></textarea>
+    
+    <div style="margin-top:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div class="field" style="margin-bottom:0;">
+          <label>Hutang (Rp)</label>
+          <input type="number" id="hutang" value="" inputmode="numeric" oninput="upd()" autocomplete="off">
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label>Pembayaran Hutang (Rp)</label>
+          <input type="number" id="pembayaranHutang" value="" inputmode="numeric" oninput="upd()" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
+      <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;">Rincian Pengeluaran</div>
+      <div id="listPeng"><em style="color:#94a3b8;font-size:13px;">Belum ada data</em></div>
     </div>
   </div>
 
+  <!-- RINGKASAN -->
   <div class="sec">
     <div class="sec-head">
-      <div class="sec-icon" style="background:#a78bfa20;"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="sec-icon" style="background:#ede9fe;"><svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <span class="sec-title">Ringkasan</span>
     </div>
-    <div class="sum-row"><span style="color:#64748b;">Total Penjualan</span><span id="totalPenj" style="font-weight:700;color:#f1f5f9;">Rp 0</span></div>
-    <div class="sum-row"><span style="color:#64748b;">Total Pengeluaran</span><span id="totalPeng" style="font-weight:700;color:#f97316;">Rp 0</span></div>
+
+    <div class="sum-row">
+      <span style="color:#64748b;">Total Penjualan</span>
+      <span id="totalPenj" style="font-weight:700;color:#0f172a;">Rp 0</span>
+    </div>
+    <div style="height:1px; background:#e2e8f0; margin:6px 0 4px;"></div>
+
+    <div class="sum-row">
+      <span style="color:#64748b;">Total Pengeluaran</span>
+      <span id="totalPeng" style="font-weight:700;color:#ea580c;">Rp 0</span>
+    </div>
+    <div class="sum-row"><span style="color:#64748b;">Total Hutang</span><span id="totalHutang" style="font-weight:700;color:#f59e0b;">Rp 0</span></div>
+    <div class="sum-row"><span style="color:#64748b;">Pembayaran Hutang</span><span id="totalBayarHutang" style="font-weight:700;color:#16a34a;">Rp 0</span></div>
+    
     <div class="sum-total">
-      <span style="font-size:12px;color:#c9a84c;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;">Laba Bersih</span>
-      <span id="laba" style="font-size:22px;font-weight:800;color:#c9a84c;">Rp 0</span>
+      <span style="font-size:12px;color:#854d0e;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;">Laba Bersih</span>
+      <span id="laba" style="font-size:22px;font-weight:800;color:#854d0e;">Rp 0</span>
     </div>
   </div>
 
+  <!-- INFO TAMBAHAN -->
   <div class="sec">
     <div class="sec-head">
-      <div class="sec-icon" style="background:#64748b20;"><svg viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="sec-icon" style="background:#e0e7ff;"><svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
       <span class="sec-title">Info Tambahan</span>
     </div>
     <div class="grid2">
@@ -218,56 +248,62 @@ input[readonly] { color:#c9a84c; cursor:default; }
   </div>
 </div>
 
-<!-- NOTA PREMIUM CAPTURE -->
+<!-- NOTA -->
 <div id="nota-capture">
   <div class="nc-outer">
     <div class="nc-bg-c1"></div>
     <div class="nc-bg-c2"></div>
-
     <div class="nc-header">
       <div class="nc-logo-row">
         <div class="nc-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0d0f18" stroke-width="2.5" stroke-linecap="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
         </div>
         <span class="nc-logo-text">Laporan Keuangan Harian</span>
       </div>
-      <div class="nc-cafe-name" id="p-namaCafe">Cafe Ndeso</div>
+      <div class="nc-cafe-name" id="p-namaCafe">Lumbong Coffee</div>
       <div class="nc-meta-row">
         <div class="nc-meta-item"><span class="nc-meta-lbl">Tanggal</span><span class="nc-meta-val" id="p-tgl">—</span></div>
-        <div class="nc-meta-item"><span class="nc-meta-lbl">Hari</span><span class="nc-meta-val" id="p-hari">—</span></div>
+        <div class="nc-meta-item"><span class="nc-meta-lbl">Hari & Tanggal</span><span class="nc-meta-val" id="p-hari-tanggal">—</span></div>
         <div class="nc-meta-item"><span class="nc-meta-lbl">Kasir</span><span class="nc-meta-val" id="p-kasir">—</span></div>
       </div>
     </div>
-
     <div class="nc-gold-line"></div>
-
     <div class="nc-body">
       <div class="nc-section-title">Penjualan</div>
       <div class="nc-cards">
-        <div class="nc-card"><div class="nc-card-val" id="p-tunai" style="color:#22c55e;">Rp 0</div><div class="nc-card-lbl">Tunai</div></div>
-        <div class="nc-card"><div class="nc-card-val" id="p-qris" style="color:#3b82f6;">Rp 0</div><div class="nc-card-lbl">QRIS</div></div>
-        <div class="nc-card"><div class="nc-card-val" id="p-trx" style="color:#a78bfa;">0</div><div class="nc-card-lbl">Transaksi</div></div>
+        <div class="nc-card"><div class="nc-card-val" id="p-tunai" style="color:#16a34a;">Rp 0</div><div class="nc-card-lbl">Tunai</div></div>
+        <div class="nc-card"><div class="nc-card-val" id="p-qris" style="color:#2563eb;">Rp 0</div><div class="nc-card-lbl">QRIS</div></div>
+        <div class="nc-card"><div class="nc-card-val" id="p-trx" style="color:#7c3aed;">0</div><div class="nc-card-lbl">Transaksi</div></div>
       </div>
       <div class="nc-detail-row">
         <span class="nc-detail-label">Total Penjualan</span>
         <span class="nc-detail-val" id="p-totalJual">Rp 0</span>
       </div>
 
-      <div style="margin-top:22px;">
-        <div class="nc-section-title">Pengeluaran</div>
+      <div style="margin-top:18px;">
+        <div class="nc-section-title">Pengeluaran & Hutang</div>
         <div class="nc-peng-section">
-          <div id="p-listPeng"><span style="color:#475569;font-size:13px;">Tidak ada pengeluaran</span></div>
-          <div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:8px;border-top:1px solid #1e2235;">
-            <span style="font-size:12px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Total Pengeluaran</span>
-            <span style="font-size:13px;color:#f97316;font-weight:700;" id="p-totalKeluar">Rp 0</span>
+          <div id="p-listPeng"><span style="color:#94a3b8;font-size:13px;">Tidak ada pengeluaran</span></div>
+          <div style="display:flex;justify-content:space-between;padding-top:8px;margin-top:8px;border-top:1px solid #e2e8f0;">
+            <span style="font-size:12px;color:#475569;font-weight:700;">Total Pengeluaran</span>
+            <span style="font-size:13px;color:#ea580c;font-weight:700;" id="p-totalKeluar">Rp 0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:6px;">
+            <span style="font-size:12px;color:#475569;font-weight:700;">Total Hutang</span>
+            <span style="font-size:13px;color:#f59e0b;font-weight:700;" id="p-hutang">Rp 0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:4px;">
+            <span style="font-size:12px;color:#475569;font-weight:700;">Pembayaran Hutang</span>
+            <span style="font-size:13px;color:#16a34a;font-weight:700;" id="p-bayarHutang">Rp 0</span>
           </div>
         </div>
       </div>
 
       <div class="nc-summary">
-        <div class="nc-section-title" style="margin-bottom:12px;">Ringkasan</div>
+        <div class="nc-section-title" style="margin-bottom:10px;">Ringkasan</div>
         <div class="nc-sum-row"><span class="nc-sum-lbl">Total Penjualan</span><span class="nc-sum-val" id="p-sum-jual">Rp 0</span></div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Pengeluaran</span><span class="nc-sum-val" style="color:#f97316;" id="p-sum-keluar">Rp 0</span></div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Pengeluaran</span><span class="nc-sum-val" style="color:#ea580c;" id="p-sum-keluar">Rp 0</span></div>
+        <div class="nc-sum-row"><span class="nc-sum-lbl">Pembayaran Hutang</span><span class="nc-sum-val" style="color:#16a34a;" id="p-sum-bayarHutang">Rp 0</span></div>
         <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kemarin</span><span class="nc-sum-val" id="p-saldoKemarin">Rp 0</span></div>
         <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kas Akhir</span><span class="nc-sum-val" id="p-saldoAkhir">Rp 0</span></div>
       </div>
@@ -282,7 +318,6 @@ input[readonly] { color:#c9a84c; cursor:default; }
         <div class="nc-catatan-val" id="p-catatan">—</div>
       </div>
     </div>
-
     <div class="nc-footer">
       <span class="nc-footer-ts" id="p-generated">—</span>
       <span class="nc-footer-badge">Laporan Harian Kasir</span>
@@ -292,26 +327,19 @@ input[readonly] { color:#c9a84c; cursor:default; }
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-const fmt = function(n) { return 'Rp\u00a0' + Math.round(n).toLocaleString('id-ID'); };
+const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
 
-function parsePeng() {
-  const lines = document.getElementById('pengeluaranText').value.trim().split('\n');
-  let total = 0, hForm = '', hNota = '';
-  lines.forEach(function(l) {
-    if (!l.includes('=')) return;
-    const parts = l.split('=');
-    const nama = parts[0].trim();
-    const val = (parts[1] || '').trim();
-    const jml = parseFloat(val.replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
-    if (jml > 0) {
-      total += jml;
-      hForm += '<div class="peng-row"><span>' + nama + '</span><span style="color:#f97316;">' + fmt(jml) + '</span></div>';
-      hNota += '<div class="nc-peng-row"><span class="nc-peng-name">' + nama + '</span><span>' + fmt(jml) + '</span></div>';
-    }
-  });
-  document.getElementById('listPeng').innerHTML = hForm || '<em style="color:#334155;font-size:13px;">Belum ada pengeluaran</em>';
-  document.getElementById('p-listPeng').innerHTML = hNota || '<span style="color:#334155;font-size:12px;">Tidak ada pengeluaran</span>';
-  return total;
+function getHariIndonesia(dateStr) {
+  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const date = new Date(dateStr);
+  return days[date.getDay()];
+}
+
+function formatTanggal(dateStr) {
+  const date = new Date(dateStr);
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const tgl = String(date.getDate()).padStart(2, '0');
+  return `${tgl} ${bulan[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 function upd() {
@@ -320,42 +348,63 @@ function upd() {
   const trx = parseInt(document.getElementById('transaksi').value) || 0;
   const totalP = tunai + qris;
   const totalK = parsePeng();
+  
+  const hutang = parseFloat(document.getElementById('hutang').value) || 0;
+  const bayarHutang = parseFloat(document.getElementById('pembayaranHutang').value) || 0;
+  
   const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + tunai;
+  const saldoAkhir = saldoK + tunai + qris + bayarHutang;
+
   document.getElementById('mTunai').textContent = fmt(tunai);
   document.getElementById('mQris').textContent = fmt(qris);
   document.getElementById('mTrx').textContent = trx;
   document.getElementById('totalPenj').textContent = fmt(totalP);
   document.getElementById('totalPeng').textContent = fmt(totalK);
+  document.getElementById('totalHutang').textContent = fmt(hutang);
+  document.getElementById('totalBayarHutang').textContent = fmt(bayarHutang);
   document.getElementById('laba').textContent = fmt(totalP - totalK);
   document.getElementById('saldoAkhir').value = fmt(saldoAkhir);
 }
 
 document.getElementById('pengeluaranText').addEventListener('input', upd);
+document.getElementById('hutang').addEventListener('input', upd);
+document.getElementById('pembayaranHutang').addEventListener('input', upd);
+
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
 document.getElementById('pengeluaranText').value = 'tape = 200000';
-window.addEventListener('load', function(){ upd(); });
+window.addEventListener('load', () => upd());
 
 async function simpanJPG() {
   const tunai = parseFloat(document.getElementById('tunai').value) || 0;
   const qris = parseFloat(document.getElementById('qris').value) || 0;
   const totalP = tunai + qris;
   const totalK = parsePeng();
+  
+  const hutang = parseFloat(document.getElementById('hutang').value) || 0;
+  const bayarHutang = parseFloat(document.getElementById('pembayaranHutang').value) || 0;
+  
   const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + tunai;
+  const saldoAkhir = saldoK + tunai + qris + bayarHutang;
+  
+  const tanggalVal = document.getElementById('tanggal').value;
+  const hari = getHariIndonesia(tanggalVal);
+  const tglFormatted = formatTanggal(tanggalVal);
   const now = new Date();
 
-  document.getElementById('p-namaCafe').innerText = document.getElementById('namaCafe').value || 'Cafe Ndeso';
-  document.getElementById('p-tgl').innerText = document.getElementById('tanggal').value || '—';
-  document.getElementById('p-hari').innerText = document.getElementById('hari').value || '—';
+  document.getElementById('p-namaCafe').innerText = 'Lumbong Coffee';
+  document.getElementById('p-tgl').innerText = tglFormatted;
+  document.getElementById('p-hari-tanggal').innerText = `${hari}, ${tglFormatted}`;
   document.getElementById('p-kasir').innerText = document.getElementById('kasir').value || '—';
   document.getElementById('p-tunai').innerText = fmt(tunai);
   document.getElementById('p-qris').innerText = fmt(qris);
   document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value)||0) + ' trx';
   document.getElementById('p-totalJual').innerText = fmt(totalP);
   document.getElementById('p-totalKeluar').innerText = fmt(totalK);
+  document.getElementById('p-hutang').innerText = fmt(hutang);
+  document.getElementById('p-bayarHutang').innerText = fmt(bayarHutang);
   document.getElementById('p-sum-jual').innerText = fmt(totalP);
   document.getElementById('p-sum-keluar').innerText = fmt(totalK);
+  document.getElementById('p-sum-bayarHutang').innerText = fmt(bayarHutang);
   document.getElementById('p-saldoKemarin').innerText = fmt(saldoK);
   document.getElementById('p-saldoAkhir').innerText = fmt(saldoAkhir);
   document.getElementById('p-laba').innerText = fmt(totalP - totalK);
@@ -364,32 +413,21 @@ async function simpanJPG() {
 
   const nota = document.getElementById('nota-capture');
   nota.style.display = 'block';
-  nota.style.position = 'fixed';
   nota.style.left = '-9999px';
-  nota.style.top = '0';
-
-  await new Promise(function(r){ setTimeout(r, 400); });
+  await new Promise(r => setTimeout(r, 400));
 
   try {
-    const canvas = await html2canvas(nota, {
-      scale: 2.5, useCORS: true, allowTaint: true,
-      backgroundColor: '#0d0f18', logging: false,
-      width: 480, windowWidth: 480
-    });
+    const canvas = await html2canvas(nota, { scale: 2.5, backgroundColor: '#ffffff', width: 480 });
     const link = document.createElement('a');
-    const tgl = document.getElementById('tanggal').value.replace(/-/g,'') || 'tanggal';
-    link.download = 'Laporan_' + tgl + '.jpg';
+    link.download = 'Laporan_' + (tanggalVal.replace(/-/g,'') || 'tanggal') + '.jpg';
     link.href = canvas.toDataURL('image/jpeg', 0.95);
     link.click();
-  } catch(err) {
-    alert('Gagal menyimpan: ' + err.message);
-  } finally {
-    nota.style.display = 'none';
-  }
+  } catch(e) { alert('Gagal menyimpan: ' + e.message); }
+  finally { nota.style.display = 'none'; }
 }
 
 function resetForm() {
-  if (confirm('Reset semua data?')) { location.reload(); }
+  if (confirm('Reset semua data?')) location.reload();
 }
 </script>
 </body>
