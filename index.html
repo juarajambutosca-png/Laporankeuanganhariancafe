@@ -329,17 +329,26 @@ input[readonly] { color:#c9a84c; cursor:default; background:#fefce8; border-colo
 <script>
 const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
 
-function getHariIndonesia(dateStr) {
-  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const date = new Date(dateStr);
-  return days[date.getDay()];
-}
+function parsePeng() {
+  const lines = document.getElementById('pengeluaranText').value.trim().split('\n');
+  let total = 0;
+  let hForm = '';
+  let hNota = '';
 
-function formatTanggal(dateStr) {
-  const date = new Date(dateStr);
-  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-  const tgl = String(date.getDate()).padStart(2, '0');
-  return `${tgl} ${bulan[date.getMonth()]} ${date.getFullYear()}`;
+  lines.forEach(l => {
+    if (!l.includes('=')) return;
+    const [nama, val] = l.split('=');
+    const jml = parseFloat((val || '').trim().replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
+    if (jml > 0) {
+      total += jml;
+      hForm += `<div class="peng-row"><span>${nama.trim()}</span><span style="color:#ea580c;">${fmt(jml)}</span></div>`;
+      hNota += `<div class="nc-peng-row"><span class="nc-peng-name">${nama.trim()}</span><span>${fmt(jml)}</span></div>`;
+    }
+  });
+
+  document.getElementById('listPeng').innerHTML = hForm || '<em style="color:#94a3b8;font-size:13px;">Belum ada pengeluaran</em>';
+  document.getElementById('p-listPeng').innerHTML = hNota || '<span style="color:#94a3b8;font-size:12px;">Tidak ada pengeluaran</span>';
+  return total;
 }
 
 function upd() {
@@ -424,6 +433,19 @@ async function simpanJPG() {
     link.click();
   } catch(e) { alert('Gagal menyimpan: ' + e.message); }
   finally { nota.style.display = 'none'; }
+}
+
+function getHariIndonesia(dateStr) {
+  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const date = new Date(dateStr);
+  return days[date.getDay()];
+}
+
+function formatTanggal(dateStr) {
+  const date = new Date(dateStr);
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const tgl = String(date.getDate()).padStart(2, '0');
+  return `${tgl} ${bulan[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 function resetForm() {
