@@ -2,311 +2,359 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Laporan Harian Kasir – Lumbong Coffee</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Laporan Harian - Lumbong Coffee</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --accent:#6366f1;
-  --accent-light:#eef2ff;
-  --accent-dark:#4338ca;
-  --green:#10b981;
-  --green-light:#d1fae5;
-  --orange:#f97316;
-  --orange-light:#fff7ed;
-  --blue:#3b82f6;
-  --blue-light:#eff6ff;
-  --purple:#8b5cf6;
-  --purple-light:#f5f3ff;
-  --red:#ef4444;
-  --surface:#ffffff;
-  --bg:#f4f6fb;
-  --border:#e2e8f0;
-  --text:#0f172a;
-  --muted:#64748b;
-  --radius:14px;
-  --radius-sm:10px;
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background:#f1f5f9;
+  color:#0f172a;
+  padding:1rem;
+  line-height:1.6;
 }
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px;line-height:1.5;background:var(--bg);color:var(--text);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
-.wrap{max-width:440px;margin:auto;padding:1rem 1rem 5rem}
+.wrap { max-width:460px; margin:auto; }
 
-/* HEADER */
-.header-bar{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:22px 20px;border-radius:20px;margin-bottom:16px;text-align:center;position:relative;overflow:hidden}
-.header-bar::before{content:'';position:absolute;width:200px;height:200px;background:rgba(255,255,255,0.07);border-radius:50%;top:-60px;right:-40px}
-.header-bar::after{content:'';position:absolute;width:140px;height:140px;background:rgba(255,255,255,0.05);border-radius:50%;bottom:-40px;left:-30px}
-.header-bar .title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
-.header-bar .subtitle{font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.5px}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  text-align:center;
+  margin:24px 0 32px;
+  font-size:28px;
+  color:#0f172a;
+}
+h1 span { color:#16a34a; }
 
-/* CARDS */
-.sec{border-radius:var(--radius);padding:1.25rem;margin-bottom:12px;background:var(--surface);border:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.05)}
-.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.sec-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec-icon svg{width:17px;height:17px}
-.sec-title{font-weight:700;font-size:14px;color:var(--text);letter-spacing:0.2px}
+.sec {
+  background:white;
+  border-radius:20px;
+  padding:1.4rem;
+  margin-bottom:18px;
+  border:1.5px solid #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
 
-/* FIELDS */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field{margin-bottom:10px}
-label{font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px}
-input,select,textarea{width:100%;padding:12px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);transition:border-color 0.2s,box-shadow 0.2s}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.12)}
-textarea{resize:vertical;min-height:80px}
-input[readonly]{background:#f8fafc;color:var(--accent-dark);border-color:#c7d2fe;font-weight:700;cursor:default}
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.field { margin-bottom:14px; }
+label {
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  color:#0f172a;
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+}
+input, textarea, select {
+  width:100%;
+  padding:13px 14px;
+  border:1.5px solid #94a3b8;
+  border-radius:12px;
+  font-size:15px;
+  color:#0f172a;
+  font-weight:600;
+  transition: all 0.2s;
+}
+input:focus, textarea:focus { 
+  outline:none; 
+  border-color:#16a34a; 
+  box-shadow:0 0 0 4px rgba(22, 163, 74, 0.15);
+}
 
-/* METRIC */
-.metric-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-.metric{text-align:center;background:var(--bg);padding:12px 8px;border-radius:var(--radius-sm);border:1px solid var(--border)}
-.metric-num{font-size:13px;font-weight:700}
-.metric-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.5px}
+h3 {
+  color:#14532d;
+  margin-bottom:12px;
+  font-size:17px;
+  font-weight: 800;
+}
 
-/* PENGELUARAN LIST */
-.peng-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid #f1f5f9;color:#475569}
+.summary {
+  background:linear-gradient(135deg, #f0fdf4, #dcfce7);
+  padding:20px;
+  border-radius:20px;
+  border:1.5px solid #86efac;
+  margin-top:10px;
+}
+.summary div {
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  font-size:15.5px;
+  color:#0f172a;
+}
+.summary .total {
+  font-weight:800;
+  font-size:18px;
+  border-top:2.5px solid #16a34a;
+  padding-top:14px;
+  margin-top:8px;
+  color:#14532d;
+}
 
-/* RINGKASAN */
-.sum-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px}
-.sum-total{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:1.5px solid #c7d2fe;border-radius:var(--radius);margin-top:12px}
+.btn {
+  width:100%;
+  padding:16px;
+  margin-top:20px;
+  font-size:16px;
+  font-weight:800;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(22,163,74,0.3);
+}
 
-/* BUTTONS */
-.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.5rem}
-.abtn{padding:16px 12px;border-radius:var(--radius);min-height:56px;font-size:14px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px}
-.abtn:active{transform:scale(0.97)}
-.abtn-print{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;box-shadow:0 8px 20px rgba(99,102,241,0.35)}
-.abtn-reset{background:var(--bg);color:var(--muted);border:1.5px solid var(--border)}
+/* ======================================================= */
+/* NOTA JPG CONFIGURATION PERMANEN (ANTI-HILANG)           */
+/* ======================================================= */
+#nota {
+  display:none;
+  position:fixed;
+  left:-1000px;
+  top:0;
+  width:460px;
+  background:#ffffff;
+  padding:45px 35px;
+  font-family:'Plus Jakarta Sans', sans-serif;
+  border-radius:24px;
+  overflow:hidden;
+}
 
-/* ===== NOTA CAPTURE ===== */
-#nota-capture{display:none;width:480px;background:#ffffff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;position:fixed;left:-9999px;top:0}
-.nc-outer{background:#ffffff;position:relative;overflow:hidden;border:1px solid #e2e8f0;border-radius:4px}
-.nc-header{padding:36px 36px 26px;background:#ffffff;position:relative}
-.nc-stripe{height:5px;background:linear-gradient(90deg,#6366f1,#8b5cf6,#3b82f6);border-radius:4px 4px 0 0}
-.nc-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;margin-top:20px}
-.nc-logo-icon{width:44px;height:44px;background:linear-gradient(135deg,#6366f1,#4f46e5);border-radius:12px;display:flex;align-items:center;justify-content:center}
-.nc-logo-icon svg{width:22px;height:22px}
-.nc-logo-text{font-size:11px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:2px}
-.nc-cafe-name{font-family:'DM Serif Display',serif;font-size:30px;color:#0f172a;line-height:1.1;letter-spacing:-0.5px}
-.nc-meta-row{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
-.nc-meta-item{display:flex;flex-direction:column;gap:3px}
-.nc-meta-lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
-.nc-meta-val{font-size:14px;color:#334155;font-weight:600}
-.nc-divider{height:1px;background:linear-gradient(90deg,transparent,#c7d2fe,#6366f1,#c7d2fe,transparent);margin:0 36px}
-.nc-body{padding:28px 36px;background:#ffffff}
-.nc-section-title{font-size:11px;color:#6366f1;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;margin-bottom:14px}
-.nc-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:22px}
-.nc-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 10px;text-align:center}
-.nc-card-val{font-size:15px;font-weight:800;margin-bottom:6px}
-.nc-card-lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px}
-.nc-detail-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f1f5f9}
-.nc-detail-label{font-size:14px;color:#475569}
-.nc-detail-val{font-size:15px;color:#0f172a;font-weight:700}
-.nc-peng-section{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0}
-.nc-peng-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid #e2e8f0;color:#475569}
-.nc-peng-row:last-of-type{border-bottom:none}
-.nc-summary{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:20px;margin-top:20px;position:relative;overflow:hidden}
-.nc-summary::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#6366f1,#8b5cf6,#3b82f6)}
-.nc-sum-row{display:flex;justify-content:space-between;padding:9px 0;font-size:14px;border-bottom:1px solid #f1f5f9}
-.nc-sum-row:last-child{border-bottom:none}
-.nc-sum-lbl{color:#475569}
-.nc-sum-val{color:#0f172a;font-weight:700}
-.nc-laba{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:1.5px solid #c7d2fe;border-radius:14px;margin-top:16px}
-.nc-laba-lbl{font-size:12px;color:#4338ca;text-transform:uppercase;letter-spacing:2px;font-weight:700}
-.nc-laba-val{font-size:28px;font-weight:800;color:#3730a3;letter-spacing:-1px}
-.nc-catatan{margin-top:20px;padding:16px 18px;background:#eef2ff;border-left:3px solid #6366f1;border-radius:0 10px 10px 0}
-.nc-catatan-lbl{font-size:11px;color:#4338ca;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px}
-.nc-catatan-val{font-size:14px;color:#475569;line-height:1.7}
-.nc-footer{padding:18px 36px 28px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e2e8f0;margin-top:10px;background:#ffffff}
-.nc-footer-ts{font-size:11px;color:#64748b}
-.nc-footer-badge{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;border:1px solid #e2e8f0;padding:5px 12px;border-radius:20px;background:#f8fafc}
+#nota::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: #14532d;
+}
+
+.nota-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.nota-header h2 {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #14532d;
+  margin-bottom: 6px;
+}
+.nota-header h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 34px;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.meta-box {
+  display: block;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%;
+  border: 1.5px solid #cbd5e1;
+}
+.meta-date {
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 800;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.meta-kasir {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 700;
+  border-top: 1.5px dashed #94a3b8;
+  padding-top: 6px;
+  text-align: center;
+}
+
+.nota-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 15.5px;
+  color: #0f172a;
+  font-weight: 600;
+}
+.nota-row.sub-item {
+  padding: 6px 0 6px 16px;
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
+}
+.nota-row strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+.nota-row .val {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.nota-divider {
+  border-top: 2px dashed #0f172a;
+  margin: 16px 0;
+}
+.nota-section-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0f172a;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.nota-highlight-box {
+  background: #dcfce7;
+  border: 2px solid #16a34a;
+  border-radius: 16px;
+  padding: 8px 18px;
+  margin-top: 20px;
+}
+.nota-highlight-box .nota-row {
+  padding: 12px 0;
+}
+.nota-highlight-box .final-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #14532d;
+}
+
+/* Wadah Box Hutang dibuat selalu statis (Selalu Terbaca) */
+#p-hutang-section {
+  margin-top: 26px;
+  padding: 16px;
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+  border-radius: 14px;
+  display: block !important; /* Memaksa agar selalu dirender permanen */
+}
+#p-hutang-section strong {
+  color: #b91c1c;
+  display: block;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+#p-hutang {
+  font-size: 15px;
+  color: #991b1b;
+  font-weight: 700;
+  line-height: 1.5;
+}
 </style>
 </head>
 <body>
+
 <div class="wrap">
+  <h1>Laporan Harian <span>Lumbong Coffee</span></h1>
 
-  <div class="header-bar">
-    <div class="title">Laporan Keuangan Harian</div>
-    <div class="subtitle">Lumbong Coffee</div>
-  </div>
-
-  <!-- INFO -->
   <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:var(--accent-light)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <span class="sec-title">Informasi</span>
-    </div>
     <div class="grid2">
       <div class="field"><label>Tanggal</label><input type="date" id="tanggal"></div>
-      <div class="field"><label>Kasir</label><input id="kasir" value="Leli" autocomplete="off"></div>
+      <div class="field"><label>Hari</label><select id="hari">
+        <option>Minggu</option><option selected>Senin</option><option>Selasa</option>
+        <option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option>
+      </select></div>
     </div>
+    <div class="field"><label>Kasir</label><input id="kasir" value="Leli"></div>
   </div>
 
-  <!-- PENJUALAN -->
   <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:var(--green-light)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </div>
-      <span class="sec-title">Penjualan</span>
+    <div class="field">
+      <label>Saldo Tunai Hari Kemarin (Rp)</label>
+      <input type="number" id="saldoKemarin" placeholder="0" oninput="hitung()">
     </div>
-    <div class="metric-grid">
-      <div class="metric"><div class="metric-num" id="mTunai" style="color:var(--green)">Rp 0</div><div class="metric-lbl">Tunai</div></div>
-      <div class="metric"><div class="metric-num" id="mQris" style="color:var(--blue)">Rp 0</div><div class="metric-lbl">QRIS</div></div>
-      <div class="metric"><div class="metric-num" id="mTrx" style="color:var(--purple)">0</div><div class="metric-lbl">Trx</div></div>
-    </div>
-    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-    <div class="field"><label>Jumlah Transaksi</label><input type="number" id="transaksi" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
   </div>
 
-  <!-- PENGELUARAN -->
   <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:var(--orange-light)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </div>
-      <span class="sec-title">Pengeluaran & Hutang</span>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Format: <code style="color:var(--accent);background:var(--accent-light);padding:2px 6px;border-radius:4px">nama = jumlah</code></p>
-    <textarea id="pengeluaranText" rows="4" autocomplete="off" oninput="upd()"></textarea>
-
-    <div style="margin-top:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
-      <div class="grid2">
-        <div class="field" style="margin-bottom:0">
-          <label>Hutang (Rp)</label>
-          <input type="number" id="hutang" inputmode="numeric" oninput="upd()" autocomplete="off">
-        </div>
-        <div class="field" style="margin-bottom:0">
-          <label>Pembayaran Hutang (Rp)</label>
-          <input type="number" id="pembayaranHutang" inputmode="numeric" oninput="upd()" autocomplete="off">
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">
-      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px">Rincian Pengeluaran</div>
-      <div id="listPeng"><em style="color:#94a3b8;font-size:13px">Belum ada data</em></div>
-    </div>
+    <h3>Pemasukan</h3>
+    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" oninput="hitung()" placeholder="0"></div>
+    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" oninput="hitung()" placeholder="0"></div>
   </div>
 
-  <!-- RINGKASAN -->
   <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:var(--purple-light)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <span class="sec-title">Ringkasan</span>
-    </div>
-    <div class="sum-row"><span style="color:var(--muted)">Total Penjualan</span><span id="totalPenj" style="font-weight:700">Rp 0</span></div>
-    <div style="height:1px;background:var(--border);margin:4px 0"></div>
-    <div class="sum-row"><span style="color:var(--muted)">Total Pengeluaran</span><span id="totalPeng" style="font-weight:700;color:var(--orange)">Rp 0</span></div>
-    <div class="sum-row"><span style="color:var(--muted)">Total Hutang</span><span id="totalHutang" style="font-weight:700;color:var(--blue)">Rp 0</span></div>
-    <div class="sum-row"><span style="color:var(--muted)">Pembayaran Hutang</span><span id="totalBayarHutang" style="font-weight:700;color:var(--green)">Rp 0</span></div>
-    <div class="sum-total">
-      <span style="font-size:12px;color:#4338ca;text-transform:uppercase;letter-spacing:1.5px;font-weight:700">Laba Bersih</span>
-      <span id="laba" style="font-size:22px;font-weight:800;color:#3730a3">Rp 0</span>
-    </div>
+    <h3>Pengeluaran</h3>
+    <p style="font-size:12px;color:#0f172a;font-weight:700;margin-bottom:8px;">Format: <code>nama = jumlah</code></p>
+    <textarea id="pengeluaranText" rows="6" oninput="hitung()" placeholder="belanja = 657500"></textarea>
   </div>
 
-  <!-- INFO TAMBAHAN -->
   <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:#e0e7ff">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      </div>
-      <span class="sec-title">Info Tambahan</span>
-    </div>
-    <div class="grid2">
-      <div class="field"><label>Saldo Kemarin (Rp)</label><input type="number" id="saldoKemarin" inputmode="numeric" oninput="upd()" autocomplete="off"></div>
-      <div class="field"><label>Saldo Kas Akhir</label><input id="saldoAkhir" readonly></div>
-    </div>
-    <div class="field"><label>Catatan</label><textarea id="catatan" rows="3" autocomplete="off"></textarea></div>
+    <h3>Hutang</h3>
+    <textarea id="hutangText" rows="3" oninput="hitung()" placeholder="contoh: Andi = 150000"></textarea>
   </div>
 
-  <div class="btn-grid">
-    <button class="abtn abtn-print" onclick="simpanJPG()">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Simpan JPG
-    </button>
-    <button class="abtn abtn-reset" onclick="resetForm()">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
-      Reset Form
-    </button>
+  <div class="sec">
+    <div class="summary" id="summary"></div>
   </div>
+
+  <button class="btn" onclick="simpanJPG()">📸 Simpan sebagai JPG</button>
 </div>
 
-<!-- NOTA CAPTURE -->
-<div id="nota-capture">
-  <div class="nc-outer">
-    <div class="nc-stripe"></div>
-    <div class="nc-header">
-      <div class="nc-logo-row">
-        <div class="nc-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
-        </div>
-        <span class="nc-logo-text">Laporan Keuangan Harian</span>
-      </div>
-      <div class="nc-cafe-name" id="p-namaCafe">Lumbong Coffee</div>
-      <div class="nc-meta-row">
-        <div class="nc-meta-item"><span class="nc-meta-lbl">Tanggal</span><span class="nc-meta-val" id="p-tgl">—</span></div>
-        <div class="nc-meta-item"><span class="nc-meta-lbl">Hari</span><span class="nc-meta-val" id="p-hari-tanggal">—</span></div>
-        <div class="nc-meta-item"><span class="nc-meta-lbl">Kasir</span><span class="nc-meta-val" id="p-kasir">—</span></div>
-      </div>
+<div id="nota">
+  <div class="nota-header">
+    <h2>Laporan Harian</h2>
+    <h3>Lumbong Coffee</h3>
+    
+    <div class="meta-box">
+      <div class="meta-date" id="p-tanggal"></div>
+      <div class="meta-kasir" id="p-kasir"></div>
     </div>
-    <div class="nc-divider"></div>
-    <div class="nc-body">
-      <div class="nc-section-title">Penjualan</div>
-      <div class="nc-cards">
-        <div class="nc-card"><div class="nc-card-val" id="p-tunai" style="color:#10b981">Rp 0</div><div class="nc-card-lbl">Tunai</div></div>
-        <div class="nc-card"><div class="nc-card-val" id="p-qris" style="color:#3b82f6">Rp 0</div><div class="nc-card-lbl">QRIS</div></div>
-        <div class="nc-card"><div class="nc-card-val" id="p-trx" style="color:#8b5cf6">0</div><div class="nc-card-lbl">Transaksi</div></div>
-      </div>
-      <div class="nc-detail-row">
-        <span class="nc-detail-label">Total Penjualan</span>
-        <span class="nc-detail-val" id="p-totalJual">Rp 0</span>
-      </div>
+  </div>
 
-      <div style="margin-top:18px">
-        <div class="nc-section-title">Pengeluaran & Hutang</div>
-        <div class="nc-peng-section">
-          <div id="p-listPeng"><span style="color:#94a3b8;font-size:13px">Tidak ada pengeluaran</span></div>
-          <div style="display:flex;justify-content:space-between;padding-top:8px;margin-top:8px;border-top:1px solid #e2e8f0">
-            <span style="font-size:12px;color:#475569;font-weight:700">Total Pengeluaran</span>
-            <span style="font-size:13px;color:#f97316;font-weight:700" id="p-totalKeluar">Rp 0</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding-top:6px">
-            <span style="font-size:12px;color:#475569;font-weight:700">Total Hutang</span>
-            <span style="font-size:13px;color:#3b82f6;font-weight:700" id="p-hutang">Rp 0</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding-top:4px">
-            <span style="font-size:12px;color:#475569;font-weight:700">Pembayaran Hutang</span>
-            <span style="font-size:13px;color:#10b981;font-weight:700" id="p-bayarHutang">Rp 0</span>
-          </div>
-        </div>
-      </div>
+  <div class="nota-row">
+    <strong>Saldo Tunai Kemarin</strong>
+    <span id="p-saldoKemarin" class="val"></span>
+  </div>
 
-      <div class="nc-summary">
-        <div class="nc-section-title" style="margin-bottom:10px">Ringkasan</div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Penjualan</span><span class="nc-sum-val" id="p-sum-jual">Rp 0</span></div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Total Pengeluaran</span><span class="nc-sum-val" style="color:#f97316" id="p-sum-keluar">Rp 0</span></div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Pembayaran Hutang</span><span class="nc-sum-val" style="color:#10b981" id="p-sum-bayarHutang">Rp 0</span></div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kemarin</span><span class="nc-sum-val" id="p-saldoKemarin">Rp 0</span></div>
-        <div class="nc-sum-row"><span class="nc-sum-lbl">Saldo Kas Akhir</span><span class="nc-sum-val" id="p-saldoAkhir">Rp 0</span></div>
-      </div>
+  <div class="nota-divider"></div>
+  <div class="nota-section-title">Rincian Pemasukan</div>
 
-      <div class="nc-laba">
-        <span class="nc-laba-lbl">Laba Bersih</span>
-        <span class="nc-laba-val" id="p-laba">Rp 0</span>
-      </div>
+  <div class="nota-row sub-item">
+    <span>• Tunai</span>
+    <span id="p-tunai" class="val"></span>
+  </div>
+  <div class="nota-row sub-item">
+    <span>• QRIS / Transfer</span>
+    <span id="p-qris" class="val"></span>
+  </div>
+  <div class="nota-row">
+    <strong>Total Pemasukan</strong>
+    <span id="p-totalMasuk" class="val" style="color: #156534;"></span>
+  </div>
 
-      <div class="nc-catatan">
-        <div class="nc-catatan-lbl">Catatan</div>
-        <div class="nc-catatan-val" id="p-catatan">—</div>
-      </div>
+  <div class="nota-divider"></div>
+  <div class="nota-section-title">Rincian Pengeluaran</div>
+  
+  <div id="p-listPeng"></div>
+  
+  <div class="nota-row" style="margin-top: 4px;">
+    <strong>Total Pengeluaran</strong>
+    <span id="p-totalKeluar" class="val" style="color: #c2410c;"></span>
+  </div>
+
+  <div class="nota-highlight-box">
+    <div class="nota-row">
+      <strong>Hasil Bersih</strong>
+      <span id="p-laba" class="final-val"></span>
     </div>
-    <div class="nc-footer">
-      <span class="nc-footer-ts" id="p-generated">—</span>
-      <span class="nc-footer-badge">Laporan Harian Kasir</span>
+    <div class="nota-row" style="border-top: 2px solid #16a34a; margin-top: 6px; padding-top: 12px;">
+      <strong style="color: #14532d;">Sisa Saldo Tunai di Toko</strong>
+      <span id="p-saldoTunai" class="final-val" style="color: #14532d;"></span>
     </div>
+  </div>
+
+  <div id="p-hutang-section">
+    <strong>Hutang Hari Ini (Belum Lunas)</strong>
+    <div id="p-hutang"></div>
   </div>
 </div>
 
@@ -314,133 +362,122 @@ input[readonly]{background:#f8fafc;color:var(--accent-dark);border-color:#c7d2fe
 <script>
 const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
 
-function parsePeng() {
-  const raw = document.getElementById('pengeluaranText').value || '';
-  const items = [];
+const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+function parseList(id, isJpgEngine = false) {
+  const lines = document.getElementById(id).value.trim().split('\n');
   let total = 0;
-  const lines = raw.split('\n');
-  lines.forEach(line => {
-    const idx = line.indexOf('=');
-    if (idx === -1) return;
-    const nama = line.substring(0, idx).trim();
-    const val = parseFloat(line.substring(idx + 1).trim().replace(/[^0-9.]/g, ''));
-    if (nama && !isNaN(val) && val > 0) {
-      items.push({ nama, val });
-      total += val;
+  let html = '';
+  lines.forEach(l => {
+    if (!l.includes('=')) return;
+    const [nama, val] = l.split('=');
+    const jml = parseFloat((val || '').trim().replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
+    if (jml > 0) {
+      total += jml;
+      if(isJpgEngine) {
+        html += `<div class="nota-row sub-item"><span>• ${nama.trim()}</span><span class="val">${fmt(jml)}</span></div>`;
+      } else {
+        html += `• ${nama.trim()} : ${fmt(jml)}<br>`;
+      }
     }
   });
-
-  const el = document.getElementById('listPeng');
-  if (items.length === 0) {
-    el.innerHTML = '<em style="color:#94a3b8;font-size:13px">Belum ada data</em>';
-  } else {
-    el.innerHTML = items.map(i =>
-      `<div class="peng-row"><span>${i.nama}</span><span style="font-weight:600;color:#f97316">${fmt(i.val)}</span></div>`
-    ).join('');
-  }
-  return { items, total };
+  return { total, html };
 }
 
-function upd() {
+function hitung() {
+  const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
   const tunai = parseFloat(document.getElementById('tunai').value) || 0;
   const qris = parseFloat(document.getElementById('qris').value) || 0;
-  const trx = parseInt(document.getElementById('transaksi').value) || 0;
-  const totalP = tunai + qris;
-  const { total: totalK } = parsePeng();
-  const hutang = parseFloat(document.getElementById('hutang').value) || 0;
-  const bayarHutang = parseFloat(document.getElementById('pembayaranHutang').value) || 0;
-  const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + tunai + qris + bayarHutang;
+  const totalMasuk = tunai + qris;
 
-  document.getElementById('mTunai').textContent = fmt(tunai);
-  document.getElementById('mQris').textContent = fmt(qris);
-  document.getElementById('mTrx').textContent = trx;
-  document.getElementById('totalPenj').textContent = fmt(totalP);
-  document.getElementById('totalPeng').textContent = fmt(totalK);
-  document.getElementById('totalHutang').textContent = fmt(hutang);
-  document.getElementById('totalBayarHutang').textContent = fmt(bayarHutang);
-  document.getElementById('laba').textContent = fmt(totalP - totalK);
-  document.getElementById('saldoAkhir').value = fmt(saldoAkhir);
-}
+  const peng = parseList('pengeluaranText', false);
+  const totalKeluar = peng.total;
 
-function getHariIndonesia(dateStr) {
-  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const parts = dateStr.split('-');
-  const date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-  return days[date.getDay()];
-}
+  const laba = saldoKemarin + totalMasuk - totalKeluar;
+  const saldoTunai = saldoKemarin + tunai - totalKeluar;
 
-function formatTanggal(dateStr) {
-  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-  const parts = dateStr.split('-');
-  const tgl = String(parseInt(parts[2])).padStart(2,'0');
-  return `${tgl} ${bulan[parseInt(parts[1]) - 1]} ${parts[0]}`;
+  let summaryHTML = `
+    <div><strong>Saldo Tunai Hari Kemarin</strong> <span style="float:right;">${fmt(saldoKemarin)}</span></div>
+    <div><strong>Pemasukan</strong> <span style="float:right;">${fmt(totalMasuk)}</span></div>
+    <div style="margin-left:15px; font-size:14.5px; color:#156534; font-weight:600;">
+      • Tunai : ${fmt(tunai)}<br>
+      • QRIS : ${fmt(qris)}
+    </div>
+    <div><strong>Pengeluaran</strong> <span style="float:right; color:#b91c1c;">${fmt(totalKeluar)}</span></div>
+    <div class="total"><strong>Hasil Bersih</strong> <span>${fmt(laba)}</span></div>
+    <div class="total"><strong>Saldo Tunai</strong> <span>${fmt(saldoTunai)}</span></div>
+  `;
+  document.getElementById('summary').innerHTML = summaryHTML;
 }
 
 async function simpanJPG() {
+  const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
   const tunai = parseFloat(document.getElementById('tunai').value) || 0;
   const qris = parseFloat(document.getElementById('qris').value) || 0;
-  const totalP = tunai + qris;
-  const { items, total: totalK } = parsePeng();
-  const hutang = parseFloat(document.getElementById('hutang').value) || 0;
-  const bayarHutang = parseFloat(document.getElementById('pembayaranHutang').value) || 0;
-  const saldoK = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const saldoAkhir = saldoK + tunai + qris + bayarHutang;
-  const tanggalVal = document.getElementById('tanggal').value;
-  const hari = getHariIndonesia(tanggalVal);
-  const tglFormatted = formatTanggal(tanggalVal);
-  const now = new Date();
+  const totalMasuk = tunai + qris;
+  
+  const peng = parseList('pengeluaranText', true);
+  const totalKeluar = peng.total;
 
-  document.getElementById('p-namaCafe').innerText = 'Lumbong Coffee';
-  document.getElementById('p-tgl').innerText = tglFormatted;
-  document.getElementById('p-hari-tanggal').innerText = `${hari}, ${tglFormatted}`;
-  document.getElementById('p-kasir').innerText = document.getElementById('kasir').value || '—';
+  const laba = saldoKemarin + totalMasuk - totalKeluar;
+  const saldoTunai = saldoKemarin + tunai - totalKeluar;
+
+  const hutangText = document.getElementById('hutangText').value.trim();
+
+  // Konversi Format Tanggal
+  const tglInput = document.getElementById('tanggal').value;
+  let tanggalFormat = '—';
+  if(tglInput) {
+     const d = new Date(tglInput);
+     const hariPilihan = document.getElementById('hari').value;
+     const dd = String(d.getDate()).padStart(2, '0');
+     const mm = namaBulan[d.getMonth()];
+     const yyyy = d.getFullYear();
+     tanggalFormat = `${hariPilihan}, ${dd}/${mm}/${yyyy}`;
+  }
+
+  document.getElementById('p-tanggal').innerText = tanggalFormat;
+  document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${document.getElementById('kasir').value || '—'}</strong>`;
+  
+  document.getElementById('p-saldoKemarin').innerText = fmt(saldoKemarin);
   document.getElementById('p-tunai').innerText = fmt(tunai);
   document.getElementById('p-qris').innerText = fmt(qris);
-  document.getElementById('p-trx').innerText = (parseInt(document.getElementById('transaksi').value) || 0) + ' trx';
-  document.getElementById('p-totalJual').innerText = fmt(totalP);
-  document.getElementById('p-totalKeluar').innerText = fmt(totalK);
-  document.getElementById('p-hutang').innerText = fmt(hutang);
-  document.getElementById('p-bayarHutang').innerText = fmt(bayarHutang);
-  document.getElementById('p-sum-jual').innerText = fmt(totalP);
-  document.getElementById('p-sum-keluar').innerText = fmt(totalK);
-  document.getElementById('p-sum-bayarHutang').innerText = fmt(bayarHutang);
-  document.getElementById('p-saldoKemarin').innerText = fmt(saldoK);
-  document.getElementById('p-saldoAkhir').innerText = fmt(saldoAkhir);
-  document.getElementById('p-laba').innerText = fmt(totalP - totalK);
-  document.getElementById('p-catatan').innerText = document.getElementById('catatan').value.trim() || 'Tidak ada catatan hari ini.';
-  document.getElementById('p-generated').innerText = 'Dicetak: ' + now.toLocaleString('id-ID');
+  document.getElementById('p-totalMasuk').innerText = fmt(totalMasuk);
+  
+  document.getElementById('p-listPeng').innerHTML = peng.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#475569;">• Tidak ada pengeluaran</div>';
+  document.getElementById('p-totalKeluar').innerText = fmt(totalKeluar);
+  document.getElementById('p-laba').innerText = fmt(laba);
+  document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
 
-  const pengHtml = items.length === 0
-    ? '<span style="color:#94a3b8;font-size:13px">Tidak ada pengeluaran</span>'
-    : items.map(i => `<div class="nc-peng-row"><span class="nc-peng-name">${i.nama}</span><span style="color:#f97316;font-weight:600">${fmt(i.val)}</span></div>`).join('');
-  document.getElementById('p-listPeng').innerHTML = pengHtml;
-
-  const nota = document.getElementById('nota-capture');
-  nota.style.display = 'block';
-  nota.style.left = '-9999px';
-  await new Promise(r => setTimeout(r, 400));
-
-  try {
-    const canvas = await html2canvas(nota, { scale: 2.5, backgroundColor: '#ffffff', width: 480 });
-    const link = document.createElement('a');
-    link.download = 'Laporan_' + (tanggalVal.replace(/-/g, '') || 'tanggal') + '.jpg';
-    link.href = canvas.toDataURL('image/jpeg', 0.95);
-    link.click();
-  } catch(e) {
-    alert('Gagal menyimpan: ' + e.message);
-  } finally {
-    nota.style.display = 'none';
+  // PENDEKATAN BARU (KONTROL ISI TEXT, BUKAN STATUS HIDDEN)
+  if (hutangText) {
+    document.getElementById('p-hutang').innerHTML = hutangText.replace(/\n/g, '<br>');
+  } else {
+    document.getElementById('p-hutang').innerHTML = '<span style="font-style:italic; color:#b91c1c;">• Tidak ada catatan hutang</span>';
   }
-}
 
-function resetForm() {
-  if (confirm('Reset semua data?')) location.reload();
+  const nota = document.getElementById('nota');
+  nota.style.display = 'block';
+  
+  await new Promise(r => setTimeout(r, 450));
+
+  html2canvas(nota, {
+    scale: 3.0, 
+    backgroundColor: '#ffffff',
+    logging: false,
+    useCORS: true
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = `Laporan_Lumbong_${document.getElementById('tanggal').value || 'hari_ini'}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.98);
+    link.click();
+    nota.style.display = 'none';
+  });
 }
 
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-document.getElementById('pengeluaranText').value = 'tape = 200000';
-window.addEventListener('load', () => upd());
+document.getElementById('pengeluaranText').value = 'belanja = 657500';
+hitung();
 </script>
 </body>
 </html>
