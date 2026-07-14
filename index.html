@@ -67,6 +67,7 @@ h3 {
   font-size:17px;
   font-weight: 800;
 }
+h3.danger { color:#b91c1c; }
 
 .summary {
   background:linear-gradient(135deg, #f0fdf4, #dcfce7);
@@ -226,29 +227,51 @@ h3 {
   color: #14532d;
 }
 
-/* Wadah Box Hutang dibuat selalu statis (Selalu Terbaca) */
+/* Wadah Box Hutang - dirapikan senada dengan box Pengeluaran     */
+/* (rincian item per baris + baris Total Hutang), selalu tampil   */
+/* permanen dengan aksen merah agar tetap mudah dikenali sbg hutang */
 #p-hutang-section {
   margin-top: 26px;
-  padding: 16px;
-  background: #fee2e2;
+  padding: 16px 18px;
+  background: #fef2f2;
   border: 2px solid #ef4444;
-  border-radius: 14px;
+  border-radius: 16px;
   display: block !important; /* Memaksa agar selalu dirender permanen */
 }
-#p-hutang-section strong {
+#p-hutang-section .nota-section-title {
+  margin-top: 0;
   color: #b91c1c;
-  display: block;
-  font-size: 13.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
+}
+#p-listHutang .nota-row.sub-item {
+  color: #7f1d1d;
+}
+#p-listHutang .val {
+  color: #b91c1c;
+}
+#p-listHutang .lunas-mark {
+  color: #16a34a;
   font-weight: 800;
 }
-#p-hutang {
-  font-size: 15px;
-  color: #991b1b;
-  font-weight: 700;
-  line-height: 1.5;
+#p-hutang-totals {
+  border-top: 1.5px dashed #ef4444;
+  margin-top: 4px;
+  padding-top: 8px;
+}
+#p-hutang-totals .nota-row {
+  padding: 6px 0;
+}
+#p-hutang-totals strong {
+  font-size: 14px;
+}
+#p-totalHutangLunas {
+  font-size: 16px;
+  font-weight: 800;
+  color: #16a34a;
+}
+#p-totalHutangBelum {
+  font-size: 17px;
+  font-weight: 800;
+  color: #b91c1c;
 }
 </style>
 </head>
@@ -283,13 +306,14 @@ h3 {
 
   <div class="sec">
     <h3>Pengeluaran</h3>
-    <p style="font-size:12px;color:#0f172a;font-weight:700;margin-bottom:8px;">Format: <code>nama = jumlah</code></p>
-    <textarea id="pengeluaranText" rows="6" oninput="hitung()" placeholder="belanja = 657500"></textarea>
+    <p style="font-size:12px;color:#0f172a;font-weight:700;margin-bottom:8px;">Format➡️ <code>nama : jumlah</code></p>
+    <textarea id="pengeluaranText" rows="6" oninput="hitung()" placeholder="belanja : 657500"></textarea>
   </div>
 
   <div class="sec">
-    <h3>Hutang</h3>
-    <textarea id="hutangText" rows="3" oninput="hitung()" placeholder="contoh: Andi = 150000"></textarea>
+    <h3 class="danger">Hutang</h3>
+    <p style="font-size:12px;color:#0f172a;font-weight:700;margin-bottom:8px;">Format➡️ <code>nama : jumlah</code> &nbsp; dan &nbsp; tambahkan <code>= ✅</code> jika sudah dibayar</p>
+    <textarea id="hutangText" rows="3" oninput="hitung()" placeholder="Andi : 150000 = ✅&#10;Budi : 200000"></textarea>
   </div>
 
   <div class="sec">
@@ -353,8 +377,20 @@ h3 {
   </div>
 
   <div id="p-hutang-section">
-    <strong>Hutang Hari Ini (Belum Lunas)</strong>
-    <div id="p-hutang"></div>
+    <div class="nota-section-title">Rincian Hutang</div>
+
+    <div id="p-listHutang"></div>
+
+    <div id="p-hutang-totals">
+      <div class="nota-row">
+        <strong>Total Hutang Lunas</strong>
+        <span id="p-totalHutangLunas" class="val"></span>
+      </div>
+      <div class="nota-row">
+        <strong>Total Hutang Belum Lunas</strong>
+        <span id="p-totalHutangBelum" class="val"></span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -368,20 +404,53 @@ function parseList(id, isJpgEngine = false) {
   const lines = document.getElementById(id).value.trim().split('\n');
   let total = 0;
   let html = '';
+  let no = 0;
   lines.forEach(l => {
-    if (!l.includes('=')) return;
-    const [nama, val] = l.split('=');
+    if (!l.includes(':')) return;
+    const idx = l.indexOf(':');
+    const nama = l.slice(0, idx);
+    const val = l.slice(idx + 1);
     const jml = parseFloat((val || '').trim().replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
     if (jml > 0) {
+      no++;
       total += jml;
       if(isJpgEngine) {
-        html += `<div class="nota-row sub-item"><span>• ${nama.trim()}</span><span class="val">${fmt(jml)}</span></div>`;
+        html += `<div class="nota-row sub-item"><span>${no}. ${nama.trim()}</span><span class="val">${fmt(jml)}</span></div>`;
       } else {
-        html += `• ${nama.trim()} : ${fmt(jml)}<br>`;
+        html += `${no}. ${nama.trim()} : ${fmt(jml)}<br>`;
       }
     }
   });
   return { total, html };
+}
+
+function parseHutang(isJpgEngine = false) {
+  const lines = document.getElementById('hutangText').value.trim().split('\n');
+  let totalLunas = 0;
+  let totalBelum = 0;
+  let html = '';
+  let no = 0;
+  lines.forEach(l => {
+    if (!l.includes(':')) return;
+    const idx = l.indexOf(':');
+    const nama = l.slice(0, idx);
+    const rest = l.slice(idx + 1);
+    const restLower = rest.toLowerCase();
+    const lunas = rest.includes('✅') || restLower.includes('lunas');
+    const jumlahRaw = rest.replace(/✅/g,'').replace(/=/g,'').replace(/lunas/gi,'');
+    const jml = parseFloat(jumlahRaw.trim().replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
+    if (jml > 0) {
+      no++;
+      if (lunas) { totalLunas += jml; } else { totalBelum += jml; }
+      const centang = lunas ? ' <span class="lunas-mark">✅</span>' : '';
+      if (isJpgEngine) {
+        html += `<div class="nota-row sub-item"><span>${no}. ${nama.trim()}</span><span class="val">${fmt(jml)}${centang}</span></div>`;
+      } else {
+        html += `${no}. ${nama.trim()} : ${fmt(jml)}${lunas ? ' ✅' : ''}<br>`;
+      }
+    }
+  });
+  return { totalLunas, totalBelum, html };
 }
 
 function hitung() {
@@ -392,6 +461,8 @@ function hitung() {
 
   const peng = parseList('pengeluaranText', false);
   const totalKeluar = peng.total;
+
+  const hutang = parseHutang(false);
 
   const laba = saldoKemarin + totalMasuk - totalKeluar;
   const saldoTunai = saldoKemarin + tunai - totalKeluar;
@@ -404,6 +475,8 @@ function hitung() {
       • QRIS : ${fmt(qris)}
     </div>
     <div><strong>Pengeluaran</strong> <span style="float:right; color:#b91c1c;">${fmt(totalKeluar)}</span></div>
+    <div><strong>Hutang Lunas</strong> <span style="float:right; color:#16a34a;">${fmt(hutang.totalLunas)}</span></div>
+    <div><strong>Hutang Belum Lunas</strong> <span style="float:right; color:#b91c1c;">${fmt(hutang.totalBelum)}</span></div>
     <div class="total"><strong>Hasil Bersih</strong> <span>${fmt(laba)}</span></div>
     <div class="total"><strong>Saldo Tunai</strong> <span>${fmt(saldoTunai)}</span></div>
   `;
@@ -419,10 +492,10 @@ async function simpanJPG() {
   const peng = parseList('pengeluaranText', true);
   const totalKeluar = peng.total;
 
+  const hutang = parseHutang(true);
+
   const laba = saldoKemarin + totalMasuk - totalKeluar;
   const saldoTunai = saldoKemarin + tunai - totalKeluar;
-
-  const hutangText = document.getElementById('hutangText').value.trim();
 
   // Konversi Format Tanggal
   const tglInput = document.getElementById('tanggal').value;
@@ -449,12 +522,10 @@ async function simpanJPG() {
   document.getElementById('p-laba').innerText = fmt(laba);
   document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
 
-  // PENDEKATAN BARU (KONTROL ISI TEXT, BUKAN STATUS HIDDEN)
-  if (hutangText) {
-    document.getElementById('p-hutang').innerHTML = hutangText.replace(/\n/g, '<br>');
-  } else {
-    document.getElementById('p-hutang').innerHTML = '<span style="font-style:italic; color:#b91c1c;">• Tidak ada catatan hutang</span>';
-  }
+  // Box Hutang: rincian item bernomor + tanda centang jika lunas, lalu total lunas & belum lunas
+  document.getElementById('p-listHutang').innerHTML = hutang.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
+  document.getElementById('p-totalHutangLunas').innerText = fmt(hutang.totalLunas);
+  document.getElementById('p-totalHutangBelum').innerText = fmt(hutang.totalBelum);
 
   const nota = document.getElementById('nota');
   nota.style.display = 'block';
@@ -476,7 +547,7 @@ async function simpanJPG() {
 }
 
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-document.getElementById('pengeluaranText').value = 'belanja = 657500';
+document.getElementById('pengeluaranText').value = ''; // Mengosongkan isi kotak
 hitung();
 </script>
 </body>
