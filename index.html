@@ -112,11 +112,11 @@ h3.danger { color:#b91c1c; }
 #nota {
   display:none;
   position:fixed;
-  left:-1000px;
+  left:-2000px;
   top:0;
-  width:460px;
+  width:700px;
   background:#ffffff;
-  padding:45px 35px;
+  padding:40px 34px;
   font-family:'Plus Jakarta Sans', sans-serif;
   border-radius:24px;
   overflow:hidden;
@@ -227,52 +227,75 @@ h3.danger { color:#b91c1c; }
   color: #14532d;
 }
 
-/* Wadah Box Hutang - dirapikan senada dengan box Pengeluaran     */
-/* (rincian item per baris + baris Total Hutang), selalu tampil   */
-/* permanen dengan aksen merah agar tetap mudah dikenali sbg hutang */
-#p-hutang-section {
-  margin-top: 26px;
-  padding: 16px 18px;
-  background: #fef2f2;
-  border: 2px solid #ef4444;
+/* ======================================================= */
+/* LAYOUT 2 KOLOM: Pengeluaran & Hutang berdampingan        */
+/* supaya hasil JPG tidak memanjang, lebih persegi & rapi   */
+/* dilihat di HP walau rinciannya banyak                    */
+/* ======================================================= */
+.nota-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 16px;
+}
+.nota-col-box {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
   border-radius: 16px;
-  display: block !important; /* Memaksa agar selalu dirender permanen */
+  padding: 14px 15px;
 }
-#p-hutang-section .nota-section-title {
+.nota-col-box .nota-section-title {
   margin-top: 0;
-  color: #b91c1c;
+  font-size: 12px;
 }
-#p-listHutang .nota-row.sub-item {
-  color: #7f1d1d;
+.nota-col-box .nota-row.sub-item {
+  padding: 5px 0;
+  font-size: 13px;
+  line-height: 1.35;
 }
-#p-listHutang .val {
-  color: #b91c1c;
+.nota-col-box .nota-row.sub-item span:first-child {
+  padding-right: 6px;
+  word-break: break-word;
 }
-#p-listHutang .lunas-mark {
-  color: #16a34a;
-  font-weight: 800;
+.nota-col-box .nota-row.col-total {
+  border-top: 1.5px dashed #94a3b8;
+  margin-top: 6px;
+  padding: 9px 0 0;
+  font-size: 14px;
 }
+
+/* Kolom Pengeluaran (aksen oranye) */
+.nota-col-box.exp {
+  background: #fff7ed;
+  border-color: #fb923c;
+}
+.nota-col-box.exp .nota-section-title { color: #c2410c; }
+.nota-col-box.exp .nota-row.sub-item { color: #7c2d12; }
+.nota-col-box.exp .val,
+.nota-col-box.exp .nota-row.col-total strong { color: #c2410c; }
+
+/* Kolom Hutang (aksen merah) - rincian item per baris +          */
+/* baris total lunas/belum lunas, selalu tampil permanen          */
+#p-hutang-section {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+#p-hutang-section .nota-section-title { color: #b91c1c; }
+#p-listHutang .nota-row.sub-item { color: #7f1d1d; }
+#p-listHutang .val { color: #b91c1c; }
+#p-listHutang .lunas-mark { color: #16a34a; font-weight: 800; }
 #p-hutang-totals {
   border-top: 1.5px dashed #ef4444;
   margin-top: 4px;
   padding-top: 8px;
 }
 #p-hutang-totals .nota-row {
-  padding: 6px 0;
+  padding: 5px 0;
+  font-size: 13px;
 }
-#p-hutang-totals strong {
-  font-size: 14px;
-}
-#p-totalHutangLunas {
-  font-size: 16px;
-  font-weight: 800;
-  color: #16a34a;
-}
-#p-totalHutangBelum {
-  font-size: 17px;
-  font-weight: 800;
-  color: #b91c1c;
-}
+#p-totalHutangLunas { color: #16a34a; font-weight: 800; }
+#p-totalHutangBelum { color: #b91c1c; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -356,13 +379,31 @@ h3.danger { color:#b91c1c; }
   </div>
 
   <div class="nota-divider"></div>
-  <div class="nota-section-title">Rincian Pengeluaran</div>
-  
-  <div id="p-listPeng"></div>
-  
-  <div class="nota-row" style="margin-top: 4px;">
-    <strong>Total Pengeluaran</strong>
-    <span id="p-totalKeluar" class="val" style="color: #c2410c;"></span>
+
+  <div class="nota-cols">
+    <div class="nota-col-box exp">
+      <div class="nota-section-title">Rincian Pengeluaran</div>
+      <div id="p-listPeng"></div>
+      <div class="nota-row col-total">
+        <strong>Total</strong>
+        <span id="p-totalKeluar" class="val"></span>
+      </div>
+    </div>
+
+    <div class="nota-col-box" id="p-hutang-section">
+      <div class="nota-section-title">Rincian Hutang</div>
+      <div id="p-listHutang"></div>
+      <div id="p-hutang-totals">
+        <div class="nota-row">
+          <strong>Lunas</strong>
+          <span id="p-totalHutangLunas" class="val"></span>
+        </div>
+        <div class="nota-row">
+          <strong>Belum Lunas</strong>
+          <span id="p-totalHutangBelum" class="val"></span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="nota-highlight-box">
@@ -373,23 +414,6 @@ h3.danger { color:#b91c1c; }
     <div class="nota-row" style="border-top: 2px solid #16a34a; margin-top: 6px; padding-top: 12px;">
       <strong style="color: #14532d;">Sisa Saldo Tunai di Toko</strong>
       <span id="p-saldoTunai" class="final-val" style="color: #14532d;"></span>
-    </div>
-  </div>
-
-  <div id="p-hutang-section">
-    <div class="nota-section-title">Rincian Hutang</div>
-
-    <div id="p-listHutang"></div>
-
-    <div id="p-hutang-totals">
-      <div class="nota-row">
-        <strong>Total Hutang Lunas</strong>
-        <span id="p-totalHutangLunas" class="val"></span>
-      </div>
-      <div class="nota-row">
-        <strong>Total Hutang Belum Lunas</strong>
-        <span id="p-totalHutangBelum" class="val"></span>
-      </div>
     </div>
   </div>
 </div>
