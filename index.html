@@ -234,8 +234,8 @@ h3.danger { color:#b91c1c; }
 /* ======================================================= */
 .nota-cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
   align-items: start;
   margin-top: 16px;
 }
@@ -274,6 +274,16 @@ h3.danger { color:#b91c1c; }
 .nota-col-box.exp .nota-row.sub-item { color: #7c2d12; }
 .nota-col-box.exp .val,
 .nota-col-box.exp .nota-row.col-total strong { color: #c2410c; }
+
+/* Kolom Pengambilan Uang Tunai (aksen biru) */
+.nota-col-box.pgb {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+.nota-col-box.pgb .nota-section-title { color: #1d4ed8; }
+.nota-col-box.pgb .nota-row.sub-item { color: #1e3a8a; }
+.nota-col-box.pgb .val,
+.nota-col-box.pgb .nota-row.col-total strong { color: #1d4ed8; }
 
 /* Kolom Hutang (aksen merah) - rincian item per baris +          */
 /* baris total lunas/belum lunas, selalu tampil permanen          */
@@ -340,7 +350,18 @@ h3.danger { color:#b91c1c; }
   </div>
 
   <div class="sec">
-    <div class="summary" id="summary"></div>
+    <h3 style="color:#1d4ed8;">Pengambilan Uang Tunai (Catatan)</h3>
+    <p style="font-size:12px;color:#0f172a;font-weight:700;margin-bottom:8px;">Format➡️ <code>nama : jumlah</code> </p>
+    <textarea id="pengambilanText" rows="3" oninput="hitung()" placeholder="Ambil buat pribadi : 100000"></textarea>
+  </div>
+
+  <div class="sec">
+    <div class="summary" id="summaryTop"></div>
+    <div class="field" style="margin-top:14px;">
+      <label>Uang Tunai yang Diambil Hari Ini (Rp)</label>
+      <input type="number" id="pengambilanAmount" placeholder="0" oninput="hitung()">
+    </div>
+    <div class="summary" id="summaryBottom" style="margin-top:14px;"></div>
   </div>
 
   <button class="btn" onclick="simpanJPG()">📸 Simpan sebagai JPG</button>
@@ -404,12 +425,25 @@ h3.danger { color:#b91c1c; }
         </div>
       </div>
     </div>
+
+    <div class="nota-col-box pgb">
+      <div class="nota-section-title">Pengambilan Tunai (Catatan)</div>
+      <div id="p-listPengambilan"></div>
+      <div class="nota-row col-total">
+        <strong>Total Dicatat</strong>
+        <span id="p-totalPengambilan" class="val"></span>
+      </div>
+    </div>
   </div>
 
   <div class="nota-highlight-box">
     <div class="nota-row">
       <strong>Hasil Bersih</strong>
       <span id="p-laba" class="final-val"></span>
+    </div>
+    <div class="nota-row" style="border-top: 1.5px dashed #94a3b8; margin-top: 6px; padding-top: 10px;">
+      <strong>Uang Tunai Diambil</strong>
+      <span id="p-pengambilanAmount" class="val" style="color:#1d4ed8;"></span>
     </div>
     <div class="nota-row" style="border-top: 2px solid #16a34a; margin-top: 6px; padding-top: 12px;">
       <strong style="color: #14532d;">Sisa Saldo Tunai di Toko</strong>
@@ -488,10 +522,15 @@ function hitung() {
 
   const hutang = parseHutang(false);
 
-  const laba = saldoKemarin + totalMasuk - totalKeluar;
-  const saldoTunai = saldoKemarin + tunai - totalKeluar;
+  // Catatan pengambilan (tidak memengaruhi hitungan)
+  parseList('pengambilanText', false);
 
-  let summaryHTML = `
+  const pengambilanAmount = parseFloat(document.getElementById('pengambilanAmount').value) || 0;
+
+  const laba = saldoKemarin + totalMasuk - totalKeluar;
+  const saldoTunai = saldoKemarin + tunai - totalKeluar - pengambilanAmount;
+
+  let summaryTopHTML = `
     <div><strong>Saldo Tunai Hari Kemarin</strong> <span style="float:right;">${fmt(saldoKemarin)}</span></div>
     <div><strong>Pemasukan</strong> <span style="float:right;">${fmt(totalMasuk)}</span></div>
     <div style="margin-left:15px; font-size:14.5px; color:#156534; font-weight:600;">
@@ -502,9 +541,15 @@ function hitung() {
     <div><strong>Hutang Lunas</strong> <span style="float:right; color:#16a34a;">${fmt(hutang.totalLunas)}</span></div>
     <div><strong>Hutang Belum Lunas</strong> <span style="float:right; color:#b91c1c;">${fmt(hutang.totalBelum)}</span></div>
     <div class="total"><strong>Hasil Bersih</strong> <span>${fmt(laba)}</span></div>
+  `;
+
+  let summaryBottomHTML = `
+    <div><strong>Uang Tunai Diambil</strong> <span style="float:right; color:#1d4ed8;">${fmt(pengambilanAmount)}</span></div>
     <div class="total"><strong>Saldo Tunai</strong> <span>${fmt(saldoTunai)}</span></div>
   `;
-  document.getElementById('summary').innerHTML = summaryHTML;
+
+  document.getElementById('summaryTop').innerHTML = summaryTopHTML;
+  document.getElementById('summaryBottom').innerHTML = summaryBottomHTML;
 }
 
 async function simpanJPG() {
@@ -518,8 +563,13 @@ async function simpanJPG() {
 
   const hutang = parseHutang(true);
 
+  // Catatan pengambilan (hanya untuk ditampilkan, tidak memengaruhi hitungan)
+  const pengambilanNote = parseList('pengambilanText', true);
+
+  const pengambilanAmount = parseFloat(document.getElementById('pengambilanAmount').value) || 0;
+
   const laba = saldoKemarin + totalMasuk - totalKeluar;
-  const saldoTunai = saldoKemarin + tunai - totalKeluar;
+  const saldoTunai = saldoKemarin + tunai - totalKeluar - pengambilanAmount;
 
   // Konversi Format Tanggal
   const tglInput = document.getElementById('tanggal').value;
@@ -544,12 +594,17 @@ async function simpanJPG() {
   document.getElementById('p-listPeng').innerHTML = peng.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#475569;">• Tidak ada pengeluaran</div>';
   document.getElementById('p-totalKeluar').innerText = fmt(totalKeluar);
   document.getElementById('p-laba').innerText = fmt(laba);
+  document.getElementById('p-pengambilanAmount').innerText = fmt(pengambilanAmount);
   document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
 
   // Box Hutang: rincian item bernomor + tanda centang jika lunas, lalu total lunas & belum lunas
   document.getElementById('p-listHutang').innerHTML = hutang.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
   document.getElementById('p-totalHutangLunas').innerText = fmt(hutang.totalLunas);
   document.getElementById('p-totalHutangBelum').innerText = fmt(hutang.totalBelum);
+
+  // Box Pengambilan Uang Tunai: hanya catatan riwayat, tidak memengaruhi hitungan
+  document.getElementById('p-listPengambilan').innerHTML = pengambilanNote.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#1e3a8a;">• Tidak ada catatan</div>';
+  document.getElementById('p-totalPengambilan').innerText = fmt(pengambilanNote.total);
 
   const nota = document.getElementById('nota');
   nota.style.display = 'block';
@@ -572,6 +627,7 @@ async function simpanJPG() {
 
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
 document.getElementById('pengeluaranText').value = ''; // Mengosongkan isi kotak
+document.getElementById('pengambilanText').value = ''; // Mengosongkan isi kotak
 hitung();
 </script>
 </body>
