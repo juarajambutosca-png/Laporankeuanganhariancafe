@@ -136,6 +136,7 @@ h3.danger { color:#b91c1c; }
   cursor:pointer;
   box-shadow:0 6px 20px rgba(22,163,74,0.3);
 }
+.btn:disabled { opacity:0.6; cursor:wait; }
 
 /* ======================================================= */
 /* NOTA JPG CONFIGURATION PERMANEN (ANTI-HILANG)           */
@@ -143,11 +144,11 @@ h3.danger { color:#b91c1c; }
 #nota {
   display:none;
   position:fixed;
-  left:-2000px;
+  left:-3000px;
   top:0;
-  width:700px;
+  width:800px;
   background:#ffffff;
-  padding:40px 34px;
+  padding:44px 38px;
   font-family:'Plus Jakarta Sans', sans-serif;
   border-radius:24px;
   overflow:hidden;
@@ -314,68 +315,53 @@ h3.danger { color:#b91c1c; }
 .nota-exp-total .nota-row { padding: 0; font-size: 15.5px; }
 
 /* ======================================================= */
-/* LAYOUT 2 KOLOM: Hutang & Pengambilan berdampingan        */
+/* RINCIAN HUTANG - FULL WIDTH, ISI 2 KOLOM KIRI-KANAN      */
 /* ======================================================= */
-.nota-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  align-items: start;
-  margin-top: 16px;
-}
-.nota-col-box {
-  background: #f8fafc;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 16px;
-  padding: 14px 15px;
-}
-.nota-col-box .nota-section-title {
-  margin-top: 0;
-  font-size: 12px;
-}
-.nota-col-box .nota-row.sub-item {
-  padding: 5px 0;
-  font-size: 13px;
-  line-height: 1.35;
-}
-.nota-col-box .nota-row.sub-item span:first-child {
-  padding-right: 6px;
-  word-break: break-word;
-}
-.nota-col-box .nota-row.col-total {
-  border-top: 1.5px dashed #94a3b8;
-  margin-top: 6px;
-  padding: 9px 0 0;
-  font-size: 14px;
-}
-
-/* Kolom Pengambilan Uang Tunai di Kasir (aksen biru) */
-.nota-col-box.pgb {
-  background: #eff6ff;
-  border-color: #3b82f6;
-}
-.nota-col-box.pgb .nota-section-title { color: #1d4ed8; }
-.nota-col-box.pgb .nota-row.sub-item { color: #1e3a8a; }
-.nota-col-box.pgb .val,
-.nota-col-box.pgb .nota-row.col-total strong { color: #1d4ed8; }
-
-/* Kolom Hutang (aksen merah) */
 #p-hutang-section {
   background: #fef2f2;
-  border-color: #ef4444;
+  border: 1.5px solid #ef4444;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-top: 16px;
 }
-#p-hutang-section .nota-section-title { color: #b91c1c; }
-#p-listHutang .nota-row.sub-item { color: #7f1d1d; }
-#p-listHutang .val { color: #b91c1c; }
+#p-hutang-section .nota-section-title {
+  margin-top: 0;
+  font-size: 12px;
+  color: #b91c1c;
+}
+#p-listHutang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 26px;
+  row-gap: 0;
+  align-items: start;
+}
+#p-listHutang .nota-row.sub-item {
+  color: #7f1d1d;
+  padding: 5px 0;
+  font-size: 13.5px;
+  line-height: 1.35;
+  border-bottom: 1px dotted #fca5a5;
+}
+#p-listHutang .nota-row.sub-item span:first-child {
+  padding-right: 8px;
+  word-break: break-word;
+}
+#p-listHutang .val { color: #b91c1c; white-space: nowrap; }
 #p-listHutang .lunas-mark { color: #16a34a; font-weight: 800; }
+#p-listHutang .empty-note { grid-column: 1 / -1; border-bottom: none; }
+
 #p-hutang-totals {
   border-top: 1.5px dashed #ef4444;
-  margin-top: 4px;
+  margin-top: 10px;
   padding-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 26px;
 }
 #p-hutang-totals .nota-row {
-  padding: 5px 0;
-  font-size: 13px;
+  padding: 4px 0;
+  font-size: 13.5px;
 }
 #p-totalHutangLunas { color: #16a34a; font-weight: 800; }
 #p-totalHutangBelum { color: #b91c1c; font-weight: 800; }
@@ -423,17 +409,11 @@ h3.danger { color:#b91c1c; }
   </div>
 
   <div class="sec">
-    <h3 style="color:#1d4ed8;">Pengambilan Uang Tunai di Kasir</h3>
-    <p class="hint">Format➡️ <code>nama : jumlah</code> </p>
-    <textarea id="pengambilanText" rows="3" oninput="hitung()" placeholder="Ambil : 100000"></textarea>
-  </div>
-
-  <div class="sec">
     <div class="summary" id="summaryTop"></div>
     <div class="summary" id="summaryBottom" style="margin-top:14px;"></div>
   </div>
 
-  <button class="btn" onclick="simpanJPG()">📸 Simpan sebagai JPG</button>
+  <button class="btn" id="btnSimpan" onclick="simpanJPG()">📸 Simpan sebagai JPG (HD)</button>
 </div>
 
 <div id="nota">
@@ -481,28 +461,17 @@ h3.danger { color:#b91c1c; }
     </div>
   </div>
 
-  <div class="nota-cols">
-    <div class="nota-col-box" id="p-hutang-section">
-      <div class="nota-section-title">Rincian Hutang</div>
-      <div id="p-listHutang"></div>
-      <div id="p-hutang-totals">
-        <div class="nota-row">
-          <strong>Lunas</strong>
-          <span id="p-totalHutangLunas" class="val"></span>
-        </div>
-        <div class="nota-row">
-          <strong>Belum Lunas</strong>
-          <span id="p-totalHutangBelum" class="val"></span>
-        </div>
+  <div id="p-hutang-section">
+    <div class="nota-section-title">Rincian Hutang</div>
+    <div id="p-listHutang"></div>
+    <div id="p-hutang-totals">
+      <div class="nota-row">
+        <strong>Lunas</strong>
+        <span id="p-totalHutangLunas" class="val"></span>
       </div>
-    </div>
-
-    <div class="nota-col-box pgb">
-      <div class="nota-section-title">Pengambilan Tunai</div>
-      <div id="p-listPengambilan"></div>
-      <div class="nota-row col-total">
-        <strong>Total Dicatat</strong>
-        <span id="p-totalPengambilan" class="val"></span>
+      <div class="nota-row">
+        <strong>Belum Lunas</strong>
+        <span id="p-totalHutangBelum" class="val"></span>
       </div>
     </div>
   </div>
@@ -625,12 +594,8 @@ function hitung() {
 
   const hutang = parseHutang(false);
 
-  // Ambil total nilai dari rincian pengambilan uang tunai
-  const pengambilanNote = parseList('pengambilanText', false);
-  const pengambilanAmount = pengambilanNote.total;
-
   const laba = saldoKemarin + totalMasuk - totalKeluar;
-  const saldoTunai = saldoKemarin + tunai - totalKeluar - pengambilanAmount;
+  const saldoTunai = saldoKemarin + tunai - totalKeluar;
 
   const rincianPengKategori = pengSemua.perKategori
     .filter(c => c.total > 0)
@@ -660,96 +625,107 @@ function hitung() {
 }
 
 async function simpanJPG() {
-  const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const tunai = parseFloat(document.getElementById('tunai').value) || 0;
-  const qris = parseFloat(document.getElementById('qris').value) || 0;
-  const totalMasuk = tunai + qris;
+  const btn = document.getElementById('btnSimpan');
+  btn.disabled = true;
+  btn.innerText = '⏳ Membuat gambar HD...';
 
-  const pengSemua = hitungPengeluaranSemua(true);
-  const totalKeluar = pengSemua.totalKeluar;
+  try {
+    const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
+    const tunai = parseFloat(document.getElementById('tunai').value) || 0;
+    const qris = parseFloat(document.getElementById('qris').value) || 0;
+    const totalMasuk = tunai + qris;
 
-  const hutang = parseHutang(true);
+    const pengSemua = hitungPengeluaranSemua(true);
+    const totalKeluar = pengSemua.totalKeluar;
 
-  const pengambilanNote = parseList('pengambilanText', true);
-  const pengambilanAmount = pengambilanNote.total;
+    const hutang = parseHutang(true);
 
-  const laba = saldoKemarin + totalMasuk - totalKeluar;
-  const saldoTunai = saldoKemarin + tunai - totalKeluar - pengambilanAmount;
+    const laba = saldoKemarin + totalMasuk - totalKeluar;
+    const saldoTunai = saldoKemarin + tunai - totalKeluar;
 
-  // Konversi Format Tanggal
-  const tglInput = document.getElementById('tanggal').value;
-  let tanggalFormat = '—';
-  if(tglInput) {
-     const d = new Date(tglInput);
-     const hariPilihan = document.getElementById('hari').value;
-     const dd = String(d.getDate()).padStart(2, '0');
-     const mm = namaBulan[d.getMonth()];
-     const yyyy = d.getFullYear();
-     tanggalFormat = `${hariPilihan}, ${dd}/${mm}/${yyyy}`;
-  }
+    // Konversi Format Tanggal
+    const tglInput = document.getElementById('tanggal').value;
+    let tanggalFormat = '—';
+    if(tglInput) {
+       const d = new Date(tglInput);
+       const hariPilihan = document.getElementById('hari').value;
+       const dd = String(d.getDate()).padStart(2, '0');
+       const mm = namaBulan[d.getMonth()];
+       const yyyy = d.getFullYear();
+       tanggalFormat = `${hariPilihan}, ${dd}/${mm}/${yyyy}`;
+    }
 
-  document.getElementById('p-tanggal').innerText = tanggalFormat;
-  document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${document.getElementById('kasir').value || '—'}</strong>`;
+    document.getElementById('p-tanggal').innerText = tanggalFormat;
+    document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${document.getElementById('kasir').value || '—'}</strong>`;
 
-  document.getElementById('p-saldoKemarin').innerText = fmt(saldoKemarin);
-  document.getElementById('p-tunai').innerText = fmt(tunai);
-  document.getElementById('p-qris').innerText = fmt(qris);
-  document.getElementById('p-totalMasuk').innerText = fmt(totalMasuk);
+    document.getElementById('p-saldoKemarin').innerText = fmt(saldoKemarin);
+    document.getElementById('p-tunai').innerText = fmt(tunai);
+    document.getElementById('p-qris').innerText = fmt(qris);
+    document.getElementById('p-totalMasuk').innerText = fmt(totalMasuk);
 
-  // Grid kategori pengeluaran
-  const kategoriTerisi = pengSemua.perKategori.filter(c => c.total > 0);
-  let expGridHTML = '';
-  if (kategoriTerisi.length === 0) {
-    expGridHTML = `<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#475569; grid-column: 1 / -1;">• Tidak ada pengeluaran</div>`;
-  } else {
-    kategoriTerisi.forEach(cat => {
-      expGridHTML += `
-        <div class="nota-cat-box" style="background:${cat.bg}; border-color:${cat.border};">
-          <div class="nota-cat-title" style="color:${cat.dot};"><span class="dot" style="background:${cat.dot};"></span>${cat.label}</div>
-          <div style="color:${cat.text};">${cat.html}</div>
-          <div class="nota-row col-total">
-            <strong style="color:${cat.dot};">Subtotal</strong>
-            <span class="val" style="color:${cat.dot};">${fmt(cat.total)}</span>
-          </div>
-        </div>`;
+    // Grid kategori pengeluaran
+    const kategoriTerisi = pengSemua.perKategori.filter(c => c.total > 0);
+    let expGridHTML = '';
+    if (kategoriTerisi.length === 0) {
+      expGridHTML = `<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#475569; grid-column: 1 / -1;">• Tidak ada pengeluaran</div>`;
+    } else {
+      kategoriTerisi.forEach(cat => {
+        expGridHTML += `
+          <div class="nota-cat-box" style="background:${cat.bg}; border-color:${cat.border};">
+            <div class="nota-cat-title" style="color:${cat.dot};"><span class="dot" style="background:${cat.dot};"></span>${cat.label}</div>
+            <div style="color:${cat.text};">${cat.html}</div>
+            <div class="nota-row col-total">
+              <strong style="color:${cat.dot};">Subtotal</strong>
+              <span class="val" style="color:${cat.dot};">${fmt(cat.total)}</span>
+            </div>
+          </div>`;
+      });
+    }
+    document.getElementById('p-expGrid').innerHTML = expGridHTML;
+    document.getElementById('p-totalKeluar').innerText = fmt(totalKeluar);
+
+    document.getElementById('p-laba').innerText = fmt(laba);
+    document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
+
+    // Box Hutang (isi tersebar 2 kolom kiri-kanan)
+    document.getElementById('p-listHutang').innerHTML = hutang.html || '<div class="nota-row sub-item empty-note" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
+    document.getElementById('p-totalHutangLunas').innerText = fmt(hutang.totalLunas);
+    document.getElementById('p-totalHutangBelum').innerText = fmt(hutang.totalBelum);
+
+    const nota = document.getElementById('nota');
+    nota.style.display = 'block';
+
+    // tunggu font & layout benar-benar siap agar hasil tajam
+    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
+    await new Promise(r => setTimeout(r, 600));
+
+    const canvas = await html2canvas(nota, {
+      scale: 5,
+      backgroundColor: '#ffffff',
+      logging: false,
+      useCORS: true,
+      imageTimeout: 0,
+      width: nota.offsetWidth,
+      height: nota.offsetHeight,
+      windowWidth: 1200
     });
-  }
-  document.getElementById('p-expGrid').innerHTML = expGridHTML;
-  document.getElementById('p-totalKeluar').innerText = fmt(totalKeluar);
 
-  document.getElementById('p-laba').innerText = fmt(laba);
-  document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
+    nota.style.display = 'none';
 
-  // Box Hutang
-  document.getElementById('p-listHutang').innerHTML = hutang.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
-  document.getElementById('p-totalHutangLunas').innerText = fmt(hutang.totalLunas);
-  document.getElementById('p-totalHutangBelum').innerText = fmt(hutang.totalBelum);
-
-  // Box Pengambilan Uang Tunai
-  document.getElementById('p-listPengambilan').innerHTML = pengambilanNote.html || '<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#1e3a8a;">• Tidak ada catatan</div>';
-  document.getElementById('p-totalPengambilan').innerText = fmt(pengambilanNote.total);
-
-  const nota = document.getElementById('nota');
-  nota.style.display = 'block';
-
-  await new Promise(r => setTimeout(r, 450));
-
-  html2canvas(nota, {
-    scale: 3.0,
-    backgroundColor: '#ffffff',
-    logging: false,
-    useCORS: true
-  }).then(canvas => {
     const link = document.createElement('a');
     link.download = `Laporan_Lumbong_${document.getElementById('tanggal').value || 'hari_ini'}.jpg`;
-    link.href = canvas.toDataURL('image/jpeg', 0.98);
+    link.href = canvas.toDataURL('image/jpeg', 1.0);
     link.click();
-    nota.style.display = 'none';
-  });
+  } catch (err) {
+    alert('Gagal membuat gambar. Coba ulangi.');
+    document.getElementById('nota').style.display = 'none';
+  } finally {
+    btn.disabled = false;
+    btn.innerText = '📸 Simpan sebagai JPG (HD)';
+  }
 }
 
 document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-document.getElementById('pengambilanText').value = '';
 hitung();
 </script>
 </body>
