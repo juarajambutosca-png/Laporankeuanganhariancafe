@@ -285,7 +285,7 @@ h3.danger { color:#b91c1c; }
 }
 .nota-exp-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 .nota-cat-box {
@@ -294,22 +294,23 @@ h3.danger { color:#b91c1c; }
   border: 1.5px solid;
 }
 .nota-cat-title {
-  font-size: 11.5px;
+  font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .nota-cat-title .dot {
   width: 8px; height: 8px; border-radius: 50%; display: inline-block;
 }
 .nota-cat-box .nota-row.sub-item {
-  padding: 3px 0;
-  font-size: 12.5px;
-  line-height: 1.35;
+  padding: 5px 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 .nota-cat-box .nota-row.sub-item span:first-child {
   padding-right: 6px;
@@ -317,9 +318,9 @@ h3.danger { color:#b91c1c; }
 }
 .nota-cat-box .nota-row.col-total {
   border-top: 1.5px dashed #cbd5e1;
-  margin-top: 5px;
-  padding: 6px 0 0;
-  font-size: 13px;
+  margin-top: 6px;
+  padding: 8px 0 0;
+  font-size: 15.5px;
 }
 .nota-exp-total {
   border-top: 2px dashed #94a3b8;
@@ -517,8 +518,6 @@ const expenseCategories = [
   { id:'pengBahanBaku',   label:'Bahan Baku',   dot:'#c2410c', border:'#fb923c', bg:'#fff7ed', text:'#7c2d12' },
   { id:'pengPerlengkapan',label:'Perlengkapan', dot:'#6d28d9', border:'#a78bfa', bg:'#f5f3ff', text:'#4c1d95' },
   { id:'pengOperasional', label:'Operasional',   dot:'#0f766e', border:'#2dd4bf', bg:'#f0fdfa', text:'#134e4a' },
-  { id:'pengMarketing',   label:'Marketing',     dot:'#be185d', border:'#f472b6', bg:'#fdf2f8', text:'#831843' },
-  { id:'pengLainlain',    label:'Lain-lain',     dot:'#334155', border:'#94a3b8', bg:'#f8fafc', text:'#1e293b' },
 ];
 
 // Bangun input field per kategori
