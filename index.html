@@ -382,6 +382,71 @@ h3.danger { color:#b91c1c; }
 }
 #p-totalHutangLunas { color: #16a34a; font-weight: 800; }
 #p-totalHutangBelum { color: #b91c1c; font-weight: 800; }
+
+/* ======================================================= */
+/* NOTA HUTANG TERPISAH (GAMBAR KE-2)                       */
+/* ======================================================= */
+#notaHutang {
+  display:none;
+  position:fixed;
+  left:-3000px;
+  top:0;
+  width:700px;
+  background:#ffffff;
+  padding:44px 38px;
+  font-family:'Plus Jakarta Sans', sans-serif;
+  border-radius:24px;
+  overflow:hidden;
+}
+#notaHutang::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: #b91c1c;
+}
+#ph-hutang-section {
+  background: #fef2f2;
+  border: 1.5px solid #ef4444;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 10px;
+}
+#ph-listHutang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  column-gap: 30px;
+  row-gap: 0;
+  align-items: start;
+}
+#ph-listHutang .nota-row.sub-item {
+  color: #7f1d1d;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+  border-bottom: 1px dotted #fca5a5;
+}
+#ph-listHutang .nota-row.sub-item span:first-child {
+  padding-right: 8px;
+  word-break: break-word;
+}
+#ph-listHutang .val { color: #b91c1c; white-space: nowrap; }
+#ph-listHutang .lunas-mark { color: #16a34a; font-weight: 800; }
+#ph-listHutang .empty-note { grid-column: 1 / -1; border-bottom: none; }
+#ph-hutang-totals {
+  border-top: 1.5px dashed #ef4444;
+  margin-top: 14px;
+  padding-top: 10px;
+}
+#ph-hutang-totals .nota-row {
+  padding: 6px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+#ph-totalHutangLunas { color: #16a34a; font-weight: 800; }
+#ph-totalHutangBelum { color: #b91c1c; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -430,7 +495,7 @@ h3.danger { color:#b91c1c; }
     <div class="summary" id="summaryBottom" style="margin-top:14px;"></div>
   </div>
 
-  <button class="btn" id="btnSimpan" onclick="simpanJPG()">📸 Simpan sebagai JPG (HD)</button>
+  <button class="btn" id="btnSimpan" onclick="simpanJPG()">📸 Simpan 2 Gambar JPG (HD)</button>
 </div>
 
 <div id="nota">
@@ -478,21 +543,6 @@ h3.danger { color:#b91c1c; }
     </div>
   </div>
 
-  <div id="p-hutang-section">
-    <div class="nota-section-title">Rincian Hutang</div>
-    <div id="p-listHutang"></div>
-    <div id="p-hutang-totals">
-      <div class="nota-row">
-        <strong>Lunas</strong>
-        <span id="p-totalHutangLunas" class="val"></span>
-      </div>
-      <div class="nota-row">
-        <strong>Belum Lunas</strong>
-        <span id="p-totalHutangBelum" class="val"></span>
-      </div>
-    </div>
-  </div>
-
   <div class="nota-highlight-box">
     <div class="nota-row">
       <strong>Hasil Bersih</strong>
@@ -501,6 +551,36 @@ h3.danger { color:#b91c1c; }
     <div class="nota-row" style="border-top: 2px solid #16a34a; margin-top: 6px; padding-top: 12px;">
       <strong style="color: #14532d;">Sisa Saldo Tunai di Toko</strong>
       <span id="p-saldoTunai" class="final-val" style="color: #14532d;"></span>
+    </div>
+  </div>
+</div>
+
+<div id="notaHutang">
+  <div class="nota-header">
+    <h2>Rincian Hutang</h2>
+    <h3>Lumbong Coffee</h3>
+
+    <div class="meta-box">
+      <div class="meta-date" id="ph-tanggal"></div>
+      <div class="meta-kasir" id="ph-kasir"></div>
+    </div>
+  </div>
+
+  <div id="ph-hutang-section">
+    <div id="ph-listHutang"></div>
+    <div id="ph-hutang-totals">
+      <div class="nota-row">
+        <strong>Lunas</strong>
+        <span id="ph-totalHutangLunas" class="val"></span>
+      </div>
+      <div class="nota-row">
+        <strong>Belum Lunas</strong>
+        <span id="ph-totalHutangBelum" class="val"></span>
+      </div>
+      <div class="nota-row" style="border-top:2px solid #ef4444; margin-top:8px; padding-top:12px;">
+        <strong>Total Hutang</strong>
+        <span id="ph-totalHutangSemua" class="val" style="font-size:20px; font-weight:800;"></span>
+      </div>
     </div>
   </div>
 </div>
@@ -669,16 +749,17 @@ async function simpanJPG() {
        const yyyy = d.getFullYear();
        tanggalFormat = `${hariPilihan}, ${dd}/${mm}/${yyyy}`;
     }
+    const namaKasir = document.getElementById('kasir').value || '—';
 
+    // ============ ISI GAMBAR 1: LAPORAN UTAMA ============
     document.getElementById('p-tanggal').innerText = tanggalFormat;
-    document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${document.getElementById('kasir').value || '—'}</strong>`;
+    document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${namaKasir}</strong>`;
 
     document.getElementById('p-saldoKemarin').innerText = fmt(saldoKemarin);
     document.getElementById('p-tunai').innerText = fmt(tunai);
     document.getElementById('p-qris').innerText = fmt(qris);
     document.getElementById('p-totalMasuk').innerText = fmt(totalMasuk);
 
-    // Grid kategori pengeluaran
     const kategoriTerisi = pengSemua.perKategori.filter(c => c.total > 0);
     let expGridHTML = '';
     if (kategoriTerisi.length === 0) {
@@ -702,8 +783,11 @@ async function simpanJPG() {
     document.getElementById('p-laba').innerText = fmt(laba);
     document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
 
-    // Box Hutang (isi tersebar 2 kolom kiri-kanan)
-    const boxHutang = document.getElementById('p-listHutang');
+    // ============ ISI GAMBAR 2: RINCIAN HUTANG ============
+    document.getElementById('ph-tanggal').innerText = tanggalFormat;
+    document.getElementById('ph-kasir').innerHTML = `Kasir: <strong>${namaKasir}</strong>`;
+
+    const boxHutang = document.getElementById('ph-listHutang');
     boxHutang.innerHTML = hutang.html || '<div class="nota-row sub-item empty-note" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
     if (hutang.count > 0) {
       // urutan mengisi kolom kiri dari atas ke bawah dulu, baru lanjut ke kolom kanan
@@ -716,17 +800,21 @@ async function simpanJPG() {
       boxHutang.style.gridTemplateRows = 'auto';
       boxHutang.style.gridTemplateColumns = '1fr';
     }
-    document.getElementById('p-totalHutangLunas').innerText = fmt(hutang.totalLunas);
-    document.getElementById('p-totalHutangBelum').innerText = fmt(hutang.totalBelum);
-
-    const nota = document.getElementById('nota');
-    nota.style.display = 'block';
+    document.getElementById('ph-totalHutangLunas').innerText = fmt(hutang.totalLunas);
+    document.getElementById('ph-totalHutangBelum').innerText = fmt(hutang.totalBelum);
+    document.getElementById('ph-totalHutangSemua').innerText = fmt(hutang.totalLunas + hutang.totalBelum);
 
     // tunggu font & layout benar-benar siap agar hasil tajam
     if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 400));
 
-    const canvas = await html2canvas(nota, {
+    const tglFile = document.getElementById('tanggal').value || 'hari_ini';
+
+    // --- Render & unduh Gambar 1: Laporan Utama ---
+    const nota = document.getElementById('nota');
+    nota.style.display = 'block';
+    await new Promise(r => setTimeout(r, 300));
+    const canvas1 = await html2canvas(nota, {
       scale: 5,
       backgroundColor: '#ffffff',
       logging: false,
@@ -736,19 +824,44 @@ async function simpanJPG() {
       height: nota.offsetHeight,
       windowWidth: 1200
     });
-
     nota.style.display = 'none';
 
-    const link = document.createElement('a');
-    link.download = `Laporan_Lumbong_${document.getElementById('tanggal').value || 'hari_ini'}.jpg`;
-    link.href = canvas.toDataURL('image/jpeg', 1.0);
-    link.click();
+    const link1 = document.createElement('a');
+    link1.download = `Laporan_Lumbong_${tglFile}.jpg`;
+    link1.href = canvas1.toDataURL('image/jpeg', 1.0);
+    link1.click();
+
+    // jeda sedikit supaya browser tidak memblokir unduhan kedua
+    await new Promise(r => setTimeout(r, 500));
+
+    // --- Render & unduh Gambar 2: Rincian Hutang ---
+    const notaHutang = document.getElementById('notaHutang');
+    notaHutang.style.display = 'block';
+    await new Promise(r => setTimeout(r, 300));
+    const canvas2 = await html2canvas(notaHutang, {
+      scale: 5,
+      backgroundColor: '#ffffff',
+      logging: false,
+      useCORS: true,
+      imageTimeout: 0,
+      width: notaHutang.offsetWidth,
+      height: notaHutang.offsetHeight,
+      windowWidth: 1200
+    });
+    notaHutang.style.display = 'none';
+
+    const link2 = document.createElement('a');
+    link2.download = `Hutang_Lumbong_${tglFile}.jpg`;
+    link2.href = canvas2.toDataURL('image/jpeg', 1.0);
+    link2.click();
+
   } catch (err) {
     alert('Gagal membuat gambar. Coba ulangi.');
     document.getElementById('nota').style.display = 'none';
+    document.getElementById('notaHutang').style.display = 'none';
   } finally {
     btn.disabled = false;
-    btn.innerText = '📸 Simpan sebagai JPG (HD)';
+    btn.innerText = '📸 Simpan 2 Gambar JPG (HD)';
   }
 }
 
