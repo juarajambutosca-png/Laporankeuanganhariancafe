@@ -99,7 +99,7 @@ h3.danger { color:#b91c1c; }
   <div class="sec">
     <div class="field">
       <label for="tanggal">Tanggal</label>
-      <input type="date" id="tanggal" onchange="updateHari()">
+      <input type="text" id="tanggal" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off" oninput="maskTanggal(this)">
       <div class="day-info" id="hariInfo"></div>
     </div>
     <div class="field"><label for="kasir">Kasir</label><input id="kasir" value="Leli"></div>
@@ -209,10 +209,21 @@ const angka = s => parseInt((s || '').replace(/[^0-9]/g, ''), 10) || 0;
 
 // Tanggal dibaca sebagai waktu lokal (bukan UTC) agar hari tidak meleset
 function bacaTanggal() {
-  const v = $('tanggal').value;
-  if (!v) return null;
-  const [y, m, d] = v.split('-').map(Number);
-  return new Date(y, m - 1, d);
+  const p = $('tanggal').value.split('/');
+  if (p.length !== 3 || p[2].length !== 4) return null;
+  const [d, m, y] = p.map(Number);
+  const dt = new Date(y, m - 1, d);
+  // tolak tanggal yang tidak valid (mis. 31/02/2026)
+  return (dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d) ? dt : null;
+}
+// Otomatis menyisipkan "/" saat mengetik: 29092026 -> 29/09/2026
+function maskTanggal(el) {
+  const s = el.value.replace(/\D/g, '').slice(0, 8);
+  let out = s.slice(0, 2);
+  if (s.length > 2) out += '/' + s.slice(2, 4);
+  if (s.length > 4) out += '/' + s.slice(4);
+  el.value = out;
+  updateHari();
 }
 function formatTanggal() {
   const d = bacaTanggal();
@@ -361,7 +372,7 @@ async function simpanJPG() {
 
     if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
 
-    const tglFile = $('tanggal').value || 'hari_ini';
+    const tglFile = $('tanggal').value.replace(/\//g, '-') || 'hari_ini';
     await renderDanUnduh($('nota'), `Laporan_Lumbong_${tglFile}.jpg`);
     await new Promise(r => setTimeout(r, 500));
     await renderDanUnduh($('notaHutang'), `Hutang_Lumbong_${tglFile}.jpg`);
@@ -376,7 +387,7 @@ async function simpanJPG() {
 // Tanggal default = hari ini (waktu lokal)
 (function () {
   const t = new Date();
-  $('tanggal').value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+  $('tanggal').value = `${String(t.getDate()).padStart(2,'0')}/${String(t.getMonth()+1).padStart(2,'0')}/${t.getFullYear()}`;
   updateHari();
   hitung();
 })();
