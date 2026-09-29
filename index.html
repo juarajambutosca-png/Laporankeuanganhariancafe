@@ -22,7 +22,18 @@ h3.danger { color:#b91c1c; }
 .hint { font-size:12px; font-weight:700; margin-bottom:8px; }
 .day-info { margin-top:8px; font-size:13px; font-weight:700; color:#14532d; text-align:center; }
 #tanggal { text-align:center; text-align-last:center; }
-#tanggal::-webkit-datetime-edit { text-align:center; }
+.center { text-align:center; }
+.center input#kasir { text-align:center; }
+.day-info { display:none; margin-top:12px; padding:5px 16px; border-radius:999px; background:#dcfce7; color:#14532d; font-size:13.5px; font-weight:800; letter-spacing:.3px; }
+.day-info.bad { background:#fee2e2; color:#b91c1c; }
+.date-box .day-info { position:absolute; top:7px; left:7px; width:78px; height:44px; margin:0; padding:0; align-items:center; justify-content:center; border-radius:12px; font-family:inherit; font-size:18px; font-weight:800; letter-spacing:.5px; color:#0f172a; }
+.date-box .day-info.bad { color:#b91c1c; }
+.date-box { position:relative; }
+.date-box #tanggal { height:58px; padding:0 60px 0 90px; border-radius:16px; font-size:18px; font-weight:800; letter-spacing:.5px; font-family:inherit; background:#f8fafc; border-color:#cbd5e1; }
+.date-box #tanggal:focus { background:#fff; }
+.cal-btn { position:absolute; top:7px; right:7px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#22c55e,#16a34a); border-radius:12px; cursor:pointer; overflow:hidden; box-shadow:0 3px 10px rgba(22,163,74,.3); }
+.cal-btn input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; padding:0; border:0; }
+.cal-btn input::-webkit-calendar-picker-indicator { position:absolute; inset:0; width:100%; height:100%; cursor:pointer; }
 .meta-date { text-align:center; width:100%; }
 
 .cat-field { border-radius:14px; padding:12px 14px; margin-bottom:12px; border:1.5px solid; }
@@ -96,11 +107,17 @@ h3.danger { color:#b91c1c; }
 <div class="wrap">
   <h1>Laporan Harian <span>Lumbong Coffee</span></h1>
 
-  <div class="sec">
+  <div class="sec center">
     <div class="field">
       <label for="tanggal">Tanggal</label>
-      <input type="text" id="tanggal" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off" oninput="maskTanggal(this)">
-      <div class="day-info" id="hariInfo"></div>
+      <div class="date-box">
+        <input type="text" id="tanggal" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off" oninput="maskTanggal(this)">
+        <div class="day-info" id="hariInfo"></div>
+        <div class="cal-btn" title="Pilih tanggal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 10h18M8 2.5v4M16 2.5v4"/></svg>
+          <input type="date" id="tanggalPicker" aria-label="Pilih tanggal dari kalender" onchange="pilihDariKalender(this)">
+        </div>
+      </div>
     </div>
     <div class="field"><label for="kasir">Kasir</label><input id="kasir" value="Leli"></div>
   </div>
@@ -216,6 +233,13 @@ function bacaTanggal() {
   // tolak tanggal yang tidak valid (mis. 31/02/2026)
   return (dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d) ? dt : null;
 }
+// Tanggal dari kalender (yyyy-mm-dd) -> tampil sebagai dd/mm/yyyy
+function pilihDariKalender(el) {
+  if (!el.value) return;
+  const [y, m, d] = el.value.split('-');
+  $('tanggal').value = `${d}/${m}/${y}`;
+  updateHari();
+}
 // Otomatis menyisipkan "/" saat mengetik: 29092026 -> 29/09/2026
 function maskTanggal(el) {
   const s = el.value.replace(/\D/g, '').slice(0, 8);
@@ -234,7 +258,12 @@ function formatTanggal() {
 }
 function updateHari() {
   const d = bacaTanggal();
-  $('hariInfo').textContent = d ? formatTanggal() : '';
+  const v = $('tanggal').value;
+  const info = $('hariInfo');
+  const salah = !d && v.length === 10;
+  info.textContent = d ? namaHari[d.getDay()] : (salah ? 'Salah' : '');
+  info.classList.toggle('bad', salah);
+  info.style.display = info.textContent ? 'flex' : 'none';
 }
 
 const expenseCategories = [
