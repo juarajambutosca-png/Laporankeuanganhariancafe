@@ -2,451 +2,93 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laporan Harian - Lumbong Coffee</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background:#f1f5f9;
-  color:#0f172a;
-  padding:1rem;
-  line-height:1.6;
-}
+body { font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:#f1f5f9; color:#0f172a; padding:1rem; line-height:1.6; }
 .wrap { max-width:460px; margin:auto; }
-
-h1 {
-  font-family: 'DM Serif Display', serif;
-  text-align:center;
-  margin:24px 0 32px;
-  font-size:28px;
-  color:#0f172a;
-}
+h1 { font-family:'DM Serif Display',serif; text-align:center; margin:24px 0 32px; font-size:28px; }
 h1 span { color:#16a34a; }
-
-.sec {
-  background:white;
-  border-radius:20px;
-  padding:1.4rem;
-  margin-bottom:18px;
-  border:1.5px solid #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.sec { background:#fff; border-radius:20px; padding:1.4rem; margin-bottom:18px; border:1.5px solid #cbd5e1; box-shadow:0 4px 12px rgba(0,0,0,.03); }
 .field { margin-bottom:14px; }
 .field:last-child { margin-bottom:0; }
-label {
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  color:#0f172a;
-  margin-bottom:6px;
-  text-transform:uppercase;
-  letter-spacing:0.8px;
-}
-input, textarea, select {
-  width:100%;
-  padding:13px 14px;
-  border:1.5px solid #94a3b8;
-  border-radius:12px;
-  font-size:15px;
-  color:#0f172a;
-  font-weight:600;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-input:focus, textarea:focus, select:focus {
-  outline:none;
-  border-color:#16a34a;
-  box-shadow:0 0 0 4px rgba(22, 163, 74, 0.15);
-}
-
-h3 {
-  color:#14532d;
-  margin-bottom:12px;
-  font-size:17px;
-  font-weight: 800;
-}
+label { display:block; font-size:12px; font-weight:800; margin-bottom:6px; text-transform:uppercase; letter-spacing:.8px; }
+input, textarea { width:100%; padding:13px 14px; border:1.5px solid #94a3b8; border-radius:12px; font-size:16px; color:#0f172a; font-weight:600; font-family:inherit; transition:all .2s; }
+input:focus, textarea:focus { outline:none; border-color:#16a34a; box-shadow:0 0 0 4px rgba(22,163,74,.15); }
+h3 { color:#14532d; margin-bottom:12px; font-size:17px; font-weight:800; }
 h3.danger { color:#b91c1c; }
+.hint { font-size:12px; font-weight:700; margin-bottom:8px; }
+.day-info { margin-top:8px; font-size:13px; font-weight:700; color:#14532d; text-align:center; }
+#tanggal { text-align:center; text-align-last:center; }
+#tanggal::-webkit-datetime-edit { text-align:center; }
+.meta-date { text-align:center; width:100%; }
 
-.hint {
-  font-size:12px;
-  color:#0f172a;
-  font-weight:700;
-  margin-bottom:8px;
-}
-
-/* Kategori pengeluaran - kotak berwarna per kategori */
-.cat-field {
-  border-radius:14px;
-  padding:12px 14px;
-  margin-bottom:12px;
-  border:1.5px solid;
-}
+.cat-field { border-radius:14px; padding:12px 14px; margin-bottom:12px; border:1.5px solid; }
 .cat-field:last-child { margin-bottom:0; }
-.cat-field label {
-  margin-bottom:8px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.cat-field .dot {
-  width:9px; height:9px; border-radius:50%; display:inline-block;
-}
-.cat-field textarea {
-  border-color:#cbd5e1;
-  background:#fff;
-}
+.cat-field label { margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.cat-field .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+.cat-field textarea { border-color:#cbd5e1; background:#fff; }
 
-.summary {
-  background:linear-gradient(135deg, #f0fdf4, #dcfce7);
-  padding:20px;
-  border-radius:20px;
-  border:1.5px solid #86efac;
-  margin-top:10px;
-}
-.summary div {
-  display:flex;
-  justify-content:space-between;
-  padding:9px 0;
-  font-size:15.5px;
-  color:#0f172a;
-}
-.summary .total {
-  font-weight:800;
-  font-size:18px;
-  border-top:2.5px solid #16a34a;
-  padding-top:14px;
-  margin-top:8px;
-  color:#14532d;
-}
+.summary { background:linear-gradient(135deg,#f0fdf4,#dcfce7); padding:20px; border-radius:20px; border:1.5px solid #86efac; }
+.summary .row { display:flex; justify-content:space-between; gap:10px; padding:8px 0; font-size:15.5px; }
+.summary .subrow { padding:0 0 6px 15px; font-size:14.5px; font-weight:600; }
+.summary .total { font-weight:800; font-size:18px; border-top:2.5px solid #16a34a; padding-top:14px; margin-top:8px; color:#14532d; }
 
-.btn {
-  width:100%;
-  padding:16px;
-  margin-top:20px;
-  font-size:16px;
-  font-weight:800;
-  border:none;
-  border-radius:16px;
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:white;
-  cursor:pointer;
-  box-shadow:0 6px 20px rgba(22,163,74,0.3);
-}
-.btn:disabled { opacity:0.6; cursor:wait; }
+.btn { width:100%; padding:16px; margin-top:20px; font-size:16px; font-weight:800; border:none; border-radius:16px; background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; cursor:pointer; box-shadow:0 6px 20px rgba(22,163,74,.3); }
+.btn:disabled { opacity:.6; cursor:wait; }
 
-/* ======================================================= */
-/* NOTA JPG CONFIGURATION PERMANEN (ANTI-HILANG)           */
-/* ======================================================= */
-#nota {
-  display:none;
-  position:fixed;
-  left:-3000px;
-  top:0;
-  width:800px;
-  background:#ffffff;
-  padding:44px 38px;
-  font-family:'Plus Jakarta Sans', sans-serif;
-  border-radius:24px;
-  overflow:hidden;
-}
+/* ===== NOTA (dirender ke JPG) ===== */
+#nota, #notaHutang { display:none; position:fixed; left:-3000px; top:0; background:#fff; padding:44px 38px; font-family:'Plus Jakarta Sans',sans-serif; border-radius:24px; overflow:hidden; }
+#nota { width:800px; }
+#notaHutang { width:700px; }
+#nota::before, #notaHutang::before { content:''; position:absolute; top:0; left:0; right:0; height:12px; background:#14532d; }
+#notaHutang::before { background:#b91c1c; }
 
-#nota::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 12px;
-  background: #14532d;
-}
+.nota-header { text-align:center; margin-bottom:30px; }
+.nota-header h2 { font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:#14532d; margin-bottom:6px; }
+#notaHutang .nota-header h2 { color:#b91c1c; }
+.nota-header h3 { font-family:'DM Serif Display',serif; font-size:34px; color:#0f172a; margin-bottom:16px; }
+.meta-box { background:#f1f5f9; padding:12px; border-radius:12px; border:1.5px solid #cbd5e1; }
+.meta-date { font-size:15px; font-weight:800; margin-bottom:6px; text-align:center; }
+.meta-kasir { font-size:14px; font-weight:700; border-top:1.5px dashed #94a3b8; padding-top:6px; text-align:center; }
 
-.nota-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-.nota-header h2 {
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #14532d;
-  margin-bottom: 6px;
-}
-.nota-header h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 34px;
-  color: #0f172a;
-  margin-bottom: 16px;
-}
+.nota-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; font-size:15.5px; font-weight:600; }
+.nota-row.sub-item { padding:6px 0 6px 16px; font-size:15px; }
+.nota-row .val { font-weight:700; }
+.nota-row.grand { padding:14px 0 10px; }
+.nota-row.grand strong { font-size:20px; font-weight:800; }
+.nota-row.grand .val { font-size:24px; font-weight:800; }
+.nota-divider { border-top:2px dashed #0f172a; margin:16px 0; }
+.nota-section-title { font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin:14px 0 6px; }
 
-.meta-box {
-  display: block;
-  background: #f1f5f9;
-  padding: 12px;
-  border-radius: 12px;
-  width: 100%;
-  border: 1.5px solid #cbd5e1;
-}
-.meta-date {
-  font-size: 15px;
-  color: #0f172a;
-  font-weight: 800;
-  margin-bottom: 6px;
-  text-align: center;
-}
-.meta-kasir {
-  font-size: 14px;
-  color: #0f172a;
-  font-weight: 700;
-  border-top: 1.5px dashed #94a3b8;
-  padding-top: 6px;
-  text-align: center;
-}
+.nota-highlight-box { background:#dcfce7; border:2px solid #16a34a; border-radius:16px; padding:8px 18px; margin-top:20px; }
+.nota-highlight-box .final-val { font-size:20px; font-weight:800; color:#14532d; }
 
-.nota-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  font-size: 15.5px;
-  color: #0f172a;
-  font-weight: 600;
-}
-.nota-row.sub-item {
-  padding: 6px 0 6px 16px;
-  font-size: 15px;
-  color: #1e293b;
-  font-weight: 600;
-}
-.nota-row strong {
-  color: #0f172a;
-  font-weight: 700;
-}
-.nota-row .val {
-  font-weight: 700;
-  color: #0f172a;
-}
+.nota-exp-wrap { border:1.5px solid #cbd5e1; border-radius:16px; padding:14px 15px; background:#f8fafc; margin-top:8px; }
+.nota-exp-grid { display:grid; gap:10px; }
+.nota-cat-box { border-radius:12px; padding:10px 12px; border:1.5px solid; }
+.nota-cat-title { font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.6px; display:flex; align-items:center; gap:5px; margin-bottom:6px; }
+.nota-cat-title .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+.col-total { border-top:1.5px dashed #cbd5e1; margin-top:6px; padding:8px 0 0 !important; }
+.nota-exp-total { border-top:2px dashed #94a3b8; margin-top:12px; padding-top:10px; }
+.nota-exp-total .nota-row { padding:2px 0 0; }
 
-/* Baris TOTAL besar (Pemasukan & Pengeluaran) */
-.nota-row.grand {
-  padding: 14px 0 10px;
-}
-.nota-row.grand strong {
-  font-size: 20px;
-  font-weight: 800;
-}
-.nota-row.grand .val {
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-}
+/* Daftar bernomor rapi: nomor | nama | jumlah */
+.item { display:grid; grid-template-columns:32px 1fr auto; column-gap:8px; align-items:baseline; padding:7px 0; font-size:15px; font-weight:700; line-height:1.45; }
+.item .no { text-align:right; }
+.item .nm { word-break:break-word; }
+.item .val { white-space:nowrap; text-align:right; font-weight:700; }
+.item .lunas-mark { color:#16a34a; font-weight:800; margin-left:6px; }
 
-.nota-divider {
-  border-top: 2px dashed #0f172a;
-  margin: 16px 0;
-}
-.nota-section-title {
-  font-size: 12.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #0f172a;
-  margin-top: 14px;
-  margin-bottom: 6px;
-}
-
-.nota-highlight-box {
-  background: #dcfce7;
-  border: 2px solid #16a34a;
-  border-radius: 16px;
-  padding: 8px 18px;
-  margin-top: 20px;
-}
-.nota-highlight-box .nota-row {
-  padding: 12px 0;
-}
-.nota-highlight-box .final-val {
-  font-size: 20px;
-  font-weight: 800;
-  color: #14532d;
-}
-
-/* ======================================================= */
-/* RINCIAN PENGELUARAN PER KATEGORI (grid, full width)      */
-/* ======================================================= */
-.nota-exp-wrap {
-  border: 1.5px solid #cbd5e1;
-  border-radius: 16px;
-  padding: 14px 15px;
-  background: #f8fafc;
-  margin-top: 8px;
-}
-.nota-exp-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-.nota-cat-box {
-  border-radius: 12px;
-  padding: 10px 12px;
-  border: 1.5px solid;
-}
-.nota-cat-title {
-  font-size: 14px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 6px;
-}
-.nota-cat-title .dot {
-  width: 8px; height: 8px; border-radius: 50%; display: inline-block;
-}
-.nota-cat-box .nota-row.sub-item {
-  padding: 5px 0;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-.nota-cat-box .nota-row.sub-item span:first-child {
-  padding-right: 6px;
-  word-break: break-word;
-}
-.nota-cat-box .nota-row.col-total {
-  border-top: 1.5px dashed #cbd5e1;
-  margin-top: 6px;
-  padding: 8px 0 0;
-  font-size: 15.5px;
-}
-.nota-exp-total {
-  border-top: 2px dashed #94a3b8;
-  margin-top: 12px;
-  padding-top: 10px;
-}
-.nota-exp-total .nota-row { padding: 0; font-size: 15.5px; }
-.nota-exp-total .nota-row.grand { padding: 2px 0 0; }
-
-/* ======================================================= */
-/* RINCIAN HUTANG - FULL WIDTH, ISI 2 KOLOM KIRI-KANAN      */
-/* ======================================================= */
-#p-hutang-section {
-  background: #fef2f2;
-  border: 1.5px solid #ef4444;
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin-top: 16px;
-}
-#p-hutang-section .nota-section-title {
-  margin-top: 0;
-  font-size: 12px;
-  color: #b91c1c;
-}
-#p-listHutang {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-flow: column;
-  column-gap: 26px;
-  row-gap: 0;
-  align-items: start;
-}
-#p-listHutang .nota-row.sub-item {
-  color: #7f1d1d;
-  padding: 5px 0;
-  font-size: 13.5px;
-  line-height: 1.35;
-  border-bottom: 1px dotted #fca5a5;
-}
-#p-listHutang .nota-row.sub-item span:first-child {
-  padding-right: 8px;
-  word-break: break-word;
-}
-#p-listHutang .val { color: #b91c1c; white-space: nowrap; }
-#p-listHutang .lunas-mark { color: #16a34a; font-weight: 800; }
-#p-listHutang .empty-note { grid-column: 1 / -1; border-bottom: none; }
-
-#p-hutang-totals {
-  border-top: 1.5px dashed #ef4444;
-  margin-top: 10px;
-  padding-top: 8px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 26px;
-}
-#p-hutang-totals .nota-row {
-  padding: 4px 0;
-  font-size: 13.5px;
-}
-#p-totalHutangLunas { color: #16a34a; font-weight: 800; }
-#p-totalHutangBelum { color: #b91c1c; font-weight: 800; }
-
-/* ======================================================= */
-/* NOTA HUTANG TERPISAH (GAMBAR KE-2)                       */
-/* ======================================================= */
-#notaHutang {
-  display:none;
-  position:fixed;
-  left:-3000px;
-  top:0;
-  width:700px;
-  background:#ffffff;
-  padding:44px 38px;
-  font-family:'Plus Jakarta Sans', sans-serif;
-  border-radius:24px;
-  overflow:hidden;
-}
-#notaHutang::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 12px;
-  background: #b91c1c;
-}
-#ph-hutang-section {
-  background: #fef2f2;
-  border: 1.5px solid #ef4444;
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-top: 10px;
-}
-#ph-listHutang {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-flow: column;
-  column-gap: 30px;
-  row-gap: 0;
-  align-items: start;
-}
-#ph-listHutang .nota-row.sub-item {
-  color: #7f1d1d;
-  padding: 8px 0;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.45;
-  border-bottom: 1px dotted #fca5a5;
-}
-#ph-listHutang .nota-row.sub-item span:first-child {
-  padding-right: 8px;
-  word-break: break-word;
-}
-#ph-listHutang .val { color: #b91c1c; white-space: nowrap; }
-#ph-listHutang .lunas-mark { color: #16a34a; font-weight: 800; }
-#ph-listHutang .empty-note { grid-column: 1 / -1; border-bottom: none; }
-#ph-hutang-totals {
-  border-top: 1.5px dashed #ef4444;
-  margin-top: 14px;
-  padding-top: 10px;
-}
-#ph-hutang-totals .nota-row {
-  padding: 6px 0;
-  font-size: 15px;
-  font-weight: 700;
-}
-#ph-totalHutangLunas { color: #16a34a; font-weight: 800; }
-#ph-totalHutangBelum { color: #b91c1c; font-weight: 800; }
+#ph-hutang-section { background:#fef2f2; border:1.5px solid #ef4444; border-radius:16px; padding:16px 20px; margin-top:10px; }
+#ph-listHutang .item { color:#7f1d1d; font-size:16px; border-bottom:1px dotted #fca5a5; padding:9px 0; }
+#ph-listHutang .item:last-child { border-bottom:none; }
+#ph-listHutang .val { color:#b91c1c; }
+#ph-hutang-totals { border-top:1.5px dashed #ef4444; margin-top:10px; padding-top:6px; }
+#ph-hutang-totals .nota-row { padding:6px 0; font-size:15px; font-weight:700; }
+.empty { font-style:italic; font-weight:700; color:#475569; padding:6px 0; }
 </style>
 </head>
 <body>
@@ -455,39 +97,37 @@ h3.danger { color:#b91c1c; }
   <h1>Laporan Harian <span>Lumbong Coffee</span></h1>
 
   <div class="sec">
-    <div class="grid2">
-      <div class="field"><label>Tanggal</label><input type="date" id="tanggal"></div>
-      <div class="field"><label>Hari</label><select id="hari">
-        <option>Minggu</option><option selected>Senin</option><option>Selasa</option>
-        <option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option>
-      </select></div>
+    <div class="field">
+      <label for="tanggal">Tanggal</label>
+      <input type="date" id="tanggal" onchange="updateHari()">
+      <div class="day-info" id="hariInfo"></div>
     </div>
-    <div class="field"><label>Kasir</label><input id="kasir" value="Leli"></div>
+    <div class="field"><label for="kasir">Kasir</label><input id="kasir" value="Leli"></div>
   </div>
 
   <div class="sec">
     <div class="field">
-      <label>Saldo Tunai Hari Kemarin (Rp)</label>
-      <input type="number" id="saldoKemarin" placeholder="0" oninput="hitung()">
+      <label for="saldoKemarin">Saldo Tunai Hari Kemarin (Rp)</label>
+      <input type="number" inputmode="numeric" id="saldoKemarin" placeholder="0" oninput="hitung()">
     </div>
   </div>
 
   <div class="sec">
     <h3>Pemasukan</h3>
-    <div class="field"><label>Tunai (Rp)</label><input type="number" id="tunai" oninput="hitung()" placeholder="0"></div>
-    <div class="field"><label>QRIS / Transfer (Rp)</label><input type="number" id="qris" oninput="hitung()" placeholder="0"></div>
+    <div class="field"><label for="tunai">Tunai (Rp)</label><input type="number" inputmode="numeric" id="tunai" oninput="hitung()" placeholder="0"></div>
+    <div class="field"><label for="qris">QRIS / Transfer (Rp)</label><input type="number" inputmode="numeric" id="qris" oninput="hitung()" placeholder="0"></div>
   </div>
 
   <div class="sec">
     <h3>Pengeluaran</h3>
-    <p class="hint">Format➡️ <code>nama : jumlah</code> (per baris)</p>
+    <p class="hint">Format ➡️ <code>nama : jumlah</code> (per baris)</p>
     <div id="pengeluaranFields"></div>
   </div>
 
   <div class="sec">
     <h3 class="danger">Hutang</h3>
-    <p class="hint">Format➡️ <code>nama : jumlah</code> &nbsp; dan &nbsp; tambahkan <code>= ✅</code> jika sudah dibayar</p>
-    <textarea id="hutangText" rows="3" oninput="hitung()" placeholder="Andi : 150000 = ✅&#10;Budi : 200000"></textarea>
+    <p class="hint">Format ➡️ <code>nama : jumlah</code> dan tambahkan <code>= ✅</code> jika sudah dibayar</p>
+    <textarea id="hutangText" rows="4" oninput="hitung()" placeholder="Andi : 150000 = ✅&#10;Budi : 200000"></textarea>
   </div>
 
   <div class="sec">
@@ -502,55 +142,34 @@ h3.danger { color:#b91c1c; }
   <div class="nota-header">
     <h2>Laporan Harian</h2>
     <h3>Lumbong Coffee</h3>
-
     <div class="meta-box">
       <div class="meta-date" id="p-tanggal"></div>
       <div class="meta-kasir" id="p-kasir"></div>
     </div>
   </div>
 
-  <div class="nota-row">
-    <strong>Saldo Tunai Kemarin</strong>
-    <span id="p-saldoKemarin" class="val"></span>
-  </div>
+  <div class="nota-row"><strong>Saldo Tunai Kemarin</strong><span id="p-saldoKemarin" class="val"></span></div>
 
   <div class="nota-divider"></div>
   <div class="nota-section-title">Rincian Pemasukan</div>
-
-  <div class="nota-row sub-item">
-    <span>• Tunai</span>
-    <span id="p-tunai" class="val"></span>
-  </div>
-  <div class="nota-row sub-item">
-    <span>• QRIS / Transfer</span>
-    <span id="p-qris" class="val"></span>
-  </div>
-  <div class="nota-row grand">
-    <strong>Total Pemasukan</strong>
-    <span id="p-totalMasuk" class="val" style="color: #156534;"></span>
-  </div>
+  <div class="nota-row sub-item"><span>• Tunai</span><span id="p-tunai" class="val"></span></div>
+  <div class="nota-row sub-item"><span>• QRIS / Transfer</span><span id="p-qris" class="val"></span></div>
+  <div class="nota-row grand"><strong>Total Pemasukan</strong><span id="p-totalMasuk" class="val" style="color:#156534;"></span></div>
 
   <div class="nota-divider"></div>
   <div class="nota-section-title">Rincian Pengeluaran</div>
-
   <div class="nota-exp-wrap">
     <div class="nota-exp-grid" id="p-expGrid"></div>
     <div class="nota-exp-total">
-      <div class="nota-row grand">
-        <strong>Total Pengeluaran</strong>
-        <span id="p-totalKeluar" class="val" style="color:#b91c1c;"></span>
-      </div>
+      <div class="nota-row grand"><strong>Total Pengeluaran</strong><span id="p-totalKeluar" class="val" style="color:#b91c1c;"></span></div>
     </div>
   </div>
 
   <div class="nota-highlight-box">
-    <div class="nota-row">
-      <strong>Hasil Bersih</strong>
-      <span id="p-laba" class="final-val"></span>
-    </div>
-    <div class="nota-row" style="border-top: 2px solid #16a34a; margin-top: 6px; padding-top: 12px;">
-      <strong style="color: #14532d;">Sisa Saldo Tunai di Toko</strong>
-      <span id="p-saldoTunai" class="final-val" style="color: #14532d;"></span>
+    <div class="nota-row"><strong>Hasil Bersih</strong><span id="p-laba" class="final-val"></span></div>
+    <div class="nota-row" style="border-top:2px solid #16a34a; margin-top:6px; padding-top:12px;">
+      <strong style="color:#14532d;">Sisa Saldo Tunai di Toko</strong>
+      <span id="p-saldoTunai" class="final-val"></span>
     </div>
   </div>
 </div>
@@ -559,7 +178,6 @@ h3.danger { color:#b91c1c; }
   <div class="nota-header">
     <h2>Rincian Hutang</h2>
     <h3>Lumbong Coffee</h3>
-
     <div class="meta-box">
       <div class="meta-date" id="ph-tanggal"></div>
       <div class="meta-kasir" id="ph-kasir"></div>
@@ -569,304 +187,199 @@ h3.danger { color:#b91c1c; }
   <div id="ph-hutang-section">
     <div id="ph-listHutang"></div>
     <div id="ph-hutang-totals">
-      <div class="nota-row">
-        <strong>Lunas</strong>
-        <span id="ph-totalHutangLunas" class="val"></span>
-      </div>
-      <div class="nota-row">
-        <strong>Belum Lunas</strong>
-        <span id="ph-totalHutangBelum" class="val"></span>
-      </div>
+      <div class="nota-row"><strong>Lunas</strong><span id="ph-totalHutangLunas" class="val" style="color:#16a34a;"></span></div>
+      <div class="nota-row"><strong>Belum Lunas</strong><span id="ph-totalHutangBelum" class="val" style="color:#b91c1c;"></span></div>
       <div class="nota-row" style="border-top:2px solid #ef4444; margin-top:8px; padding-top:12px;">
-        <strong>Total Hutang</strong>
-        <span id="ph-totalHutangSemua" class="val" style="font-size:20px; font-weight:800;"></span>
+        <strong>Total Hutang</strong><span id="ph-totalHutangSemua" class="val" style="font-size:20px; font-weight:800;"></span>
       </div>
     </div>
   </div>
 </div>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+const namaBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const namaHari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+// Ambil angka dari teks: "50.000", "50,000", "Rp 50000" -> 50000
+const angka = s => parseInt((s || '').replace(/[^0-9]/g, ''), 10) || 0;
 
-// ======================================================
-// KATEGORI PENGELUARAN
-// ======================================================
+// Tanggal dibaca sebagai waktu lokal (bukan UTC) agar hari tidak meleset
+function bacaTanggal() {
+  const v = $('tanggal').value;
+  if (!v) return null;
+  const [y, m, d] = v.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function formatTanggal() {
+  const d = bacaTanggal();
+  if (!d) return '—';
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  return `${namaHari[d.getDay()]}, ${dd}/${mm}/${d.getFullYear()}`;
+}
+function updateHari() {
+  const d = bacaTanggal();
+  $('hariInfo').textContent = d ? formatTanggal() : '';
+}
+
 const expenseCategories = [
-  { id:'pengBahanBaku',   label:'Bahan Baku',   dot:'#c2410c', border:'#fb923c', bg:'#fff7ed', text:'#7c2d12' },
-  { id:'pengPerlengkapan',label:'Perlengkapan', dot:'#6d28d9', border:'#a78bfa', bg:'#f5f3ff', text:'#4c1d95' },
-  { id:'pengOperasional', label:'Operasional',   dot:'#0f766e', border:'#2dd4bf', bg:'#f0fdfa', text:'#134e4a' },
+  { id:'pengBahanBaku',    label:'Bahan Baku',   dot:'#c2410c', border:'#fb923c', bg:'#fff7ed', text:'#7c2d12' },
+  { id:'pengPerlengkapan', label:'Perlengkapan', dot:'#6d28d9', border:'#a78bfa', bg:'#f5f3ff', text:'#4c1d95' },
+  { id:'pengOperasional',  label:'Operasional',  dot:'#0f766e', border:'#2dd4bf', bg:'#f0fdfa', text:'#134e4a' },
 ];
 
-// Bangun input field per kategori
-(function buildExpenseFields() {
-  const wrap = document.getElementById('pengeluaranFields');
-  let html = '';
-  expenseCategories.forEach(cat => {
-    html += `
-      <div class="cat-field" style="border-color:${cat.border}; background:${cat.bg};">
-        <label style="color:${cat.text};"><span class="dot" style="background:${cat.dot};"></span>${cat.label}</label>
-        <textarea id="${cat.id}" rows="2" oninput="hitung()" placeholder="contoh : 50000"></textarea>
-      </div>`;
-  });
-  wrap.innerHTML = html;
-})();
+$('pengeluaranFields').innerHTML = expenseCategories.map(c => `
+  <div class="cat-field" style="border-color:${c.border}; background:${c.bg};">
+    <label for="${c.id}" style="color:${c.text};"><span class="dot" style="background:${c.dot};"></span>${c.label}</label>
+    <textarea id="${c.id}" rows="2" oninput="hitung()" placeholder="contoh : 50000"></textarea>
+  </div>`).join('');
 
-function parseList(id, isJpgEngine = false) {
-  const lines = document.getElementById(id).value.trim().split('\n');
-  let total = 0;
-  let html = '';
-  let no = 0;
-  lines.forEach(l => {
-    if (!l.includes(':')) return;
-    const idx = l.indexOf(':');
-    const nama = l.slice(0, idx);
-    const val = l.slice(idx + 1);
-    const jml = parseFloat((val || '').trim().replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
-    if (jml > 0) {
-      no++;
-      total += jml;
-      if(isJpgEngine) {
-        html += `<div class="nota-row sub-item"><span>${no}. ${nama.trim()}</span><span class="val">${fmt(jml)}</span></div>`;
-      } else {
-        html += `${no}. ${nama.trim()} : ${fmt(jml)}<br>`;
-      }
-    }
+// Baris daftar bernomor
+const barisItem = (no, nama, jml, lunas) =>
+  `<div class="item"><span class="no">${no}.</span><span class="nm">${esc(nama)}</span><span class="val">${fmt(jml)}${lunas ? '<span class="lunas-mark">✅</span>' : ''}</span></div>`;
+
+function parseList(id) {
+  let total = 0, html = '', no = 0;
+  $(id).value.split('\n').forEach(l => {
+    const i = l.indexOf(':');
+    if (i < 0) return;
+    const nama = l.slice(0, i).trim();
+    const jml = angka(l.slice(i + 1));
+    if (jml > 0) { no++; total += jml; html += barisItem(no, nama || '-', jml, false); }
   });
   return { total, html };
 }
 
-function parseHutang(isJpgEngine = false) {
-  const lines = document.getElementById('hutangText').value.trim().split('\n');
-  let totalLunas = 0;
-  let totalBelum = 0;
-  let html = '';
-  let no = 0;
-  lines.forEach(l => {
-    if (!l.includes(':')) return;
-    const idx = l.indexOf(':');
-    const nama = l.slice(0, idx);
-    const rest = l.slice(idx + 1);
-    const restLower = rest.toLowerCase();
-    const lunas = rest.includes('✅') || restLower.includes('lunas');
-    const jumlahRaw = rest.replace(/✅/g,'').replace(/=/g,'').replace(/lunas/gi,'');
-    const jml = parseFloat(jumlahRaw.trim().replace(/[^0-9.,]/g,'').replace(',','.')) || 0;
+function parseHutang() {
+  let lunas = 0, belum = 0, html = '', no = 0;
+  $('hutangText').value.split('\n').forEach(l => {
+    const i = l.indexOf(':');
+    if (i < 0) return;
+    const nama = l.slice(0, i).trim();
+    const rest = l.slice(i + 1);
+    const sudah = rest.includes('✅') || /lunas/i.test(rest);
+    const jml = angka(rest.replace(/lunas/gi, ''));
     if (jml > 0) {
       no++;
-      if (lunas) { totalLunas += jml; } else { totalBelum += jml; }
-      const centang = lunas ? ' <span class="lunas-mark">✅</span>' : '';
-      if (isJpgEngine) {
-        html += `<div class="nota-row sub-item"><span>${no}. ${nama.trim()}</span><span class="val">${fmt(jml)}${centang}</span></div>`;
-      } else {
-        html += `${no}. ${nama.trim()} : ${fmt(jml)}${lunas ? ' ✅' : ''}<br>`;
-      }
+      if (sudah) lunas += jml; else belum += jml;
+      html += barisItem(no, nama || '-', jml, sudah);
     }
   });
-  return { totalLunas, totalBelum, html, count: no };
+  return { lunas, belum, html, count: no };
 }
 
-function hitungPengeluaranSemua(isJpgEngine = false) {
-  let totalKeluar = 0;
-  const perKategori = [];
-  expenseCategories.forEach(cat => {
-    const r = parseList(cat.id, isJpgEngine);
-    totalKeluar += r.total;
-    perKategori.push({ ...cat, total: r.total, html: r.html });
-  });
-  return { totalKeluar, perKategori };
+function hitungSemua() {
+  const saldoKemarin = parseFloat($('saldoKemarin').value) || 0;
+  const tunai = parseFloat($('tunai').value) || 0;
+  const qris = parseFloat($('qris').value) || 0;
+  const kategori = expenseCategories.map(c => ({ ...c, ...parseList(c.id) }));
+  const totalKeluar = kategori.reduce((a, c) => a + c.total, 0);
+  return {
+    saldoKemarin, tunai, qris, kategori, totalKeluar,
+    totalMasuk: tunai + qris,
+    hutang: parseHutang(),
+    laba: saldoKemarin + tunai + qris - totalKeluar,
+    saldoTunai: saldoKemarin + tunai - totalKeluar
+  };
 }
 
 function hitung() {
-  const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-  const tunai = parseFloat(document.getElementById('tunai').value) || 0;
-  const qris = parseFloat(document.getElementById('qris').value) || 0;
-  const totalMasuk = tunai + qris;
+  const r = hitungSemua();
+  const rincian = r.kategori.filter(c => c.total > 0)
+    .map(c => `<div>• ${c.label} : ${fmt(c.total)}</div>`).join('');
+  $('summaryTop').innerHTML = `
+    <div class="row"><strong>Saldo Tunai Hari Kemarin</strong><span>${fmt(r.saldoKemarin)}</span></div>
+    <div class="row"><strong>Pemasukan</strong><span>${fmt(r.totalMasuk)}</span></div>
+    <div class="subrow" style="color:#156534;"><div>• Tunai : ${fmt(r.tunai)}</div><div>• QRIS : ${fmt(r.qris)}</div></div>
+    <div class="row"><strong>Pengeluaran</strong><span style="color:#b91c1c;">${fmt(r.totalKeluar)}</span></div>
+    ${rincian ? `<div class="subrow" style="color:#b91c1c;">${rincian}</div>` : ''}
+    <div class="row"><strong>Hutang Lunas</strong><span style="color:#16a34a;">${fmt(r.hutang.lunas)}</span></div>
+    <div class="row"><strong>Hutang Belum Lunas</strong><span style="color:#b91c1c;">${fmt(r.hutang.belum)}</span></div>
+    <div class="row total"><strong>Hasil Bersih</strong><span>${fmt(r.laba)}</span></div>`;
+  $('summaryBottom').innerHTML =
+    `<div class="row total" style="border-top:none; padding-top:0; margin-top:0;"><strong>Saldo Tunai</strong><span>${fmt(r.saldoTunai)}</span></div>`;
+}
 
-  const pengSemua = hitungPengeluaranSemua(false);
-  const totalKeluar = pengSemua.totalKeluar;
-
-  const hutang = parseHutang(false);
-
-  const laba = saldoKemarin + totalMasuk - totalKeluar;
-  const saldoTunai = saldoKemarin + tunai - totalKeluar;
-
-  const rincianPengKategori = pengSemua.perKategori
-    .filter(c => c.total > 0)
-    .map(c => `• ${c.label} : ${fmt(c.total)}`)
-    .join('<br>');
-
-  let summaryTopHTML = `
-    <div><strong>Saldo Tunai Hari Kemarin</strong> <span style="float:right;">${fmt(saldoKemarin)}</span></div>
-    <div><strong>Pemasukan</strong> <span style="float:right;">${fmt(totalMasuk)}</span></div>
-    <div style="margin-left:15px; font-size:14.5px; color:#156534; font-weight:600;">
-      • Tunai : ${fmt(tunai)}<br>
-      • QRIS : ${fmt(qris)}
-    </div>
-    <div><strong>Pengeluaran</strong> <span style="float:right; color:#b91c1c;">${fmt(totalKeluar)}</span></div>
-    ${rincianPengKategori ? `<div style="margin-left:15px; font-size:14.5px; color:#b91c1c; font-weight:600;">${rincianPengKategori}</div>` : ''}
-    <div><strong>Hutang Lunas</strong> <span style="float:right; color:#16a34a;">${fmt(hutang.totalLunas)}</span></div>
-    <div><strong>Hutang Belum Lunas</strong> <span style="float:right; color:#b91c1c;">${fmt(hutang.totalBelum)}</span></div>
-    <div class="total"><strong>Hasil Bersih</strong> <span>${fmt(laba)}</span></div>
-  `;
-
-  let summaryBottomHTML = `
-    <div class="total" style="border-top:none; padding-top:0; margin-top:0;"><strong>Saldo Tunai</strong> <span>${fmt(saldoTunai)}</span></div>
-  `;
-
-  document.getElementById('summaryTop').innerHTML = summaryTopHTML;
-  document.getElementById('summaryBottom').innerHTML = summaryBottomHTML;
+async function renderDanUnduh(el, namaFile) {
+  el.style.display = 'block';
+  await new Promise(r => setTimeout(r, 300));
+  try {
+    const canvas = await html2canvas(el, {
+      scale: 4, backgroundColor: '#ffffff', logging: false, useCORS: true,
+      width: el.offsetWidth, height: el.offsetHeight, windowWidth: 1200
+    });
+    const a = document.createElement('a');
+    a.download = namaFile;
+    a.href = canvas.toDataURL('image/jpeg', 0.95);
+    a.click();
+  } finally {
+    el.style.display = 'none';
+  }
 }
 
 async function simpanJPG() {
-  const btn = document.getElementById('btnSimpan');
+  const btn = $('btnSimpan');
   btn.disabled = true;
   btn.innerText = '⏳ Membuat gambar HD...';
-
   try {
-    const saldoKemarin = parseFloat(document.getElementById('saldoKemarin').value) || 0;
-    const tunai = parseFloat(document.getElementById('tunai').value) || 0;
-    const qris = parseFloat(document.getElementById('qris').value) || 0;
-    const totalMasuk = tunai + qris;
+    const r = hitungSemua();
+    const tgl = formatTanggal();
+    const kasir = esc($('kasir').value.trim() || '—');
 
-    const pengSemua = hitungPengeluaranSemua(true);
-    const totalKeluar = pengSemua.totalKeluar;
+    // Gambar 1: laporan utama
+    $('p-tanggal').innerText = tgl;
+    $('p-kasir').innerHTML = `Kasir: <strong>${kasir}</strong>`;
+    $('p-saldoKemarin').innerText = fmt(r.saldoKemarin);
+    $('p-tunai').innerText = fmt(r.tunai);
+    $('p-qris').innerText = fmt(r.qris);
+    $('p-totalMasuk').innerText = fmt(r.totalMasuk);
 
-    const hutang = parseHutang(true);
+    const terisi = r.kategori.filter(c => c.total > 0);
+    $('p-expGrid').innerHTML = terisi.length === 0
+      ? `<div class="empty">• Tidak ada pengeluaran</div>`
+      : terisi.map(c => `
+        <div class="nota-cat-box" style="background:${c.bg}; border-color:${c.border};">
+          <div class="nota-cat-title" style="color:${c.dot};"><span class="dot" style="background:${c.dot};"></span>${c.label}</div>
+          <div style="color:${c.text};">${c.html}</div>
+          <div class="nota-row col-total"><strong style="color:${c.dot};">Subtotal</strong><span class="val" style="color:${c.dot};">${fmt(c.total)}</span></div>
+        </div>`).join('');
+    $('p-totalKeluar').innerText = fmt(r.totalKeluar);
+    $('p-laba').innerText = fmt(r.laba);
+    $('p-saldoTunai').innerText = fmt(r.saldoTunai);
 
-    const laba = saldoKemarin + totalMasuk - totalKeluar;
-    const saldoTunai = saldoKemarin + tunai - totalKeluar;
+    // Gambar 2: rincian hutang
+    $('ph-tanggal').innerText = tgl;
+    $('ph-kasir').innerHTML = `Kasir: <strong>${kasir}</strong>`;
+    $('ph-listHutang').innerHTML = r.hutang.html || `<div class="empty">• Tidak ada catatan hutang</div>`;
+    $('ph-totalHutangLunas').innerText = fmt(r.hutang.lunas);
+    $('ph-totalHutangBelum').innerText = fmt(r.hutang.belum);
+    $('ph-totalHutangSemua').innerText = fmt(r.hutang.lunas + r.hutang.belum);
 
-    // Konversi Format Tanggal
-    const tglInput = document.getElementById('tanggal').value;
-    let tanggalFormat = '—';
-    if(tglInput) {
-       const d = new Date(tglInput);
-       const hariPilihan = document.getElementById('hari').value;
-       const dd = String(d.getDate()).padStart(2, '0');
-       const mm = namaBulan[d.getMonth()];
-       const yyyy = d.getFullYear();
-       tanggalFormat = `${hariPilihan}, ${dd}/${mm}/${yyyy}`;
-    }
-    const namaKasir = document.getElementById('kasir').value || '—';
+    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
 
-    // ============ ISI GAMBAR 1: LAPORAN UTAMA ============
-    document.getElementById('p-tanggal').innerText = tanggalFormat;
-    document.getElementById('p-kasir').innerHTML = `Kasir: <strong>${namaKasir}</strong>`;
-
-    document.getElementById('p-saldoKemarin').innerText = fmt(saldoKemarin);
-    document.getElementById('p-tunai').innerText = fmt(tunai);
-    document.getElementById('p-qris').innerText = fmt(qris);
-    document.getElementById('p-totalMasuk').innerText = fmt(totalMasuk);
-
-    const kategoriTerisi = pengSemua.perKategori.filter(c => c.total > 0);
-    let expGridHTML = '';
-    if (kategoriTerisi.length === 0) {
-      expGridHTML = `<div class="nota-row sub-item" style="font-style:italic; font-weight:700; color:#475569; grid-column: 1 / -1;">• Tidak ada pengeluaran</div>`;
-    } else {
-      kategoriTerisi.forEach(cat => {
-        expGridHTML += `
-          <div class="nota-cat-box" style="background:${cat.bg}; border-color:${cat.border};">
-            <div class="nota-cat-title" style="color:${cat.dot};"><span class="dot" style="background:${cat.dot};"></span>${cat.label}</div>
-            <div style="color:${cat.text};">${cat.html}</div>
-            <div class="nota-row col-total">
-              <strong style="color:${cat.dot};">Subtotal</strong>
-              <span class="val" style="color:${cat.dot};">${fmt(cat.total)}</span>
-            </div>
-          </div>`;
-      });
-    }
-    document.getElementById('p-expGrid').innerHTML = expGridHTML;
-    document.getElementById('p-totalKeluar').innerText = fmt(totalKeluar);
-
-    document.getElementById('p-laba').innerText = fmt(laba);
-    document.getElementById('p-saldoTunai').innerText = fmt(saldoTunai);
-
-    // ============ ISI GAMBAR 2: RINCIAN HUTANG ============
-    document.getElementById('ph-tanggal').innerText = tanggalFormat;
-    document.getElementById('ph-kasir').innerHTML = `Kasir: <strong>${namaKasir}</strong>`;
-
-    const boxHutang = document.getElementById('ph-listHutang');
-    boxHutang.innerHTML = hutang.html || '<div class="nota-row sub-item empty-note" style="font-style:italic; font-weight:700; color:#7f1d1d;">• Tidak ada catatan hutang</div>';
-    if (hutang.count > 0) {
-      // urutan mengisi kolom kiri dari atas ke bawah dulu, baru lanjut ke kolom kanan
-      const baris = Math.ceil(hutang.count / 2);
-      boxHutang.style.gridAutoFlow = 'column';
-      boxHutang.style.gridTemplateRows = `repeat(${baris}, auto)`;
-      boxHutang.style.gridTemplateColumns = hutang.count === 1 ? '1fr' : '1fr 1fr';
-    } else {
-      boxHutang.style.gridAutoFlow = 'row';
-      boxHutang.style.gridTemplateRows = 'auto';
-      boxHutang.style.gridTemplateColumns = '1fr';
-    }
-    document.getElementById('ph-totalHutangLunas').innerText = fmt(hutang.totalLunas);
-    document.getElementById('ph-totalHutangBelum').innerText = fmt(hutang.totalBelum);
-    document.getElementById('ph-totalHutangSemua').innerText = fmt(hutang.totalLunas + hutang.totalBelum);
-
-    // tunggu font & layout benar-benar siap agar hasil tajam
-    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
-    await new Promise(r => setTimeout(r, 400));
-
-    const tglFile = document.getElementById('tanggal').value || 'hari_ini';
-
-    // --- Render & unduh Gambar 1: Laporan Utama ---
-    const nota = document.getElementById('nota');
-    nota.style.display = 'block';
-    await new Promise(r => setTimeout(r, 300));
-    const canvas1 = await html2canvas(nota, {
-      scale: 5,
-      backgroundColor: '#ffffff',
-      logging: false,
-      useCORS: true,
-      imageTimeout: 0,
-      width: nota.offsetWidth,
-      height: nota.offsetHeight,
-      windowWidth: 1200
-    });
-    nota.style.display = 'none';
-
-    const link1 = document.createElement('a');
-    link1.download = `Laporan_Lumbong_${tglFile}.jpg`;
-    link1.href = canvas1.toDataURL('image/jpeg', 1.0);
-    link1.click();
-
-    // jeda sedikit supaya browser tidak memblokir unduhan kedua
+    const tglFile = $('tanggal').value || 'hari_ini';
+    await renderDanUnduh($('nota'), `Laporan_Lumbong_${tglFile}.jpg`);
     await new Promise(r => setTimeout(r, 500));
-
-    // --- Render & unduh Gambar 2: Rincian Hutang ---
-    const notaHutang = document.getElementById('notaHutang');
-    notaHutang.style.display = 'block';
-    await new Promise(r => setTimeout(r, 300));
-    const canvas2 = await html2canvas(notaHutang, {
-      scale: 5,
-      backgroundColor: '#ffffff',
-      logging: false,
-      useCORS: true,
-      imageTimeout: 0,
-      width: notaHutang.offsetWidth,
-      height: notaHutang.offsetHeight,
-      windowWidth: 1200
-    });
-    notaHutang.style.display = 'none';
-
-    const link2 = document.createElement('a');
-    link2.download = `Hutang_Lumbong_${tglFile}.jpg`;
-    link2.href = canvas2.toDataURL('image/jpeg', 1.0);
-    link2.click();
-
+    await renderDanUnduh($('notaHutang'), `Hutang_Lumbong_${tglFile}.jpg`);
   } catch (err) {
-    alert('Gagal membuat gambar. Coba ulangi.');
-    document.getElementById('nota').style.display = 'none';
-    document.getElementById('notaHutang').style.display = 'none';
+    alert('Gagal membuat gambar. Periksa koneksi internet lalu coba lagi.');
   } finally {
     btn.disabled = false;
     btn.innerText = '📸 Simpan 2 Gambar JPG (HD)';
   }
 }
 
-document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
-hitung();
+// Tanggal default = hari ini (waktu lokal)
+(function () {
+  const t = new Date();
+  $('tanggal').value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+  updateHari();
+  hitung();
+})();
 </script>
 </body>
 </html>
